@@ -5,8 +5,9 @@ import tycoon.transport.domain.WarehouseUnknown
 
 class DeliveryMapTest {
 
+    private val map = DeliveryMap()
+
     @Test fun `can not tell the distance to unknown warehouses`() {
-        val map = DeliveryMap()
         assertThrows<WarehouseUnknown> {
             map.distanceTo("B")
         }
