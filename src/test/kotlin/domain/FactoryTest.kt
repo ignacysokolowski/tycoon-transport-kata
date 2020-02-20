@@ -32,4 +32,12 @@ class FactoryTest {
             Shipment(WarehouseId("B"))
         )))
     }
+
+    @Test fun `provides next shipment to pick up`() {
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A"))
+        ))
+        val nextShipment = factory.pickUpNextShipment()
+        assertThat(nextShipment, equalTo(Shipment(WarehouseId("A"))))
+    }
 }
