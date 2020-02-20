@@ -12,4 +12,10 @@ class TruckTest {
         val truck = Truck()
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
+
+    @Test fun `records the distance it has driven`() {
+        val truck = Truck()
+        truck.drive(Distance(5))
+        assertThat(truck.distanceDriven(), equalTo(Distance(5)))
+    }
 }
