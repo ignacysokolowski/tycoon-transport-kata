@@ -8,7 +8,7 @@ class TransportApp {
         if (!warehouses.contains(warehouseId)) {
             throw RuntimeException("Unknown destination")
         }
-        totalDeliveryTime = 5
+        totalDeliveryTime = warehouses[warehouseId]!!
     }
 
     fun totalDeliveryTime(): Int {
