@@ -10,8 +10,11 @@ class Factory {
     }
 
     fun pickUpNextShipment(): Shipment {
-        return shipmentsWaiting.pop()
-            ?: throw RuntimeException()
+        return try {
+            shipmentsWaiting.pop()
+        } catch (e: NoSuchElementException) {
+            throw AllShipmentsPickedUp()
+        }
     }
 
     fun shipmentsWaiting() = shipmentsWaiting.toList()
