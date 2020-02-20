@@ -14,6 +14,10 @@ class TransportAppTest {
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
+    @Test fun `total delivery time is zero before anything has been shipped`() {
+        assertThat(app.totalDeliveryTime(), equalTo(0))
+    }
+
     @Test fun `can not ship to unknown destinations`() {
         app.addWarehouse("B")
         val exception = assertThrows<RuntimeException> {

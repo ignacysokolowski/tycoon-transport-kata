@@ -2,12 +2,13 @@ package tycoon.transport.app
 
 class TransportApp {
     private val warehouses = mutableListOf<String>()
-    private val totalDeliveryTime = 5
+    private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
         if (!warehouses.contains(warehouseId)) {
             throw RuntimeException("Unknown destination")
         }
+        totalDeliveryTime = 5
     }
 
     fun totalDeliveryTime(): Int {
