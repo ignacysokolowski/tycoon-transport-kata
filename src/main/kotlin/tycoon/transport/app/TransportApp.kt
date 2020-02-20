@@ -9,10 +9,11 @@ import tycoon.transport.domain.WarehouseId
 import tycoon.transport.domain.WarehouseUnknown
 
 class TransportApp(private val map: DistanceMap) {
+    private val factory = Factory()
+    private val truck = Truck()
     private var distanceDriven = Distance(0)
 
     fun ship(warehouseId: String) {
-        val factory = Factory()
         factory.collectShipments(listOf(Shipment(WarehouseId(warehouseId))))
         val shipment = factory.shipmentsWaiting().first()
         val distance = try {
@@ -20,7 +21,6 @@ class TransportApp(private val map: DistanceMap) {
         } catch (e: WarehouseUnknown) {
             throw RuntimeException("Unknown destination")
         }
-        val truck = Truck()
         truck.drive(distance)
         distanceDriven = truck.distanceDriven()
     }
