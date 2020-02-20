@@ -14,6 +14,6 @@ class TransportApp {
     }
 
     fun addWarehouse(warehouseId: String, distance: Int) {
-        this.warehouses[warehouseId] = distance
+        warehouses[warehouseId] = distance
     }
 }
