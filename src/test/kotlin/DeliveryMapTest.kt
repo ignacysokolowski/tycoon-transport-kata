@@ -3,6 +3,7 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.DeliveryMap
+import tycoon.transport.domain.WarehouseId
 import tycoon.transport.domain.WarehouseUnknown
 
 class DeliveryMapTest {
@@ -10,7 +11,7 @@ class DeliveryMapTest {
     private val map = DeliveryMap()
 
     @Test fun `tells the distance to a warehouse`() {
-        map.addWarehouseWithDistance(5, "A")
+        map.addWarehouseWithDistance(5, WarehouseId("A"))
         assertThat(map.distanceTo("A"), equalTo(5))
     }
 

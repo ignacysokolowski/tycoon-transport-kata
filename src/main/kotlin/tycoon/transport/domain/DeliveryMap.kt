@@ -8,7 +8,7 @@ class DeliveryMap {
             ?: throw WarehouseUnknown()
     }
 
-    fun addWarehouseWithDistance(distance: Int, warehouseId: String) {
-        distances[warehouseId] = distance
+    fun addWarehouseWithDistance(distance: Int, warehouseId: WarehouseId) {
+        distances[warehouseId.value] = distance
     }
 }
