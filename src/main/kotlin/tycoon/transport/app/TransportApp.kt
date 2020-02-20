@@ -1,6 +1,6 @@
 package tycoon.transport.app
 
-class TransportApp(private val warehouses: MutableMap<String, Int>) {
+class TransportApp(private val warehouses: Map<String, Int>) {
     private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
