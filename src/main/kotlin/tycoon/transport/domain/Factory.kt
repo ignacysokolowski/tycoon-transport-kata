@@ -7,5 +7,9 @@ class Factory {
         shipmentsWaiting = shipments
     }
 
+    fun pickUpNextShipment() {
+        throw RuntimeException()
+    }
+
     fun shipmentsWaiting() = shipmentsWaiting
 }
