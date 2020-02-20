@@ -12,7 +12,7 @@ class DistanceMapTest {
     private val map = DistanceMap()
 
     @Test fun `tells the distance to a warehouse`() {
-        map.addWarehouseWithDistance(Distance(5), WarehouseId("A"))
+        map.addWarehouse(Distance(5), WarehouseId("A"))
         assertThat(map.distanceTo(WarehouseId("A")), equalTo(5))
     }
 
