@@ -15,7 +15,7 @@ class TransportApp(private val map: DistanceMap) {
 
     fun ship(warehouseId: String) {
         factory.collectShipments(listOf(Shipment(WarehouseId(warehouseId))))
-        val shipment = factory.shipmentsWaiting().first()
+        val shipment = factory.pickUpNextShipment()
         val distance = try {
             map.distanceTo(shipment.destination)
         } catch (e: WarehouseUnknown) {
