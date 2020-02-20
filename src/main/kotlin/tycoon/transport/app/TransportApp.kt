@@ -13,7 +13,7 @@ class TransportApp {
         return totalDeliveryTime
     }
 
-    fun addWarehouse(warehouseId: String) {
-        this.warehouses[warehouseId] = 5
+    fun addWarehouse(warehouseId: String, distance: Int) {
+        this.warehouses[warehouseId] = distance
     }
 }
