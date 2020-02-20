@@ -9,8 +9,12 @@ class TransportAppTest {
     private val warehouses = mutableMapOf<String, Int>()
     private val app = TransportApp(warehouses)
 
+    private fun addWarehouse(warehouseId: String, distance: Int) {
+        warehouses[warehouseId] = distance
+    }
+
     @Test fun `ships cargo to a warehouse`() {
-        warehouses["B"] = 5
+        addWarehouse("B", distance = 5)
         app.ship("B")
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
@@ -20,7 +24,7 @@ class TransportAppTest {
     }
 
     @Test fun `can not ship to unknown destinations`() {
-        warehouses["B"] = 5
+        addWarehouse("B", distance = 5)
         val exception = assertThrows<RuntimeException> {
             app.ship("X")
         }
