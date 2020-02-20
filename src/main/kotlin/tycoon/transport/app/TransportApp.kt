@@ -8,8 +8,7 @@ import tycoon.transport.domain.WarehouseUnknown
 class TransportApp(private val map: DistanceMap) {
     private var distanceDriven = Distance(0)
 
-    fun ship(warehouseIds: List<String>) {
-        val warehouseId = warehouseIds[0]
+    fun ship(warehouseId: String) {
         try {
             distanceDriven = map.distanceTo(WarehouseId(warehouseId))
         } catch (e: WarehouseUnknown) {
