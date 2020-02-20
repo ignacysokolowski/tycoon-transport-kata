@@ -3,6 +3,7 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
+import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.WarehouseId
 
@@ -12,7 +13,7 @@ class TransportAppTest {
     private val app = TransportApp(map)
 
     @Test fun `ships cargo to a warehouse`() {
-        map.addWarehouseWithDistance(5, WarehouseId("B"))
+        map.addWarehouse(WarehouseId("B"), Distance(5))
         app.ship("B")
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
@@ -22,7 +23,7 @@ class TransportAppTest {
     }
 
     @Test fun `can not ship to unknown destinations`() {
-        map.addWarehouseWithDistance(5, WarehouseId("B"))
+        map.addWarehouse(WarehouseId("B"), Distance(5))
         val exception = assertThrows<RuntimeException> {
             app.ship("X")
         }
