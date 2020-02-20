@@ -14,8 +14,9 @@ class TransportAppTest {
 
     @Test fun `can not ship to unknown destinations`() {
         val app = TransportApp()
-        assertThrows<RuntimeException> {
+        val exception = assertThrows<RuntimeException> {
             app.ship("X")
         }
+        assertThat(exception.message, equalTo("Unknown destination"))
     }
 }
