@@ -1,6 +1,7 @@
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
 
 class TransportAppTest {
@@ -9,5 +10,12 @@ class TransportAppTest {
         val app = TransportApp()
         app.ship("B")
         assertThat(app.totalDeliveryTime(), equalTo(5))
+    }
+
+    @Test fun `can not ship to unknown destinations`() {
+        val app = TransportApp()
+        assertThrows<RuntimeException> {
+            app.ship("X")
+        }
     }
 }
