@@ -5,9 +5,8 @@ class TransportApp {
     private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
-        val distance = warehouses[warehouseId]
+        totalDeliveryTime = warehouses[warehouseId]
             ?: throw RuntimeException("Unknown destination")
-        totalDeliveryTime = distance
     }
 
     fun totalDeliveryTime(): Int {
