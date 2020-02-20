@@ -1,7 +1,7 @@
 package tycoon.transport.app
 
 class TransportApp {
-    private val warehouses = mutableListOf<String>()
+    private val warehouses = mutableMapOf<String, Int>()
     private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
@@ -16,6 +16,6 @@ class TransportApp {
     }
 
     fun addWarehouse(warehouseId: String) {
-        this.warehouses.add(warehouseId)
+        this.warehouses[warehouseId] = 5
     }
 }
