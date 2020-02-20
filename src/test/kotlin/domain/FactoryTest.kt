@@ -4,6 +4,8 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.domain.Factory
+import tycoon.transport.domain.Shipment
+import tycoon.transport.domain.WarehouseId
 
 class FactoryTest {
 
@@ -11,5 +13,10 @@ class FactoryTest {
 
     @Test fun `has no shipments waiting`() {
         assertThat(factory.shipmentsWaiting(), equalTo(emptyList()))
+    }
+
+    @Test fun `collects shipments`() {
+        factory.collectShipment(Shipment(WarehouseId("A")))
+        assertThat(factory.shipmentsWaiting(), equalTo(listOf(Shipment(WarehouseId("A")))))
     }
 }
