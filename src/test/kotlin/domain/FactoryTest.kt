@@ -37,7 +37,6 @@ class FactoryTest {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A"))
         ))
-        val nextShipment = factory.pickUpNextShipment()
-        assertThat(nextShipment, equalTo(Shipment(WarehouseId("A"))))
+        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(WarehouseId("A"))))
     }
 }
