@@ -8,11 +8,7 @@ class DistanceMap {
             ?: throw WarehouseUnknown()
     }
 
-    fun addWarehouseWithDistance(distance: Int, warehouseId: WarehouseId) {
-        distances[warehouseId] = distance
-    }
-
     fun addWarehouse(warehouseId: WarehouseId, distance: Distance) {
-        addWarehouseWithDistance(distance.hours, warehouseId)
+        distances[warehouseId] = distance.hours
     }
 }
