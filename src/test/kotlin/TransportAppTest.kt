@@ -6,7 +6,7 @@ import tycoon.transport.app.TransportApp
 
 class TransportAppTest {
 
-    private val app = TransportApp()
+    private val app = TransportApp(mutableMapOf())
 
     @Test fun `ships cargo to a warehouse`() {
         app.addWarehouse("B", distance = 5)
