@@ -35,8 +35,10 @@ class FactoryTest {
 
     @Test fun `provides next shipment to pick up`() {
         factory.collectShipments(listOf(
-            Shipment(WarehouseId("A"))
+            Shipment(WarehouseId("A")),
+            Shipment(WarehouseId("B"))
         ))
         assertThat(factory.pickUpNextShipment(), equalTo(Shipment(WarehouseId("A"))))
+        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(WarehouseId("B"))))
     }
 }

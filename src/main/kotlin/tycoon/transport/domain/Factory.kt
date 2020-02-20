@@ -1,16 +1,18 @@
 package tycoon.transport.domain
 
+import java.util.ArrayDeque
+
 class Factory {
-    private var shipmentsWaiting = emptyList<Shipment>()
+    private var shipmentsWaiting = ArrayDeque<Shipment>()
 
     fun collectShipments(shipments: List<Shipment>) {
-        shipmentsWaiting = shipments
+        shipmentsWaiting = ArrayDeque(shipments)
     }
 
     fun pickUpNextShipment(): Shipment {
-        return shipmentsWaiting.firstOrNull()
+        return shipmentsWaiting.pop()
             ?: throw RuntimeException()
     }
 
-    fun shipmentsWaiting() = shipmentsWaiting
+    fun shipmentsWaiting() = shipmentsWaiting.toList()
 }
