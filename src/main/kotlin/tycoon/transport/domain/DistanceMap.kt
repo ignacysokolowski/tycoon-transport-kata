@@ -3,8 +3,8 @@ package tycoon.transport.domain
 class DistanceMap {
     private val distances = mutableMapOf<WarehouseId, Distance>()
 
-    fun distanceTo(warehouseId: WarehouseId): Int {
-        return distances[warehouseId]?.hours
+    fun distanceTo(warehouseId: WarehouseId): Distance {
+        return distances[warehouseId]
             ?: throw WarehouseUnknown()
     }
 

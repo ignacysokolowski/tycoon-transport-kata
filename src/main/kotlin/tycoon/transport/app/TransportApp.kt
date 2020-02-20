@@ -9,7 +9,7 @@ class TransportApp(private val map: DistanceMap) {
 
     fun ship(warehouseId: String) {
         try {
-            totalDeliveryTime = map.distanceTo(WarehouseId(warehouseId))
+            totalDeliveryTime = map.distanceTo(WarehouseId(warehouseId)).hours
         } catch (e: WarehouseUnknown) {
             throw RuntimeException("Unknown destination")
         }
