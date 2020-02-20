@@ -5,15 +5,15 @@ import tycoon.transport.domain.WarehouseId
 import tycoon.transport.domain.WarehouseUnknown
 
 class TransportApp(private val map: DistanceMap) {
-    private var totalDeliveryTime = 0
+    private var distanceDriven = 0
 
     fun ship(warehouseId: String) {
         try {
-            totalDeliveryTime = map.distanceTo(WarehouseId(warehouseId)).hours
+            distanceDriven = map.distanceTo(WarehouseId(warehouseId)).hours
         } catch (e: WarehouseUnknown) {
             throw RuntimeException("Unknown destination")
         }
     }
 
-    fun totalDeliveryTime() = totalDeliveryTime
+    fun totalDeliveryTime() = distanceDriven
 }
