@@ -1,11 +1,18 @@
 package tycoon.transport.app
 
-class TransportApp(private val warehouses: Map<String, Int>) {
+import tycoon.transport.domain.DistanceMap
+import tycoon.transport.domain.WarehouseId
+import tycoon.transport.domain.WarehouseUnknown
+
+class TransportApp(private val map: DistanceMap) {
     private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
-        totalDeliveryTime = warehouses[warehouseId]
-            ?: throw RuntimeException("Unknown destination")
+        try {
+            totalDeliveryTime = map.distanceTo(WarehouseId(warehouseId))
+        } catch (e: WarehouseUnknown) {
+            throw RuntimeException("Unknown destination")
+        }
     }
 
     fun totalDeliveryTime() = totalDeliveryTime
