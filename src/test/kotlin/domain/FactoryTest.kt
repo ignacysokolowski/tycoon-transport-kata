@@ -23,15 +23,11 @@ class FactoryTest {
         }
     }
 
-    @Test fun `collects shipments`() {
+    @Test fun `has shipments waiting to be picked up`() {
         factory.collectShipments(listOf(
-            Shipment(WarehouseId("A")),
-            Shipment(WarehouseId("B"))
+            Shipment(WarehouseId("A"))
         ))
-        assertThat(factory.shipmentsWaiting(), equalTo(listOf(
-            Shipment(WarehouseId("A")),
-            Shipment(WarehouseId("B"))
-        )))
+        assertThat(factory.hasShipmentsWaiting(), equalTo(true))
     }
 
     @Test fun `provides next shipment to pick up`() {
