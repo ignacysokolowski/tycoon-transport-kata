@@ -2,6 +2,7 @@ package tycoon.transport.app
 
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
+import tycoon.transport.domain.Truck
 import tycoon.transport.domain.WarehouseId
 import tycoon.transport.domain.WarehouseUnknown
 
@@ -14,7 +15,9 @@ class TransportApp(private val map: DistanceMap) {
         } catch (e: WarehouseUnknown) {
             throw RuntimeException("Unknown destination")
         }
-        distanceDriven = distance
+        val truck = Truck()
+        truck.drive(distance)
+        distanceDriven = truck.distanceDriven()
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
