@@ -16,7 +16,13 @@ class FactoryTest {
     }
 
     @Test fun `collects shipments`() {
-        factory.collectShipment(Shipment(WarehouseId("A")))
-        assertThat(factory.shipmentsWaiting(), equalTo(listOf(Shipment(WarehouseId("A")))))
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A")),
+            Shipment(WarehouseId("B"))
+        ))
+        assertThat(factory.shipmentsWaiting(), equalTo(listOf(
+            Shipment(WarehouseId("A")),
+            Shipment(WarehouseId("B"))
+        )))
     }
 }

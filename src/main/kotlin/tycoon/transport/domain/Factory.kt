@@ -7,7 +7,7 @@ class Factory {
         return shipmentsWaiting
     }
 
-    fun collectShipment(shipment: Shipment) {
-        shipmentsWaiting = listOf(shipment)
+    fun collectShipments(shipments: List<Shipment>) {
+        shipmentsWaiting = shipments
     }
 }
