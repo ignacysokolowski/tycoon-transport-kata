@@ -5,10 +5,9 @@ class TransportApp {
     private var totalDeliveryTime = 0
 
     fun ship(warehouseId: String) {
-        if (!warehouses.contains(warehouseId)) {
-            throw RuntimeException("Unknown destination")
-        }
-        totalDeliveryTime = warehouses[warehouseId]!!
+        val distance = warehouses[warehouseId]
+            ?: throw RuntimeException("Unknown destination")
+        totalDeliveryTime = distance
     }
 
     fun totalDeliveryTime(): Int {
