@@ -7,8 +7,9 @@ import tycoon.transport.domain.Factory
 
 class FactoryTest {
 
+    private val factory = Factory()
+
     @Test fun `has no shipments waiting`() {
-        val factory = Factory()
         assertThat(factory.shipmentsWaiting(), equalTo(emptyList()))
     }
 }
