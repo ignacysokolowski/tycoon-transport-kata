@@ -16,7 +16,7 @@ class TransportAppTest {
 
     @Test fun `ships cargo to a warehouse`() {
         map.addWarehouse(WarehouseId("B"), Distance(5))
-        app.ship("B")
+        app.ship(listOf("B"))
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
@@ -27,7 +27,7 @@ class TransportAppTest {
     @Test fun `can not ship to unknown destinations`() {
         map.addWarehouse(WarehouseId("B"), Distance(5))
         val exception = assertThrows<RuntimeException> {
-            app.ship("X")
+            app.ship(listOf("X"))
         }
         assertThat(exception.message, equalTo("Unknown destination"))
     }
