@@ -20,6 +20,12 @@ class TransportAppTest {
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
+    @Test fun `truck has to travel back to the factory to pick up the next shipment`() {
+        map.addWarehouse(WarehouseId("B"), Distance(5))
+        app.ship(listOf("B", "B"))
+        assertThat(app.totalDeliveryTime(), equalTo(15))
+    }
+
     @Test fun `total delivery time is zero before anything has been shipped`() {
         assertThat(app.totalDeliveryTime(), equalTo(0))
     }

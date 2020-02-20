@@ -15,13 +15,20 @@ class TransportApp(private val map: DistanceMap) {
 
     fun ship(warehouseIds: List<String>) {
         factory.collectShipments(warehouseIds.map { Shipment(WarehouseId(it)) })
-        val shipment = factory.pickUpNextShipment()
-        val distance = try {
-            map.distanceTo(shipment.destination)
-        } catch (e: WarehouseUnknown) {
-            throw RuntimeException("Unknown destination")
+
+        while (factory.hasShipmentsWaiting()) {
+            val shipment = factory.pickUpNextShipment()
+            val distance = try {
+                map.distanceTo(shipment.destination)
+            } catch (e: WarehouseUnknown) {
+                throw RuntimeException("Unknown destination")
+            }
+            truck.drive(distance)
+            if (factory.hasShipmentsWaiting()) {
+                truck.drive(distance)
+            }
         }
-        truck.drive(distance)
+
         distanceDriven = truck.distanceDriven()
     }
 
