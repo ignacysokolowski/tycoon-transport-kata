@@ -2,6 +2,7 @@ package tycoon.transport.app
 
 class TransportApp {
     private val warehouses = mutableListOf<String>()
+    private val totalDeliveryTime = 5
 
     fun ship(warehouseId: String) {
         if (!warehouses.contains(warehouseId)) {
@@ -10,7 +11,7 @@ class TransportApp {
     }
 
     fun totalDeliveryTime(): Int {
-        return 5
+        return totalDeliveryTime
     }
 
     fun addWarehouse(warehouseId: String) {
