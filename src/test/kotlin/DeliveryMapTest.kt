@@ -13,6 +13,11 @@ class DeliveryMapTest {
         assertThat(map.distanceTo("A"), equalTo(5))
     }
 
+    @Test fun `allows adding new warehouses`() {
+        map.addWarehouseWithDistance(3, "B")
+        assertThat(map.distanceTo("B"), equalTo(3))
+    }
+
     @Test fun `can not tell the distance to unknown warehouses`() {
         assertThrows<WarehouseUnknown> {
             map.distanceTo("B")
