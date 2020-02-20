@@ -10,7 +10,7 @@ class TransportAppTest {
     private val app = TransportApp(warehouses)
 
     @Test fun `ships cargo to a warehouse`() {
-        app.addWarehouse("B", distance = 5)
+        warehouses["B"] = 5
         app.ship("B")
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
@@ -20,7 +20,7 @@ class TransportAppTest {
     }
 
     @Test fun `can not ship to unknown destinations`() {
-        app.addWarehouse("B", distance = 5)
+        warehouses["B"] = 5
         val exception = assertThrows<RuntimeException> {
             app.ship("X")
         }

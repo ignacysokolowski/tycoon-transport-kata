@@ -9,8 +9,4 @@ class TransportApp(private val warehouses: MutableMap<String, Int>) {
     }
 
     fun totalDeliveryTime() = totalDeliveryTime
-
-    fun addWarehouse(warehouseId: String, distance: Int) {
-        warehouses[warehouseId] = distance
-    }
 }
