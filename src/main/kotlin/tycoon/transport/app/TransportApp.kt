@@ -9,9 +9,7 @@ class TransportApp {
             ?: throw RuntimeException("Unknown destination")
     }
 
-    fun totalDeliveryTime(): Int {
-        return totalDeliveryTime
-    }
+    fun totalDeliveryTime() = totalDeliveryTime
 
     fun addWarehouse(warehouseId: String, distance: Int) {
         warehouses[warehouseId] = distance
