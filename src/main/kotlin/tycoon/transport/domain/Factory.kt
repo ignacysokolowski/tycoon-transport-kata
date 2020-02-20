@@ -17,7 +17,5 @@ class Factory {
         }
     }
 
-    fun shipmentsWaiting() = shipmentsWaiting.toList()
-
     fun hasShipmentsWaiting() = shipmentsWaiting.isNotEmpty()
 }
