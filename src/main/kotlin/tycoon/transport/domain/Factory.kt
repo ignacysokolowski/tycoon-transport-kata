@@ -18,4 +18,8 @@ class Factory {
     }
 
     fun shipmentsWaiting() = shipmentsWaiting.toList()
+
+    fun hasShipmentsWaiting(): Boolean {
+        return false
+    }
 }

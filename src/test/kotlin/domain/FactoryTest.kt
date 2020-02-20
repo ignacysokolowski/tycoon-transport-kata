@@ -14,7 +14,7 @@ class FactoryTest {
     private val factory = Factory()
 
     @Test fun `has no shipments waiting`() {
-        assertThat(factory.shipmentsWaiting(), equalTo(emptyList()))
+        assertThat(factory.hasShipmentsWaiting(), equalTo(false))
     }
 
     @Test fun `has no shipments to be picked up`() {
