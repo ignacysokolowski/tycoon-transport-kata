@@ -12,7 +12,7 @@ import tycoon.transport.domain.TruckAtDestination
 class TruckTest {
 
     @Test fun `starts on a trip`() {
-        val truck = Truck(Trip(Distance(2)))
+        val truck = Truck.on(Trip(Distance(2)))
         assertThat(truck.trip, equalTo(Trip(Distance(2))))
     }
 
