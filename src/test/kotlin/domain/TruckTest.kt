@@ -31,6 +31,13 @@ class TruckTest {
         assertThat(truck.atDestination(), equalTo(true))
     }
 
+    @Test fun `drives the trip distance`() {
+        val truck = Truck.on(Trip(Distance(3)))
+        truck.drive(Distance(2))
+        truck.drive(Distance(1))
+        assertThat(truck.atDestination(), equalTo(true))
+    }
+
     @Test fun `can not drive if already at destination`() {
         val truck = Truck.on(Trip(Distance(0)))
         assertThrows<TruckAtDestination> {
@@ -42,13 +49,6 @@ class TruckTest {
         val truck = Truck.on(Trip(Distance(0)))
         truck.startTrip(Trip(Distance(2)))
         assertThat(truck.trip, equalTo(Trip(Distance(2))))
-    }
-
-    @Test fun `drives the trip distance`() {
-        val truck = Truck.on(Trip(Distance(3)))
-        truck.drive(Distance(2))
-        truck.drive(Distance(1))
-        assertThat(truck.atDestination(), equalTo(true))
     }
 
     @Test fun `records the distance it has driven`() {
