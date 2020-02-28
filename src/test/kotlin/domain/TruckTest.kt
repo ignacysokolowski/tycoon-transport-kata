@@ -44,10 +44,11 @@ class TruckTest {
         assertThat(truck.trip, equalTo(Trip(Distance(2))))
     }
 
-    @Test fun `advances the trip`() {
+    @Test fun `drives the trip distance`() {
         val truck = Truck.on(Trip(Distance(3)))
         truck.drive(Distance(2))
-        assertThat(truck.trip, equalTo(Trip(Distance(1))))
+        truck.drive(Distance(1))
+        assertThat(truck.atDestination(), equalTo(true))
     }
 
     @Test fun `records the distance it has driven`() {
