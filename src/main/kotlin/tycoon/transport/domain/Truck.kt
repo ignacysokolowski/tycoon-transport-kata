@@ -15,9 +15,7 @@ class Truck(var trip: Trip) {
         distanceDriven += distance
     }
 
-    fun atDestination(): Boolean {
-        return trip.atDestination()
-    }
+    fun atDestination() = trip.atDestination()
 
     fun distanceDriven() = distanceDriven
 }
