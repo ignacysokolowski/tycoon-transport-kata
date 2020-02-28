@@ -3,6 +3,7 @@ package domain
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
@@ -23,6 +24,13 @@ class TruckTest {
         val truck = Truck(Trip(Distance(0)))
         truck.startTrip(Trip(Distance(2)))
         assertThat(truck.trip, equalTo(Trip(Distance(2))))
+    }
+
+    @Test fun `can not drive if already at destination`() {
+        val truck = Truck(Trip(Distance(0)))
+        assertThrows<RuntimeException> {
+            truck.drive(Distance(5))
+        }
     }
 
     @Test fun `records the distance it has driven`() {

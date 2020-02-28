@@ -31,6 +31,7 @@ class TransportApp(private val map: DistanceMap) {
 
     private fun ship(shipment: Shipment) {
         val distance = map.distanceTo(shipment.destination)
+        truck.startTrip(Trip(distance))
         truck.drive(distance)
         if (factory.hasShipmentsWaiting()) {
             truck.drive(distance)
