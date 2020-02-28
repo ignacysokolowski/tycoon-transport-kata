@@ -14,8 +14,6 @@ class TripTest {
     }
 
     @Test fun `gets a shorter distance when advanced`() {
-        val trip = Trip(Distance(3))
-        val tripAdvanced = trip.advancedBy(Distance(1))
-        assertThat(tripAdvanced, equalTo(Trip(Distance(2))))
+        assertThat(Trip(Distance(3)).advancedBy(Distance(1)), equalTo(Trip(Distance(2))))
     }
 }
