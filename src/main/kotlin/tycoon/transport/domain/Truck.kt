@@ -1,7 +1,13 @@
 package tycoon.transport.domain
 
 class Truck {
+    var trip: Trip? = null
+
     private var distanceDriven = Distance(0)
+
+    fun startTrip(trip: Trip) {
+        this.trip = trip
+    }
 
     fun drive(distance: Distance) {
         distanceDriven += distance
