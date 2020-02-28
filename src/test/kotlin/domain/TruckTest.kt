@@ -32,6 +32,11 @@ class TruckTest {
         assertThat(truck.atDestination(), equalTo(false))
     }
 
+    @Test fun `at the destination once has driven the whole trip distance`() {
+        val truck = Truck(Trip(Distance(0)))
+        assertThat(truck.atDestination(), equalTo(true))
+    }
+
     @Test fun `can not drive if already at destination`() {
         val truck = Truck(Trip(Distance(0)))
         assertThrows<TruckAtDestination> {
