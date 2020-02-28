@@ -9,7 +9,7 @@ class Truck(var trip: Trip) {
 
     fun drive(distance: Distance) {
         if (trip.atDestination()) {
-            throw RuntimeException()
+            throw TruckAtDestination()
         }
         distanceDriven += distance
     }

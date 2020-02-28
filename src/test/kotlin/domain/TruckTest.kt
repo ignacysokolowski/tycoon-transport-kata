@@ -7,6 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
+import tycoon.transport.domain.TruckAtDestination
 
 class TruckTest {
 
@@ -28,7 +29,7 @@ class TruckTest {
 
     @Test fun `can not drive if already at destination`() {
         val truck = Truck(Trip(Distance(0)))
-        assertThrows<RuntimeException> {
+        assertThrows<TruckAtDestination> {
             truck.drive(Distance(5))
         }
     }
