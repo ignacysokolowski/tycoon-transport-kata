@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class Truck private constructor(var trip: Trip) {
+class Truck private constructor(private var trip: Trip) {
 
     companion object {
         fun on(trip: Trip) = Truck(trip)
