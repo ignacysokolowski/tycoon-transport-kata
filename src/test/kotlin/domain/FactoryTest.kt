@@ -17,6 +17,10 @@ class FactoryTest {
         assertThat(factory.hasShipmentsWaiting(), equalTo(false))
     }
 
+    @Test fun `has all shipments delivered if has not collected any yet`() {
+        assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
+    }
+
     @Test fun `has no shipments to be picked up`() {
         assertThrows<AllShipmentsPickedUp> {
             factory.pickUpNextShipment()

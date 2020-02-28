@@ -18,4 +18,6 @@ class Factory {
     }
 
     fun hasShipmentsWaiting() = shipmentsWaiting.isNotEmpty()
+
+    fun hasAllShipmentsDelivered() = true
 }
