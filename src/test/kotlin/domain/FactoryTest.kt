@@ -55,8 +55,9 @@ class FactoryTest {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A"))
         ))
+        factory.pickUpNextShipment()
         assertThrows<ShipmentNotPickedUp> {
-            factory.shipmentDelivered(Shipment(WarehouseId("A")))
+            factory.shipmentDelivered(Shipment(WarehouseId("B")))
         }
     }
 

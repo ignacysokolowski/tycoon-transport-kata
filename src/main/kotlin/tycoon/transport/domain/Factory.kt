@@ -27,7 +27,7 @@ class Factory {
     }
 
     fun shipmentDelivered(shipment: Shipment) {
-        if (shipmentsPickedUp.isEmpty()) {
+        if (!shipmentsPickedUp.contains(shipment)) {
             throw ShipmentNotPickedUp()
         }
         shipmentsPickedUp.clear()
