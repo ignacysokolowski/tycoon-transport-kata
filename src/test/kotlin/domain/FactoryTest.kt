@@ -50,6 +50,15 @@ class FactoryTest {
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
     }
 
+    @Test fun `can not be notified about delivery of a shipment that was not picked up`() {
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A"))
+        ))
+        assertThrows<RuntimeException> {
+            factory.shipmentDelivered(Shipment(WarehouseId("A")))
+        }
+    }
+
     @Test fun `provides next shipment to pick up`() {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A")),

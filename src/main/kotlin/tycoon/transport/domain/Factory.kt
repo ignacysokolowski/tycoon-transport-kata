@@ -27,6 +27,9 @@ class Factory {
     }
 
     fun shipmentDelivered(shipment: Shipment) {
+        if (shipmentsPickedUp.isEmpty()) {
+            throw RuntimeException()
+        }
         shipmentsPickedUp.clear()
     }
 }
