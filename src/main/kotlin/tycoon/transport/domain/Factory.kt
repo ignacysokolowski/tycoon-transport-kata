@@ -25,4 +25,8 @@ class Factory {
     fun hasAllShipmentsDelivered(): Boolean {
         return (shipmentsPickedUp.isEmpty() and !hasShipmentsWaiting())
     }
+
+    fun shipmentDelivered(shipment: Shipment) {
+        shipmentsPickedUp.clear()
+    }
 }

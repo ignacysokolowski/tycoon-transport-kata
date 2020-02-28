@@ -41,6 +41,15 @@ class FactoryTest {
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
     }
 
+    @Test fun `can be notified about delivery`() {
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A"))
+        ))
+        val shipment = factory.pickUpNextShipment()
+        factory.shipmentDelivered(shipment)
+        assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
+    }
+
     @Test fun `provides next shipment to pick up`() {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A")),
