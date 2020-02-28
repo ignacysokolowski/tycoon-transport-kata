@@ -8,6 +8,10 @@ import tycoon.transport.domain.Trip
 
 class TripTest {
 
+    @Test fun `is at destination if has no distance`() {
+        assertThat(Trip(Distance(0)).atDestination(), equalTo(true))
+    }
+
     @Test fun `is not at destination if has a distance`() {
         assertThat(Trip(Distance(1)).atDestination(), equalTo(false))
     }
