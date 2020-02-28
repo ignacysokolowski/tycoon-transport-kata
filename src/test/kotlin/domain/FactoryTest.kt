@@ -7,6 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.AllShipmentsPickedUp
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Shipment
+import tycoon.transport.domain.ShipmentNotPickedUp
 import tycoon.transport.domain.WarehouseId
 
 class FactoryTest {
@@ -54,7 +55,7 @@ class FactoryTest {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A"))
         ))
-        assertThrows<RuntimeException> {
+        assertThrows<ShipmentNotPickedUp> {
             factory.shipmentDelivered(Shipment(WarehouseId("A")))
         }
     }
