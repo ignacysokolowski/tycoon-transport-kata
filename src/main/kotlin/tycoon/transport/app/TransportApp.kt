@@ -37,7 +37,9 @@ class TransportApp(private val map: DistanceMap) {
         }
         if (factory.hasShipmentsWaiting()) {
             truck.startTrip(Trip(distance))
-            truck.drive(distance)
+            while (!truck.atDestination()) {
+                truck.drive(Distance(1))
+            }
         }
     }
 
