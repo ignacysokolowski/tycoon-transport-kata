@@ -1,7 +1,7 @@
 package tycoon.transport.domain
 
 class Truck {
-    var trip: Trip? = null
+    var trip = Trip(Distance(0))
 
     private var distanceDriven = Distance(0)
 

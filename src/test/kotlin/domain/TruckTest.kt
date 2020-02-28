@@ -9,12 +9,17 @@ import tycoon.transport.domain.Truck
 
 class TruckTest {
 
+    @Test fun `starts with a zero-distance trip`() {
+        val truck = Truck()
+        assertThat(truck.trip, equalTo(Trip(Distance(0))))
+    }
+
     @Test fun `has not driven yet`() {
         val truck = Truck()
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
 
-    @Test fun `can start a trip`() {
+    @Test fun `can start a new trip`() {
         val truck = Truck()
         truck.startTrip(Trip(Distance(2)))
         assertThat(truck.trip, equalTo(Trip(Distance(2))))
