@@ -49,4 +49,12 @@ class FactoryTest {
         assertThat(factory.pickUpNextShipment(), equalTo(Shipment(WarehouseId("A"))))
         assertThat(factory.pickUpNextShipment(), equalTo(Shipment(WarehouseId("B"))))
     }
+
+    @Test fun `shipments picked up are not delivered yet`() {
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A"))
+        ))
+        factory.pickUpNextShipment()
+        assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
+    }
 }
