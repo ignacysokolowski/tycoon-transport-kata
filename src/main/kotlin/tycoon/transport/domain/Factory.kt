@@ -27,9 +27,8 @@ class Factory {
     }
 
     fun shipmentDelivered(shipment: Shipment) {
-        if (!shipmentsPickedUp.contains(shipment)) {
+        if (!shipmentsPickedUp.remove(shipment)) {
             throw ShipmentNotPickedUp()
         }
-        shipmentsPickedUp.remove(shipment)
     }
 }
