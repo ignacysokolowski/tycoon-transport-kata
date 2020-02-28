@@ -16,7 +16,7 @@ class TransportApp(private val map: DistanceMap) {
 
     fun ship(warehouseIds: List<String>) {
         factory.collectShipments(shipmentsFrom(warehouseIds))
-        while (factory.hasShipmentsWaiting()) {
+        while (!factory.hasAllShipmentsDelivered()) {
             try {
                 ship(factory.pickUpNextShipment())
             } catch (e: WarehouseUnknown) {
@@ -35,6 +35,7 @@ class TransportApp(private val map: DistanceMap) {
         while (!truck.atDestination()) {
             truck.drive(Distance(1))
         }
+        factory.shipmentDelivered(shipment)
         if (factory.hasShipmentsWaiting()) {
             truck.startTrip(Trip(distance))
             while (!truck.atDestination()) {
