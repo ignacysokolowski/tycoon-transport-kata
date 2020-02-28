@@ -34,6 +34,13 @@ class FactoryTest {
         assertThat(factory.hasShipmentsWaiting(), equalTo(true))
     }
 
+    @Test fun `shipments waiting to be picked up are not delivered yet`() {
+        factory.collectShipments(listOf(
+            Shipment(WarehouseId("A"))
+        ))
+        assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
+    }
+
     @Test fun `provides next shipment to pick up`() {
         factory.collectShipments(listOf(
             Shipment(WarehouseId("A")),

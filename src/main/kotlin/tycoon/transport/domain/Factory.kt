@@ -19,5 +19,5 @@ class Factory {
 
     fun hasShipmentsWaiting() = shipmentsWaiting.isNotEmpty()
 
-    fun hasAllShipmentsDelivered() = true
+    fun hasAllShipmentsDelivered() = !hasShipmentsWaiting()
 }
