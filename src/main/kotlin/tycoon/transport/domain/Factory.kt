@@ -30,6 +30,6 @@ class Factory {
         if (!shipmentsPickedUp.contains(shipment)) {
             throw ShipmentNotPickedUp()
         }
-        shipmentsPickedUp.clear()
+        shipmentsPickedUp.remove(shipment)
     }
 }
