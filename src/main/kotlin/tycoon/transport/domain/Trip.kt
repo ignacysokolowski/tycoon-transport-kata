@@ -1,5 +1,5 @@
 package tycoon.transport.domain
 
-data class Trip(val distance: Distance) {
+data class Trip(private val distance: Distance) {
     fun advancedBy(distance: Distance) = Trip(this.distance - distance)
 }
