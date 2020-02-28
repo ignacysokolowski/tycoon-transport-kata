@@ -4,13 +4,14 @@ import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Shipment
+import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.WarehouseId
 import tycoon.transport.domain.WarehouseUnknown
 
 class TransportApp(private val map: DistanceMap) {
     private val factory = Factory()
-    private val truck = Truck()
+    private val truck = Truck(Trip(Distance(0)))
     private var distanceDriven = Distance(0)
 
     fun ship(warehouseIds: List<String>) {
