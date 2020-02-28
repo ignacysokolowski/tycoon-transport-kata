@@ -14,12 +14,15 @@ class TransportApp(private val map: DistanceMap) {
     private var distanceDriven = Distance(0)
 
     fun ship(warehouseIds: List<String>) {
-        factory.collectShipments(warehouseIds.map { Shipment(WarehouseId(it)) })
+        factory.collectShipments(shipmentsFrom(warehouseIds))
         while (factory.hasShipmentsWaiting()) {
             ship(factory.pickUpNextShipment())
         }
         distanceDriven = truck.distanceDriven()
     }
+
+    private fun shipmentsFrom(warehouseIds: List<String>) =
+        warehouseIds.map { Shipment(WarehouseId(it)) }
 
     private fun ship(shipment: Shipment) {
         val distance = try {
