@@ -11,7 +11,7 @@ import tycoon.transport.domain.WarehouseUnknown
 
 class TransportApp(private val map: DistanceMap) {
     private val factory = Factory()
-    private val truck = Truck(Trip(Distance(0)))
+    private val truck = Truck.on(Trip(Distance(0)))
     private var distanceDriven = Distance(0)
 
     fun ship(warehouseIds: List<String>) {
