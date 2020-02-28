@@ -11,6 +11,7 @@ class Truck(var trip: Trip) {
         if (trip.atDestination()) {
             throw TruckAtDestination()
         }
+        trip = trip.advancedBy(distance)
         distanceDriven += distance
     }
 
