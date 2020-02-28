@@ -14,6 +14,11 @@ class TruckTest {
         assertThat(truck.trip, equalTo(Trip(Distance(0))))
     }
 
+    @Test fun `starts on a trip`() {
+        val truck = Truck(Trip(Distance(2)))
+        assertThat(truck.trip, equalTo(Trip(Distance(2))))
+    }
+
     @Test fun `has not driven yet`() {
         val truck = Truck()
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
