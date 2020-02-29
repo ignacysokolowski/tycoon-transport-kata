@@ -12,7 +12,7 @@ import tycoon.transport.domain.Truck
 
 class TransportApp(private val map: DistanceMap) {
     private val factory = Factory()
-    private val truck = Truck.on(Trip(Distance(0)))
+    private val truck = Truck.on(Trip(Distance(0), LocationId("FACTORY")))
     private val shipmentIds = ShipmentIds()
     private var distanceDriven = Distance(0)
 
@@ -33,13 +33,13 @@ class TransportApp(private val map: DistanceMap) {
 
     private fun ship(shipment: Shipment) {
         val distance = map.distanceTo(shipment.destination)
-        truck.startTrip(Trip(distance))
+        truck.startTrip(Trip(distance, shipment.destination))
         while (!truck.atDestination()) {
             truck.drive(Distance(1))
         }
         factory.shipmentDelivered(shipment)
         if (factory.hasShipmentsWaiting()) {
-            truck.startTrip(Trip(distance))
+            truck.startTrip(Trip(distance, LocationId("FACTORY")))
             while (!truck.atDestination()) {
                 truck.drive(Distance(1))
             }
