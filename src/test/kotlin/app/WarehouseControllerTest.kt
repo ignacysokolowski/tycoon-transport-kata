@@ -17,6 +17,12 @@ class WarehouseControllerTest {
         controller.transportArrived(TransportStub())
         assertThat(deliveryListener.shipmentsDelivered, equalTo(listOf(ShipmentId("dummy"))))
     }
+
+    @Test fun `directs transports back to the origin`() {
+        val transport = TransportStub()
+        controller.transportArrived(transport)
+        assertThat(transport.goesBack, equalTo(true))
+    }
 }
 
 class DeliverySpy : DeliveryListener {
@@ -28,5 +34,11 @@ class DeliverySpy : DeliveryListener {
 }
 
 class TransportStub : Transport {
+    var goesBack = false
+
     override fun dropOff() = ShipmentId("dummy")
+
+    override fun goBack() {
+        goesBack = true
+    }
 }

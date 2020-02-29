@@ -24,7 +24,7 @@ class Truck private constructor(
         this.trip = trip
     }
 
-    fun goBack() {
+    override fun goBack() {
         trip = trip.backToOrigin()
     }
 
