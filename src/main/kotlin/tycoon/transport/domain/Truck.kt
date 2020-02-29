@@ -11,6 +11,10 @@ class Truck private constructor(
 
     private var distanceDriven = Distance(0)
 
+    init {
+        notifyIfArrived()
+    }
+
     fun startTrip(trip: Trip) {
         this.trip = trip
     }
