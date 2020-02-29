@@ -34,7 +34,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        val truck = Truck.on(Trip.between(factoryLocationId, factoryLocationId, Distance(0)), this)
+        val truck = Truck.on(Trip.inPlace(factoryLocationId), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
         }
