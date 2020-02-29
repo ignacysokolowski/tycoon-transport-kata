@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class Trip private constructor(
+data class Trip private constructor(
     private val origin: LocationId,
     private val destination: LocationId,
     private val distance: Distance,
@@ -17,7 +17,7 @@ class Trip private constructor(
     }
 
     fun reversed(): Trip {
-        return Trip(destination, origin, distance, distance)
+        return copy(origin = destination, destination = origin, progress = distance)
     }
 
     fun advancedBy(distance: Distance): Trip {
