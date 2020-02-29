@@ -24,6 +24,10 @@ class Truck private constructor(
         this.trip = trip
     }
 
+    fun goBack() {
+        trip = trip.reversed()
+    }
+
     fun drive(distance: Distance) {
         if (trip.atDestination()) {
             return
