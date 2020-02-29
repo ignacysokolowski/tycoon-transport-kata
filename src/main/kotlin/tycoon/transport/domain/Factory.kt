@@ -20,8 +20,8 @@ class Factory {
         return shipment
     }
 
-    fun shipmentDelivered(shipment: Shipment) {
-        if (!shipmentsPickedUp.remove(shipment)) {
+    fun shipmentDelivered(shipmentId: ShipmentId) {
+        if (!shipmentsPickedUp.removeIf { it.id == shipmentId }) {
             throw ShipmentNotPickedUp()
         }
     }

@@ -47,7 +47,7 @@ class FactoryTest {
         factory.collectShipments(listOf(
             Shipment(ShipmentId("1"), LocationId("A"))
         ))
-        factory.shipmentDelivered(factory.pickUpNextShipment())
+        factory.shipmentDelivered(factory.pickUpNextShipment().id)
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
     }
 
@@ -57,7 +57,7 @@ class FactoryTest {
             Shipment(ShipmentId("2"), LocationId("B"))
         ))
         factory.pickUpNextShipment()
-        factory.shipmentDelivered(factory.pickUpNextShipment())
+        factory.shipmentDelivered(factory.pickUpNextShipment().id)
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
     }
 
@@ -67,7 +67,7 @@ class FactoryTest {
         ))
         factory.pickUpNextShipment()
         assertThrows<ShipmentNotPickedUp> {
-            factory.shipmentDelivered(Shipment(ShipmentId("1"), LocationId("B")))
+            factory.shipmentDelivered(ShipmentId("2"))
         }
     }
 

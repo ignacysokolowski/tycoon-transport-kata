@@ -39,7 +39,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         while (!truck.atDestination()) {
             truck.drive(Distance(1))
         }
-        factory.shipmentDelivered(shipment)
+        factory.shipmentDelivered(shipment.id)
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
