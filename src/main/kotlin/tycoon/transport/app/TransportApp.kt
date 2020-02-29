@@ -29,7 +29,7 @@ class TransportApp(private val map: DistanceMap) {
     }
 
     private fun shipmentsFrom(warehouseIds: List<String>) =
-        warehouseIds.map { Shipment(WarehouseId(it), shipmentIds.next()) }
+        warehouseIds.map { Shipment(shipmentIds.next(), WarehouseId(it)) }
 
     private fun ship(shipment: Shipment) {
         val distance = map.distanceTo(shipment.destination)
