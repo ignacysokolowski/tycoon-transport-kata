@@ -1,3 +1,3 @@
 package tycoon.transport.domain
 
-data class Shipment(val destination: WarehouseId, val shipmentId: ShipmentId? = null)
+data class Shipment(val destination: WarehouseId, val shipmentId: ShipmentId)
