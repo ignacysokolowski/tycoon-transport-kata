@@ -8,6 +8,7 @@ import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentIds
+import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
@@ -33,7 +34,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        val truck = Truck.on(Journey.to(factoryLocationId, Distance(0)), this)
+        val truck = Truck.on(Trip.between(factoryLocationId, factoryLocationId, Distance(0)), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
         }
