@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
-import tycoon.transport.domain.WarehouseId
+import tycoon.transport.domain.LocationId
 
 class TransportAppTest {
 
@@ -15,13 +15,13 @@ class TransportAppTest {
     private val app = TransportApp(map)
 
     @Test fun `ships cargo to a warehouse`() {
-        map.addWarehouse(WarehouseId("B"), Distance(5))
+        map.addWarehouse(LocationId("B"), Distance(5))
         app.ship(listOf("B"))
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next shipment`() {
-        map.addWarehouse(WarehouseId("B"), Distance(5))
+        map.addWarehouse(LocationId("B"), Distance(5))
         app.ship(listOf("B", "B"))
         assertThat(app.totalDeliveryTime(), equalTo(15))
     }
@@ -31,7 +31,7 @@ class TransportAppTest {
     }
 
     @Test fun `can not ship to unknown destinations`() {
-        map.addWarehouse(WarehouseId("B"), Distance(5))
+        map.addWarehouse(LocationId("B"), Distance(5))
         val exception = assertThrows<RuntimeException> {
             app.ship(listOf("X"))
         }

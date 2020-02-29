@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.AllShipmentsPickedUp
 import tycoon.transport.domain.Factory
+import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.ShipmentNotPickedUp
-import tycoon.transport.domain.WarehouseId
 
 class FactoryTest {
 
@@ -31,21 +31,21 @@ class FactoryTest {
 
     @Test fun `has shipments waiting to be picked up`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A"))
+            Shipment(ShipmentId("1"), LocationId("A"))
         ))
         assertThat(factory.hasShipmentsWaiting(), equalTo(true))
     }
 
     @Test fun `shipments waiting to be picked up are not delivered yet`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A"))
+            Shipment(ShipmentId("1"), LocationId("A"))
         ))
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
     }
 
     @Test fun `can be notified about delivery`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A"))
+            Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.shipmentDelivered(factory.pickUpNextShipment())
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
@@ -53,8 +53,8 @@ class FactoryTest {
 
     @Test fun `delivering a single shipment does not deliver all`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A")),
-            Shipment(ShipmentId("2"), WarehouseId("B"))
+            Shipment(ShipmentId("1"), LocationId("A")),
+            Shipment(ShipmentId("2"), LocationId("B"))
         ))
         factory.pickUpNextShipment()
         factory.shipmentDelivered(factory.pickUpNextShipment())
@@ -63,26 +63,26 @@ class FactoryTest {
 
     @Test fun `can not be notified about delivery of a shipment that was not picked up`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A"))
+            Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.pickUpNextShipment()
         assertThrows<ShipmentNotPickedUp> {
-            factory.shipmentDelivered(Shipment(ShipmentId("1"), WarehouseId("B")))
+            factory.shipmentDelivered(Shipment(ShipmentId("1"), LocationId("B")))
         }
     }
 
     @Test fun `provides next shipment to pick up`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A")),
-            Shipment(ShipmentId("2"), WarehouseId("B"))
+            Shipment(ShipmentId("1"), LocationId("A")),
+            Shipment(ShipmentId("2"), LocationId("B"))
         ))
-        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(ShipmentId("1"), WarehouseId("A"))))
-        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(ShipmentId("2"), WarehouseId("B"))))
+        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(ShipmentId("1"), LocationId("A"))))
+        assertThat(factory.pickUpNextShipment(), equalTo(Shipment(ShipmentId("2"), LocationId("B"))))
     }
 
     @Test fun `shipments picked up are not delivered yet`() {
         factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), WarehouseId("A"))
+            Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.pickUpNextShipment()
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
