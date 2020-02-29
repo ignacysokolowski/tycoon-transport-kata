@@ -20,6 +20,10 @@ class Truck private constructor(
         this.shipmentId = shipmentId
     }
 
+    fun startTrip(trip: Trip) {
+        startJourney(trip.journey())
+    }
+
     fun startJourney(journey: Journey) {
         this.journey = journey
     }
