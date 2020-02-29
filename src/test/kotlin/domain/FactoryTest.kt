@@ -7,6 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.AllShipmentsPickedUp
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Shipment
+import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.ShipmentNotPickedUp
 import tycoon.transport.domain.WarehouseId
 
@@ -30,7 +31,7 @@ class FactoryTest {
 
     @Test fun `has shipments waiting to be picked up`() {
         factory.collectShipments(listOf(
-            Shipment(WarehouseId("A"))
+            Shipment(WarehouseId("A"), ShipmentId("1"))
         ))
         assertThat(factory.hasShipmentsWaiting(), equalTo(true))
     }
