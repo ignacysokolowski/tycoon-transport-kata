@@ -1,7 +1,7 @@
 package tycoon.transport.domain
 
 data class Trip private constructor(
-    private val destination: LocationId,
+    val destination: LocationId,
     private val distance: Distance
 ) {
     companion object {

@@ -49,12 +49,12 @@ class TruckTest {
         assertThat(truck.atDestination(), equalTo(true))
     }
 
-    // @Test fun `notifies about arrivals`() {
-    //     val truckListener = TruckSpy()
-    //     val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
-    //     truck.drive(Distance(3))
-    //     assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
-    // }
+    @Test fun `notifies about arrivals`() {
+        val truckListener = TruckSpy()
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
+        truck.drive(Distance(3))
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+    }
 
     @Test fun `can not drive if already at destination`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
