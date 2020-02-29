@@ -9,13 +9,14 @@ import tycoon.transport.domain.Journey
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.NoShipmentCarried
 import tycoon.transport.domain.ShipmentId
+import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 
 class TruckTest {
     private val truckListener = TruckSpy()
 
     @Test fun `has not driven yet`() {
-        val truck = Truck.on(Journey.to(LocationId("A"), Distance(0)), truckListener)
+        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
 

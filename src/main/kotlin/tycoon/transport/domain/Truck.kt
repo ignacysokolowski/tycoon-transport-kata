@@ -7,6 +7,7 @@ class Truck private constructor(
 
     companion object {
         fun on(journey: Journey, listener: TruckListener) = Truck(journey, listener)
+        fun on(trip: Trip, listener: TruckListener) = on(trip.journey(), listener)
     }
 
     private var distanceDriven = Distance(0)
