@@ -35,10 +35,10 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
 
     private fun shipNext() {
-        ship(factory.pickUpNextShipment())
+        ship(factory.pickUpNextShipment(), truck)
     }
 
-    private fun ship(shipment: Shipment) {
+    private fun ship(shipment: Shipment, truck: Truck) {
         val distance = map.distanceTo(shipment.destination)
         truck.pickUp(shipment.id)
         truck.startTrip(Trip.to(shipment.destination, distance))
