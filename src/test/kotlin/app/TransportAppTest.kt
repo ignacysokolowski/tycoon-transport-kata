@@ -30,6 +30,11 @@ class TransportAppTest {
         assertThat(app.totalDeliveryTime(), equalTo(0))
     }
 
+    @Test fun `total delivery time is zero after shipping no cargo`() {
+        app.ship(emptyList())
+        assertThat(app.totalDeliveryTime(), equalTo(0))
+    }
+
     @Test fun `can not ship to unknown destinations`() {
         map.addDistanceTo(LocationId("B"), Distance(5))
         val exception = assertThrows<RuntimeException> {

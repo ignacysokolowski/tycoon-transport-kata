@@ -19,6 +19,9 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     private var distanceDriven = Distance(0)
 
     fun ship(warehouseIds: List<String>) {
+        if (warehouseIds.isEmpty()) {
+            return
+        }
         factory.collectShipments(shipmentsFrom(warehouseIds))
         try {
             shipNext(truck)
