@@ -14,12 +14,12 @@ class WarehouseControllerTest {
     private val controller = WarehouseController(deliveryListener)
 
     @Test fun `drops off shipment from a transport that arrived and notifies about delivery`() {
-        controller.transportArrived(TransportStub())
+        controller.transportArrived(FakeTransport())
         assertThat(deliveryListener.shipmentsDelivered, equalTo(listOf(ShipmentId("dummy"))))
     }
 
     @Test fun `directs transports back to the origin`() {
-        val transport = TransportStub()
+        val transport = FakeTransport()
         controller.transportArrived(transport)
         assertThat(transport.goesBack, equalTo(true))
     }
@@ -33,7 +33,7 @@ class DeliverySpy : DeliveryListener {
     }
 }
 
-class TransportStub : Transport {
+class FakeTransport : Transport {
     var goesBack = false
 
     override fun dropOff() = ShipmentId("dummy")
