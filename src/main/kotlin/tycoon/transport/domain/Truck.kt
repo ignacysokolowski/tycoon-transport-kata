@@ -40,8 +40,10 @@ class Truck private constructor(
     }
 
     fun dropOff(): ShipmentId {
-        return shipmentId
+        val shipmentId = shipmentId
             ?: throw NoShipmentCarried()
+        this.shipmentId = null
+        return shipmentId
     }
 
     fun atDestination() = trip.atDestination()

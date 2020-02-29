@@ -84,4 +84,13 @@ class TruckTest {
             truck.dropOff()
         }
     }
+
+    @Test fun `has to pick up another shipment after dropping off`() {
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)), truckListener)
+        truck.pickUp(ShipmentId("1"))
+        truck.dropOff()
+        assertThrows<NoShipmentCarried> {
+            truck.dropOff()
+        }
+    }
 }
