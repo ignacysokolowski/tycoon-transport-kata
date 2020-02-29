@@ -21,6 +21,7 @@ class TruckTest {
     @Test fun `not at the destination until has driven the whole trip distance`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(1)), truckListener)
         assertThat(truck.atDestination(), equalTo(false))
+        assertThat(truckListener.arrivals, equalTo(emptyList<TruckArrival>()))
     }
 
     @Test fun `at the destination once has driven the whole trip distance`() {
