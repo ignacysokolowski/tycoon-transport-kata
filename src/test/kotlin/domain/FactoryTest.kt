@@ -15,10 +15,6 @@ class FactoryTest {
 
     private val factory = Factory()
 
-    @Test fun `has no shipments waiting`() {
-        assertThat(factory.hasShipmentsWaiting(), equalTo(false))
-    }
-
     @Test fun `has all shipments delivered if has not collected any yet`() {
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
     }
@@ -27,13 +23,6 @@ class FactoryTest {
         assertThrows<AllShipmentsPickedUp> {
             factory.pickUpNextShipment()
         }
-    }
-
-    @Test fun `has shipments waiting to be picked up`() {
-        factory.collectShipments(listOf(
-            Shipment(ShipmentId("1"), LocationId("A"))
-        ))
-        assertThat(factory.hasShipmentsWaiting(), equalTo(true))
     }
 
     @Test fun `shipments waiting to be picked up are not delivered yet`() {
