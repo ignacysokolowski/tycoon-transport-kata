@@ -8,6 +8,8 @@ data class Trip private constructor(
     companion object {
         fun between(origin: LocationId, destination: LocationId, distance: Distance) =
             Trip(origin, distance, Journey.to(destination, distance))
+
+        fun inPlace(locationId: LocationId) = between(locationId, locationId, Distance(0))
     }
 
     fun journey() = journey
