@@ -51,4 +51,9 @@ class TripTest {
         val trip = Trip.inPlace(LocationId("A"))
         assertThat(trip.reversed(), equalTo(trip))
     }
+
+    @Test fun `trip in place can not be advanced`() {
+        val trip = Trip.inPlace(LocationId("A"))
+        assertThat(trip.advancedBy(Distance(1)), equalTo(trip))
+    }
 }
