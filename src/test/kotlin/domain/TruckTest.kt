@@ -14,22 +14,22 @@ class TruckTest {
     private val truckListener = TruckSpy()
 
     @Test fun `has not driven yet`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
 
     @Test fun `not at the destination until has driven the whole trip distance`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(1)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(1)), truckListener)
         assertThat(truck.atDestination(), equalTo(false))
     }
 
     @Test fun `at the destination once has driven the whole trip distance`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
         assertThat(truck.atDestination(), equalTo(true))
     }
 
     @Test fun `drives the trip distance`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
         truck.drive(Distance(2))
         truck.drive(Distance(1))
         assertThat(truck.atDestination(), equalTo(true))
@@ -48,21 +48,21 @@ class TruckTest {
     }
 
     @Test fun `can not drive if already at destination`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
         assertThrows<TruckAtDestination> {
             truck.drive(Distance(5))
         }
     }
 
     @Test fun `can start a new trip`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
         truck.startTrip(Trip.to(LocationId("B"), Distance(1)))
         truck.drive(Distance(1))
         assertThat(truck.atDestination(), equalTo(true))
     }
 
     @Test fun `records the distance it has driven`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)))
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)), truckListener)
         truck.drive(Distance(5))
         truck.drive(Distance(3))
         assertThat(truck.distanceDriven(), equalTo(Distance(8)))
