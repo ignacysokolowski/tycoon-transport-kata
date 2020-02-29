@@ -1,6 +1,9 @@
 package tycoon.transport.domain
 
-data class Trip(private val distance: Distance, val destination: LocationId) {
-    fun advancedBy(distance: Distance) = Trip(this.distance - distance, destination)
+data class Trip(
+    private val destination: LocationId,
+    private val distance: Distance
+) {
+    fun advancedBy(distance: Distance) = Trip(destination, this.distance - distance)
     fun atDestination() = distance == Distance(0)
 }
