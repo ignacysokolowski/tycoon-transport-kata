@@ -22,11 +22,13 @@ class Truck private constructor(
     }
 
     fun drive(distance: Distance) {
-        listener.truckArrived(this, trip.destination)
         if (trip.atDestination()) {
             throw TruckAtDestination()
         }
         trip = trip.advancedBy(distance)
+        if (trip.atDestination()) {
+            listener.truckArrived(this, trip.destination)
+        }
         distanceDriven += distance
     }
 
