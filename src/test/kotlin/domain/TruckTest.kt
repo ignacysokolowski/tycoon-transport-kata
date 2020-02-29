@@ -11,6 +11,7 @@ import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckAtDestination
 
 class TruckTest {
+    private val truckListener = TruckSpy()
 
     @Test fun `has not driven yet`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)))
@@ -35,14 +36,12 @@ class TruckTest {
     }
 
     @Test fun `notifies about arrivals`() {
-        val truckListener = TruckSpy()
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
         truck.drive(Distance(3))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `only notifies about actual arrivals`() {
-        val truckListener = TruckSpy()
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
         truck.drive(Distance(2))
         assertThat(truckListener.arrivals, equalTo(emptyList<TruckArrival>()))
