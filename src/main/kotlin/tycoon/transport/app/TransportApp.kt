@@ -47,9 +47,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     override fun truckArrived(truck: Truck, locationId: LocationId) {
         if (locationId != factoryLocationId) {
             factory.shipmentDelivered(truck.dropOff())
-            if (factory.hasShipmentsWaiting()) {
-                truck.startTrip(Trip.to(factoryLocationId, map.distanceTo(locationId)))
-            }
+            truck.startTrip(Trip.to(factoryLocationId, map.distanceTo(locationId)))
         } else {
             if (factory.hasShipmentsWaiting()) {
                 shipNext()
