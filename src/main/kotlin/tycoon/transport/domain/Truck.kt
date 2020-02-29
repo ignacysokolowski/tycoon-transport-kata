@@ -6,13 +6,7 @@ class Truck private constructor(
 ) {
 
     companion object {
-        fun on(
-            trip: Trip,
-            listener: TruckListener = object : TruckListener {
-                override fun truckArrived(truck: Truck, locationId: LocationId) {
-                }
-            }
-        ) = Truck(trip, listener)
+        fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
     }
 
     private var distanceDriven = Distance(0)
