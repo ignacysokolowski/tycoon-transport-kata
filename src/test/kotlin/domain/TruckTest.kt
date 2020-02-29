@@ -37,6 +37,7 @@ class TruckTest {
         truck.drive(Distance(2))
         truck.drive(Distance(1))
         assertThat(truck.atDestination(), equalTo(true))
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `notifies about arrivals`() {
@@ -63,6 +64,13 @@ class TruckTest {
         truck.startTrip(Trip.to(LocationId("B"), Distance(1)))
         truck.drive(Distance(1))
         assertThat(truck.atDestination(), equalTo(true))
+        assertThat(
+            truckListener.arrivals,
+            equalTo(listOf(
+                TruckArrival(truck, LocationId("A")),
+                TruckArrival(truck, LocationId("B"))
+            ))
+        )
     }
 
     @Test fun `records the distance it has driven`() {
