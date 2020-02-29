@@ -58,8 +58,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         Trip.between(factoryLocationId, destination, map.distanceTo(destination))
 
     private fun arrivedAtWarehouse(truck: Truck) {
-        factory.shipmentDelivered(truck.dropOff())
-        truck.goBack()
+        WarehouseController(factory).transportArrived(truck)
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
