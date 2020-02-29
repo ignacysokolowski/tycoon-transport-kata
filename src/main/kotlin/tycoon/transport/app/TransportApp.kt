@@ -48,9 +48,13 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         if (locationId != factoryLocationId) {
             arrivedAtWarehouse(truck, locationId)
         } else {
-            if (factory.hasShipmentsWaiting()) {
-                shipNext()
-            }
+            arrivedAtFactory()
+        }
+    }
+
+    private fun arrivedAtFactory() {
+        if (factory.hasShipmentsWaiting()) {
+            shipNext()
         }
     }
 
