@@ -20,10 +20,14 @@ class Truck private constructor(
             throw TruckAtDestination()
         }
         trip = trip.advancedBy(distance)
+        notifyIfArrived()
+        distanceDriven += distance
+    }
+
+    private fun notifyIfArrived() {
         if (trip.atDestination()) {
             listener.truckArrived(this, trip.destination)
         }
-        distanceDriven += distance
     }
 
     fun atDestination() = trip.atDestination()
