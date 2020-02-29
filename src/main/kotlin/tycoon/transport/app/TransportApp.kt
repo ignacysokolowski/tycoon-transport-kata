@@ -3,7 +3,6 @@ package tycoon.transport.app
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
-import tycoon.transport.domain.Journey
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Shipment
@@ -57,7 +56,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun arrivedAtWarehouse(truck: Truck, locationId: LocationId) {
         factory.shipmentDelivered(truck.dropOff())
-        truck.startJourney(Journey.to(factoryLocationId, map.distanceTo(locationId)))
+        truck.startTrip(Trip.between(locationId, factoryLocationId, map.distanceTo(locationId)))
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
