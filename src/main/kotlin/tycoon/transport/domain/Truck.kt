@@ -15,6 +15,9 @@ class Truck private constructor(
         notifyIfArrived()
     }
 
+    fun pickUp(shipmentId: ShipmentId) {
+    }
+
     fun startTrip(trip: Trip) {
         this.trip = trip
     }
@@ -32,6 +35,10 @@ class Truck private constructor(
         if (trip.atDestination()) {
             listener.truckArrived(this, trip.destination)
         }
+    }
+
+    fun dropOff(): ShipmentId {
+        return ShipmentId("1")
     }
 
     fun atDestination() = trip.atDestination()

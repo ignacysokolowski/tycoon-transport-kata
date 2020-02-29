@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckAtDestination
@@ -68,5 +69,11 @@ class TruckTest {
         truck.drive(Distance(5))
         truck.drive(Distance(3))
         assertThat(truck.distanceDriven(), equalTo(Distance(8)))
+    }
+
+    @Test fun `picks up shipments`() {
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)), truckListener)
+        truck.pickUp(ShipmentId("1"))
+        assertThat(truck.dropOff(), equalTo(ShipmentId("1")))
     }
 }
