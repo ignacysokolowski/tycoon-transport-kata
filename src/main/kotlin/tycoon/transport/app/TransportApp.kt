@@ -3,11 +3,11 @@ package tycoon.transport.app
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
+import tycoon.transport.domain.Journey
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentIds
-import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
@@ -33,7 +33,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        val truck = Truck.on(Trip.to(factoryLocationId, Distance(0)), this)
+        val truck = Truck.on(Journey.to(factoryLocationId, Distance(0)), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
         }
@@ -51,12 +51,12 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     private fun arrivedAtFactory(truck: Truck) {
         val shipment = factory.pickUpNextShipment()
         truck.pickUp(shipment.id)
-        truck.startTrip(Trip.to(shipment.destination, map.distanceTo(shipment.destination)))
+        truck.startJourney(Journey.to(shipment.destination, map.distanceTo(shipment.destination)))
     }
 
     private fun arrivedAtWarehouse(truck: Truck, locationId: LocationId) {
         factory.shipmentDelivered(truck.dropOff())
-        truck.startTrip(Trip.to(factoryLocationId, map.distanceTo(locationId)))
+        truck.startJourney(Journey.to(factoryLocationId, map.distanceTo(locationId)))
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
