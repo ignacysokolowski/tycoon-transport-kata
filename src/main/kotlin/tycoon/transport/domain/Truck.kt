@@ -1,12 +1,12 @@
 package tycoon.transport.domain
 
 class Truck private constructor(
-    private var journey: Journey,
+    private var trip: Trip,
     private val listener: TruckListener
 ) {
 
     companion object {
-        fun on(trip: Trip, listener: TruckListener) = Truck(trip.journey(), listener)
+        fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
     }
 
     private var distanceDriven = Distance(0)
@@ -21,21 +21,21 @@ class Truck private constructor(
     }
 
     fun startTrip(trip: Trip) {
-        journey = trip.journey()
+        this.trip = trip
     }
 
     fun drive(distance: Distance) {
-        if (journey.atDestination()) {
+        if (trip.atDestination()) {
             return
         }
-        journey = journey.advancedBy(distance)
+        trip = trip.advancedBy(distance)
         notifyIfArrived()
         distanceDriven += distance
     }
 
     private fun notifyIfArrived() {
-        if (journey.atDestination()) {
-            listener.truckArrived(this, journey.destination)
+        if (trip.atDestination()) {
+            listener.truckArrived(this, trip.destination())
         }
     }
 
