@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.NoShipmentCarried
 import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
@@ -79,7 +80,7 @@ class TruckTest {
 
     @Test fun `can not drop off shipments if did not pick up`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)), truckListener)
-        assertThrows<RuntimeException> {
+        assertThrows<NoShipmentCarried> {
             truck.dropOff()
         }
     }

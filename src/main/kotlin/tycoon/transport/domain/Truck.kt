@@ -40,7 +40,8 @@ class Truck private constructor(
     }
 
     fun dropOff(): ShipmentId {
-        return shipmentId!!
+        return shipmentId
+            ?: throw NoShipmentCarried()
     }
 
     fun atDestination() = trip.atDestination()
