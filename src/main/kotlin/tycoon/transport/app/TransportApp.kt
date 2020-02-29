@@ -22,7 +22,11 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         if (warehouseIds.isEmpty()) {
             return
         }
-        shipAll(shipmentsFrom(warehouseIds))
+        try {
+            shipAll(shipmentsFrom(warehouseIds))
+        } catch (e: LocationUnknown) {
+            throw IllegalArgumentException("Unknown destination")
+        }
     }
 
     private fun shipmentsFrom(warehouseIds: List<String>) =
@@ -30,11 +34,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        try {
-            shipNext(truck)
-        } catch (e: LocationUnknown) {
-            throw IllegalArgumentException("Unknown destination")
-        }
+        shipNext(truck)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
         }
