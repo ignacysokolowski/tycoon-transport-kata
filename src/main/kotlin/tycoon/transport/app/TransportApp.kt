@@ -44,7 +44,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         if (locationId == factoryLocationId) {
             arrivedAtFactory(truck)
         } else {
-            arrivedAtWarehouse(truck, locationId)
+            arrivedAtWarehouse(truck)
         }
     }
 
@@ -54,9 +54,9 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         truck.startTrip(Trip.between(factoryLocationId, shipment.destination, map.distanceTo(shipment.destination)))
     }
 
-    private fun arrivedAtWarehouse(truck: Truck, locationId: LocationId) {
+    private fun arrivedAtWarehouse(truck: Truck) {
         factory.shipmentDelivered(truck.dropOff())
-        truck.startTrip(Trip.between(locationId, factoryLocationId, map.distanceTo(locationId)))
+        truck.goBack()
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
