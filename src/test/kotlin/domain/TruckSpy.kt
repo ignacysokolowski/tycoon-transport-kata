@@ -4,16 +4,13 @@ import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Truck
 
 class TruckSpy {
-    private val arrivals = mutableMapOf<Truck, MutableList<LocationId>>()
+    private val arrivals = mutableListOf<Pair<Truck, LocationId>>()
 
     fun arrivalsOf(truck: Truck): List<LocationId> {
-        return arrivals[truck] ?: emptyList()
+        return arrivals.filter { it.first == truck }.map { it.second }
     }
 
     fun truckArrived(truck: Truck, locationId: LocationId) {
-        if (!arrivals.containsKey(truck)) {
-            arrivals[truck] = mutableListOf()
-        }
-        arrivals[truck]!!.add(locationId)
+        arrivals.add(Pair(truck, locationId))
     }
 }
