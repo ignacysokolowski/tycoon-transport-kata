@@ -76,4 +76,11 @@ class TruckTest {
         truck.pickUp(ShipmentId("1"))
         assertThat(truck.dropOff(), equalTo(ShipmentId("1")))
     }
+
+    @Test fun `can not drop off shipments if did not pick up`() {
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(10)), truckListener)
+        assertThrows<RuntimeException> {
+            truck.dropOff()
+        }
+    }
 }
