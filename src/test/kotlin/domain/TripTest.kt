@@ -20,14 +20,14 @@ class TripTest {
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("B"), Distance(2))))
     }
 
-    @Test fun `changes direction of the journey when reversed`() {
+    @Test fun `changes direction of the journey when turned back to origin`() {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
-        assertThat(trip.reversed().journey(), equalTo(Journey.to(LocationId("A"), Distance(3))))
-        assertThat(trip.reversed().reversed().journey(), equalTo(Journey.to(LocationId("B"), Distance(3))))
+        assertThat(trip.backToOrigin().journey(), equalTo(Journey.to(LocationId("A"), Distance(3))))
+        assertThat(trip.backToOrigin().backToOrigin().journey(), equalTo(Journey.to(LocationId("B"), Distance(3))))
     }
 
-    @Test fun `resets the journey progress when reversed`() {
-        val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3)).advancedBy(Distance(1)).reversed()
+    @Test fun `resets the journey progress when turned back to origin`() {
+        val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3)).advancedBy(Distance(1)).backToOrigin()
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("A"), Distance(3))))
     }
 
@@ -47,9 +47,9 @@ class TripTest {
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("A"), Distance(0))))
     }
 
-    @Test fun `trip in place has then same destination when reversed`() {
+    @Test fun `trip in place has then same origin and destination`() {
         val trip = Trip.inPlace(LocationId("A"))
-        assertThat(trip.reversed(), equalTo(trip))
+        assertThat(trip.backToOrigin(), equalTo(trip))
     }
 
     @Test fun `trip in place can not be advanced`() {
