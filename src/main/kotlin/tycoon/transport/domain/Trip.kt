@@ -15,4 +15,6 @@ data class Trip private constructor(
     fun reversed() = copy(origin = journey.destination, journey = Journey.to(origin, distance))
 
     fun advancedBy(distance: Distance) = copy(journey = journey.advancedBy(distance))
+
+    fun atDestination() = false
 }

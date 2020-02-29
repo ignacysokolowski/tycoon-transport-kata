@@ -30,4 +30,9 @@ class TripTest {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3)).advancedBy(Distance(1)).reversed()
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("A"), Distance(3))))
     }
+
+    @Test fun `is not at destination until completes the journey`() {
+        val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
+        assertThat(trip.atDestination(), equalTo(false))
+    }
 }
