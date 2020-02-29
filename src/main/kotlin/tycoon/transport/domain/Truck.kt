@@ -26,7 +26,7 @@ class Truck private constructor(
 
     fun drive(distance: Distance) {
         if (trip.atDestination()) {
-            throw TruckAtDestination()
+            return
         }
         trip = trip.advancedBy(distance)
         notifyIfArrived()

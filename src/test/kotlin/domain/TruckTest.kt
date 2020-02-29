@@ -10,7 +10,6 @@ import tycoon.transport.domain.NoShipmentCarried
 import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
-import tycoon.transport.domain.TruckAtDestination
 
 class TruckTest {
     private val truckListener = TruckSpy()
@@ -43,11 +42,10 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(emptyList<TruckArrival>()))
     }
 
-    @Test fun `can not drive if already at destination`() {
+    @Test fun `does not drive if already at destination`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
-        assertThrows<TruckAtDestination> {
-            truck.drive(Distance(5))
-        }
+        truck.drive(Distance(1))
+        assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
 
     @Test fun `can start a new trip`() {
