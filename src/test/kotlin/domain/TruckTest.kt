@@ -33,7 +33,6 @@ class TruckTest {
         val truck2 = Truck.on(Trip.to(LocationId("A"), Distance(3)))
         truckListener.truckArrived(truck, LocationId("A"))
         truckListener.truckArrived(truck2, LocationId("A"))
-        assertThat(truckListener.arrivalsOf(truck), equalTo(listOf(LocationId("A"))))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(

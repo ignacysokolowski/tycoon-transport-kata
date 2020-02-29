@@ -8,10 +8,6 @@ data class TruckArrival(val truck: Truck, val destination: LocationId)
 class TruckSpy {
     val arrivals = mutableListOf<TruckArrival>()
 
-    fun arrivalsOf(truck: Truck): List<LocationId> {
-        return arrivals.filter { it.truck == truck }.map { it.destination }
-    }
-
     fun truckArrived(truck: Truck, locationId: LocationId) {
         arrivals.add(TruckArrival(truck, locationId))
     }
