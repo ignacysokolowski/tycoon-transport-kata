@@ -16,5 +16,5 @@ data class Trip private constructor(
 
     fun advancedBy(distance: Distance) = copy(journey = journey.advancedBy(distance))
 
-    fun atDestination() = false
+    fun atDestination() = journey.atDestination()
 }
