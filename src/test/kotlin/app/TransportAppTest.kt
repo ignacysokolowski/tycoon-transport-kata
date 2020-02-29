@@ -37,7 +37,7 @@ class TransportAppTest {
 
     @Test fun `can not ship to unknown destinations`() {
         map.addDistanceTo(LocationId("B"), Distance(5))
-        val exception = assertThrows<RuntimeException> {
+        val exception = assertThrows<IllegalArgumentException> {
             app.ship(listOf("X"))
         }
         assertThat(exception.message, equalTo("Unknown destination"))

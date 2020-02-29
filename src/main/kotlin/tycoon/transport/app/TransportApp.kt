@@ -26,7 +26,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         try {
             shipNext(truck)
         } catch (e: LocationUnknown) {
-            throw RuntimeException("Unknown destination")
+            throw IllegalArgumentException("Unknown destination")
         }
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
