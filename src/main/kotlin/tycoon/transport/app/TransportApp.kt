@@ -22,7 +22,14 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         if (warehouseIds.isEmpty()) {
             return
         }
-        factory.collectShipments(shipmentsFrom(warehouseIds))
+        shipAll(shipmentsFrom(warehouseIds))
+    }
+
+    private fun shipmentsFrom(warehouseIds: List<String>) =
+        warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
+
+    private fun shipAll(shipments: List<Shipment>) {
+        factory.collectShipments(shipments)
         try {
             shipNext(truck)
         } catch (e: LocationUnknown) {
@@ -33,9 +40,6 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         }
         distanceDriven = truck.distanceDriven()
     }
-
-    private fun shipmentsFrom(warehouseIds: List<String>) =
-        warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
 
     private fun shipNext(truck: Truck) {
         val shipment = factory.pickUpNextShipment()
