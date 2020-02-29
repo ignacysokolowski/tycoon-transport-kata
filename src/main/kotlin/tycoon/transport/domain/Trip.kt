@@ -8,6 +8,6 @@ data class Trip private constructor(
         fun to(destination: LocationId, distance: Distance) = Trip(destination, distance)
     }
 
-    fun advancedBy(distance: Distance) = Trip(destination, this.distance - distance)
+    fun advancedBy(distance: Distance) = copy(distance = this.distance - distance)
     fun atDestination() = distance == Distance(0)
 }
