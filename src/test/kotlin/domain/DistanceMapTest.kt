@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.LocationId
-import tycoon.transport.domain.WarehouseUnknown
+import tycoon.transport.domain.LocationUnknown
 
 class DistanceMapTest {
 
@@ -19,7 +19,7 @@ class DistanceMapTest {
     }
 
     @Test fun `can not tell the distance to unknown warehouses`() {
-        assertThrows<WarehouseUnknown> {
+        assertThrows<LocationUnknown> {
             map.distanceTo(LocationId("A"))
         }
     }
