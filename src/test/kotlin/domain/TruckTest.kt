@@ -27,6 +27,13 @@ class TruckTest {
         assertThat(truck.atDestination(), equalTo(true))
     }
 
+    @Test fun `truck spy records arrivals`() {
+        val truckListener = TruckSpy()
+        val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)))
+        truckListener.truckArrived(truck, LocationId("A"))
+        assertThat(truckListener.arrivalsOf(truck), equalTo(listOf(LocationId("A"))))
+    }
+
     @Test fun `drives the trip distance`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)))
         truck.drive(Distance(2))
