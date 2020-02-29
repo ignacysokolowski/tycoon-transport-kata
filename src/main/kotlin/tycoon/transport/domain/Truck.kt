@@ -21,11 +21,7 @@ class Truck private constructor(
     }
 
     fun startTrip(trip: Trip) {
-        startJourney(trip.journey())
-    }
-
-    fun startJourney(journey: Journey) {
-        this.journey = journey
+        journey = trip.journey()
     }
 
     fun drive(distance: Distance) {

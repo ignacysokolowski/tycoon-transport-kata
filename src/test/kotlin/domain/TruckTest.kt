@@ -5,7 +5,6 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
-import tycoon.transport.domain.Journey
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.NoShipmentCarried
 import tycoon.transport.domain.ShipmentId
@@ -47,19 +46,6 @@ class TruckTest {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
         truck.drive(Distance(1))
         assertThat(truck.distanceDriven(), equalTo(Distance(0)))
-    }
-
-    @Test fun `can start a new journey`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
-        truck.startJourney(Journey.to(LocationId("A"), Distance(1)))
-        truck.drive(Distance(1))
-        assertThat(
-            truckListener.arrivals,
-            equalTo(listOf(
-                TruckArrival(truck, LocationId("B")),
-                TruckArrival(truck, LocationId("A"))
-            ))
-        )
     }
 
     @Test fun `can start a new trip`() {
