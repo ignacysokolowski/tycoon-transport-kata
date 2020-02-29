@@ -9,11 +9,12 @@ import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentIds
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
+import tycoon.transport.domain.TruckListener
 
-class TransportApp(private val map: DistanceMap) {
+class TransportApp(private val map: DistanceMap) : TruckListener {
     private val factory = Factory()
     private val factoryLocationId = LocationId("FACTORY")
-    private val truck = Truck.on(Trip.to(factoryLocationId, Distance(0)))
+    private val truck = Truck.on(Trip.to(factoryLocationId, Distance(0)), this)
     private val shipmentIds = ShipmentIds()
     private var distanceDriven = Distance(0)
 
@@ -45,6 +46,9 @@ class TransportApp(private val map: DistanceMap) {
                 truck.drive(Distance(1))
             }
         }
+    }
+
+    override fun truckArrived(truck: Truck, locationId: LocationId) {
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
