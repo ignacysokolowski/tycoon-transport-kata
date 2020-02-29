@@ -1,9 +1,10 @@
 package tycoon.transport.domain
 
 class ShipmentIds {
-    private val next = 1
+    private var next = 0
 
     fun next(): String {
+        next += 1
         return next.toString()
     }
 }
