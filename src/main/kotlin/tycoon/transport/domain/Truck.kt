@@ -3,7 +3,7 @@ package tycoon.transport.domain
 class Truck private constructor(
     private var trip: Trip,
     private val listener: TruckListener
-) {
+) : Transport {
 
     companion object {
         fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
@@ -43,7 +43,7 @@ class Truck private constructor(
         }
     }
 
-    fun dropOff(): ShipmentId {
+    override fun dropOff(): ShipmentId {
         val shipmentId = shipmentId
             ?: throw NoShipmentCarried()
         this.shipmentId = null
