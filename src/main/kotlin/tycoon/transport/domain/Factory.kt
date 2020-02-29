@@ -2,7 +2,7 @@ package tycoon.transport.domain
 
 import java.util.ArrayDeque
 
-class Factory {
+class Factory : DeliveryListener {
     private var shipmentsWaiting = ArrayDeque<Shipment>()
     private val shipmentsPickedUp = mutableListOf<Shipment>()
 
@@ -20,7 +20,7 @@ class Factory {
         return shipment
     }
 
-    fun shipmentDelivered(shipmentId: ShipmentId) {
+    override fun shipmentDelivered(shipmentId: ShipmentId) {
         if (!shipmentsPickedUp.removeIf { it.id == shipmentId }) {
             throw ShipmentNotPickedUp()
         }

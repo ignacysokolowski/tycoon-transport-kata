@@ -1,9 +1,10 @@
 package tycoon.transport.app
 
+import tycoon.transport.domain.DeliveryListener
 import tycoon.transport.domain.Transport
 
-class WarehouseController {
+class WarehouseController(private val deliveryListener: DeliveryListener) {
     fun transportArrived(transport: Transport) {
-        transport.dropOff()
+        deliveryListener.shipmentDelivered(transport.dropOff())
     }
 }
