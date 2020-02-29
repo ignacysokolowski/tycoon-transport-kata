@@ -13,12 +13,12 @@ class DistanceMapTest {
 
     private val map = DistanceMap()
 
-    @Test fun `tells the distance to a warehouse`() {
+    @Test fun `tells the distance to a location`() {
         map.addWarehouse(LocationId("A"), Distance(5))
         assertThat(map.distanceTo(LocationId("A")), equalTo(Distance(5)))
     }
 
-    @Test fun `can not tell the distance to unknown warehouses`() {
+    @Test fun `can not tell the distance to unknown locations`() {
         assertThrows<LocationUnknown> {
             map.distanceTo(LocationId("A"))
         }
