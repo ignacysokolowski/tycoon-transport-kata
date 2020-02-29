@@ -46,7 +46,5 @@ class Truck private constructor(
         return shipmentId
     }
 
-    fun atDestination() = trip.atDestination()
-
     fun distanceDriven() = distanceDriven
 }

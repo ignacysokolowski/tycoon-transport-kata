@@ -21,14 +21,12 @@ class TruckTest {
     }
 
     @Test fun `not at the destination until has driven the whole trip distance`() {
-        val truck = Truck.on(Trip.to(LocationId("A"), Distance(1)), truckListener)
-        assertThat(truck.atDestination(), equalTo(false))
+        Truck.on(Trip.to(LocationId("A"), Distance(1)), truckListener)
         assertThat(truckListener.arrivals, equalTo(emptyList<TruckArrival>()))
     }
 
     @Test fun `at the destination once has driven the whole trip distance`() {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
-        assertThat(truck.atDestination(), equalTo(true))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
@@ -36,7 +34,6 @@ class TruckTest {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(3)), truckListener)
         truck.drive(Distance(2))
         truck.drive(Distance(1))
-        assertThat(truck.atDestination(), equalTo(true))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
@@ -63,7 +60,6 @@ class TruckTest {
         val truck = Truck.on(Trip.to(LocationId("A"), Distance(0)), truckListener)
         truck.startTrip(Trip.to(LocationId("B"), Distance(1)))
         truck.drive(Distance(1))
-        assertThat(truck.atDestination(), equalTo(true))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
