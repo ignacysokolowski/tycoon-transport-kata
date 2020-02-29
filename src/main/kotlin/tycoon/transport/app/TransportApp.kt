@@ -21,7 +21,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     fun ship(warehouseIds: List<String>) {
         factory.collectShipments(shipmentsFrom(warehouseIds))
         try {
-            ship(factory.pickUpNextShipment())
+            shipNext()
         } catch (e: LocationUnknown) {
             throw RuntimeException("Unknown destination")
         }
@@ -33,6 +33,10 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipmentsFrom(warehouseIds: List<String>) =
         warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
+
+    private fun shipNext() {
+        ship(factory.pickUpNextShipment())
+    }
 
     private fun ship(shipment: Shipment) {
         val distance = map.distanceTo(shipment.destination)
@@ -48,7 +52,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
             }
         } else {
             if (factory.hasShipmentsWaiting()) {
-                ship(factory.pickUpNextShipment())
+                shipNext()
             }
         }
     }
