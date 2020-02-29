@@ -40,15 +40,17 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
             truck.drive(Distance(1))
         }
         factory.shipmentDelivered(shipment)
-        if (factory.hasShipmentsWaiting()) {
-            truck.startTrip(Trip.to(factoryLocationId, distance))
-            while (!truck.atDestination()) {
-                truck.drive(Distance(1))
-            }
-        }
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
+        if (locationId != factoryLocationId) {
+            if (factory.hasShipmentsWaiting()) {
+                truck.startTrip(Trip.to(factoryLocationId, map.distanceTo(locationId)))
+                while (!truck.atDestination()) {
+                    truck.drive(Distance(1))
+                }
+            }
+        }
     }
 
     fun totalDeliveryTime() = distanceDriven.hours
