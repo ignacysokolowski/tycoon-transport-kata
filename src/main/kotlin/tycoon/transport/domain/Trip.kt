@@ -2,13 +2,12 @@ package tycoon.transport.domain
 
 data class Trip private constructor(
     private val origin: LocationId,
-    private val destination: LocationId,
     private val distance: Distance,
     private val journey: Journey
 ) {
     companion object {
         fun between(origin: LocationId, destination: LocationId, distance: Distance): Trip {
-            return Trip(origin, destination, distance, Journey.to(destination, distance))
+            return Trip(origin, distance, Journey.to(destination, distance))
         }
     }
 
