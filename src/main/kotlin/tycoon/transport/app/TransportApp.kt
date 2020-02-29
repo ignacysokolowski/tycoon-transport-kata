@@ -45,10 +45,10 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
-        if (locationId != factoryLocationId) {
-            arrivedAtWarehouse(truck, locationId)
-        } else {
+        if (locationId == factoryLocationId) {
             arrivedAtFactory()
+        } else {
+            arrivedAtWarehouse(truck, locationId)
         }
     }
 
