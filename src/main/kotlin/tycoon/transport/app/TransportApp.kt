@@ -20,12 +20,13 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     fun ship(warehouseIds: List<String>) {
         factory.collectShipments(shipmentsFrom(warehouseIds))
+        try {
+            ship(factory.pickUpNextShipment())
+        } catch (e: LocationUnknown) {
+            throw RuntimeException("Unknown destination")
+        }
         while (!factory.hasAllShipmentsDelivered()) {
-            try {
-                ship(factory.pickUpNextShipment())
-            } catch (e: LocationUnknown) {
-                throw RuntimeException("Unknown destination")
-            }
+            truck.drive(Distance(1))
         }
         distanceDriven = truck.distanceDriven()
     }
@@ -37,9 +38,6 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
         val distance = map.distanceTo(shipment.destination)
         truck.pickUp(shipment.id)
         truck.startTrip(Trip.to(shipment.destination, distance))
-        while (!truck.atDestination()) {
-            truck.drive(Distance(1))
-        }
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
@@ -47,9 +45,10 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
             factory.shipmentDelivered(truck.dropOff())
             if (factory.hasShipmentsWaiting()) {
                 truck.startTrip(Trip.to(factoryLocationId, map.distanceTo(locationId)))
-                while (!truck.atDestination()) {
-                    truck.drive(Distance(1))
-                }
+            }
+        } else {
+            if (factory.hasShipmentsWaiting()) {
+                ship(factory.pickUpNextShipment())
             }
         }
     }
