@@ -1,7 +1,9 @@
 package tycoon.transport.domain
 
 class ShipmentIds {
+    private val next = 1
+
     fun next(): String {
-        return 1.toString()
+        return next.toString()
     }
 }
