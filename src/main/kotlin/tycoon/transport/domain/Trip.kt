@@ -22,6 +22,6 @@ data class Trip private constructor(
     }
 
     fun advancedBy(distance: Distance): Trip {
-        return copy(progress = progress - distance, journey = journey.advancedBy(distance))
+        return copy(journey = journey.advancedBy(distance))
     }
 }
