@@ -4,12 +4,11 @@ data class Trip private constructor(
     private val origin: LocationId,
     private val destination: LocationId,
     private val distance: Distance,
-    private val progress: Distance,
     private val journey: Journey
 ) {
     companion object {
         fun between(origin: LocationId, destination: LocationId, distance: Distance): Trip {
-            return Trip(origin, destination, distance, distance, Journey.to(destination, distance))
+            return Trip(origin, destination, distance, Journey.to(destination, distance))
         }
     }
 
