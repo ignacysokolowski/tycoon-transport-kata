@@ -46,4 +46,9 @@ class TripTest {
         val trip = Trip.inPlace(LocationId("A"))
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("A"), Distance(0))))
     }
+
+    @Test fun `trip in place has then same destination when reversed`() {
+        val trip = Trip.inPlace(LocationId("A"))
+        assertThat(trip.reversed(), equalTo(trip))
+    }
 }
