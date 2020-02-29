@@ -10,6 +10,7 @@ class Truck private constructor(
     }
 
     private var distanceDriven = Distance(0)
+    private val shipmentId = ShipmentId("1")
 
     init {
         notifyIfArrived()
@@ -38,7 +39,7 @@ class Truck private constructor(
     }
 
     fun dropOff(): ShipmentId {
-        return ShipmentId("1")
+        return shipmentId
     }
 
     fun atDestination() = trip.atDestination()
