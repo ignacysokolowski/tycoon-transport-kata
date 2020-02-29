@@ -14,13 +14,13 @@ class TripTest {
     }
 
     @Test fun `is not at destination if has a distance`() {
-        assertThat(Trip(LocationId("A"), Distance(1)).atDestination(), equalTo(false))
+        assertThat(Trip.to(LocationId("A"), Distance(1)).atDestination(), equalTo(false))
     }
 
     @Test fun `gets a shorter distance when advanced`() {
         assertThat(
-            Trip(LocationId("A"), Distance(3)).advancedBy(Distance(1)),
-            equalTo(Trip(LocationId("A"), Distance(2)))
+            Trip.to(LocationId("A"), Distance(3)).advancedBy(Distance(1)),
+            equalTo(Trip.to(LocationId("A"), Distance(2)))
         )
     }
 }
