@@ -34,12 +34,14 @@ class TransportApp(map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        val trucks = listOf(newTruck())
+        val trucks = createTrucks()
         while (!factory.hasAllShipmentsDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
             totalDeliveryTime += 1
         }
     }
+
+    private fun createTrucks() = listOf(newTruck())
 
     private fun newTruck() = Truck.on(router.inPlaceTripAtOrigin(), this)
 
