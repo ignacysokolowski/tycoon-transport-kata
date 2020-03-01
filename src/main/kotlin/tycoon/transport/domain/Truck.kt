@@ -15,16 +15,18 @@ class Truck private constructor(
         notifyIfArrived()
     }
 
+    private fun notifyIfArrived() {
+        if (trip.atDestination()) {
+            listener.truckArrived(this, trip.destination())
+        }
+    }
+
     fun pickUp(shipmentId: ShipmentId) {
         this.shipmentId = shipmentId
     }
 
     fun startTrip(trip: Trip) {
         this.trip = trip
-    }
-
-    override fun goBack() {
-        trip = trip.backToOrigin()
     }
 
     fun drive(distance: Distance) {
@@ -35,16 +37,14 @@ class Truck private constructor(
         notifyIfArrived()
     }
 
-    private fun notifyIfArrived() {
-        if (trip.atDestination()) {
-            listener.truckArrived(this, trip.destination())
-        }
-    }
-
     override fun dropOff(): ShipmentId {
         val shipmentId = shipmentId
             ?: throw NoShipmentCarried()
         this.shipmentId = null
         return shipmentId
+    }
+
+    override fun goBack() {
+        trip = trip.backToOrigin()
     }
 }
