@@ -14,11 +14,6 @@ import tycoon.transport.domain.Truck
 class TruckTest {
     private val truckListener = TruckSpy()
 
-    @Test fun `has not driven yet`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
-        assertThat(truck.distanceDriven(), equalTo(Distance(0)))
-    }
-
     @Test fun `not at the destination until has driven the whole journey distance`() {
         Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(1)), truckListener)
         assertThat(truckListener.arrivals, equalTo(emptyList<TruckArrival>()))
@@ -47,7 +42,6 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
         truck.drive(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
-        assertThat(truck.distanceDriven(), equalTo(Distance(0)))
     }
 
     @Test fun `can start a new trip`() {
@@ -75,13 +69,6 @@ class TruckTest {
                 TruckArrival(truck, LocationId("A"))
             ))
         )
-    }
-
-    @Test fun `records the distance it has driven`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        truck.drive(Distance(5))
-        truck.drive(Distance(3))
-        assertThat(truck.distanceDriven(), equalTo(Distance(8)))
     }
 
     @Test fun `picks up shipments`() {

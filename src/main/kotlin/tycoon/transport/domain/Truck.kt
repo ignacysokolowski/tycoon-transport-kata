@@ -9,7 +9,6 @@ class Truck private constructor(
         fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
     }
 
-    private var distanceDriven = Distance(0)
     private var shipmentId: ShipmentId? = null
 
     init {
@@ -34,7 +33,6 @@ class Truck private constructor(
         }
         trip = trip.advancedBy(distance)
         notifyIfArrived()
-        distanceDriven += distance
     }
 
     private fun notifyIfArrived() {
@@ -49,6 +47,4 @@ class Truck private constructor(
         this.shipmentId = null
         return shipmentId
     }
-
-    fun distanceDriven() = distanceDriven
 }
