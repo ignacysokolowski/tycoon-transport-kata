@@ -1,12 +1,12 @@
-package app
+package domain
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.app.WarehouseController
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryListener
 import tycoon.transport.domain.Transport
+import tycoon.transport.domain.WarehouseController
 
 class WarehouseControllerTest {
 

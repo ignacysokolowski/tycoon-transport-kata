@@ -11,6 +11,7 @@ import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Router
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
+import tycoon.transport.domain.WarehouseController
 
 class TransportApp(map: DistanceMap) : TruckListener {
     private val cargoIds = CargoIds()

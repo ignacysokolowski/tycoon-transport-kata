@@ -1,7 +1,4 @@
-package tycoon.transport.app
-
-import tycoon.transport.domain.DeliveryListener
-import tycoon.transport.domain.Transport
+package tycoon.transport.domain
 
 class WarehouseController(private val deliveryListener: DeliveryListener) {
     fun transportArrived(transport: Transport) {
