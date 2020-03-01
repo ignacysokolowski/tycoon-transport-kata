@@ -1,31 +1,18 @@
 package tycoon.transport.domain
 
-import java.util.ArrayDeque
-
 class Factory : DeliveryListener {
     val locationId = LocationId("FACTORY")
-    private var shipmentsWaiting = ArrayDeque<Shipment>()
-    private val shipmentsPickedUp = mutableListOf<Shipment>()
+    private val containerStock = ContainerStock()
 
     fun produce(shipments: List<Shipment>) {
-        shipmentsWaiting = ArrayDeque(shipments)
+        containerStock.put(shipments)
     }
 
-    fun pickUpNextShipment(): Shipment {
-        val shipment = try {
-            shipmentsWaiting.pop()
-        } catch (e: NoSuchElementException) {
-            throw AllShipmentsPickedUp()
-        }
-        shipmentsPickedUp.add(shipment)
-        return shipment
-    }
+    fun pickUpNextShipment() = containerStock.pickUpNext()
 
     override fun shipmentDelivered(shipmentId: ShipmentId) {
-        if (!shipmentsPickedUp.removeIf { it.id == shipmentId }) {
-            throw ShipmentNotPickedUp()
-        }
+        containerStock.markDelivered(shipmentId)
     }
 
-    fun hasAllShipmentsDelivered() = shipmentsPickedUp.isEmpty() and shipmentsWaiting.isEmpty()
+    fun hasAllShipmentsDelivered() = containerStock.allDelivered()
 }
