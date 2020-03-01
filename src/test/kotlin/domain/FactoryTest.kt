@@ -106,4 +106,10 @@ class FactoryTest {
         factory.transportArrived(transport)
         assertThat(transport.cargoPickedUp, absent())
     }
+
+    @Test fun `does not dispatch the transport if no cargo waiting`() {
+        val transport = FakeTransport()
+        factory.transportArrived(transport)
+        assertThat(transport.tripStarted, absent())
+    }
 }
