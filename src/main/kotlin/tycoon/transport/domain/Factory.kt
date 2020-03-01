@@ -3,6 +3,7 @@ package tycoon.transport.domain
 import java.util.ArrayDeque
 
 class Factory : DeliveryListener {
+    val locationId = LocationId("FACTORY")
     private var shipmentsWaiting = ArrayDeque<Shipment>()
     private val shipmentsPickedUp = mutableListOf<Shipment>()
 

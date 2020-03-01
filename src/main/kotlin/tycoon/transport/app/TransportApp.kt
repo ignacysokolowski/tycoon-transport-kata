@@ -13,7 +13,6 @@ import tycoon.transport.domain.TruckListener
 
 class TransportApp(private val map: DistanceMap) : TruckListener {
     private val factory = Factory()
-    private val factoryLocationId = LocationId("FACTORY")
     private val shipmentIds = ShipmentIds()
     private var distanceDriven = Distance(0)
     private val warehouseController = WarehouseController(factory)
@@ -34,7 +33,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
 
     private fun shipAll(shipments: List<Shipment>) {
         factory.collectShipments(shipments)
-        val truck = Truck.on(Trip.inPlace(factoryLocationId), this)
+        val truck = Truck.on(Trip.inPlace(factory.locationId), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
         }
@@ -42,7 +41,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
-        if (locationId == factoryLocationId) {
+        if (locationId == factory.locationId) {
             arrivedAtFactory(truck)
         } else {
             arrivedAtWarehouse(truck)
@@ -56,7 +55,7 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     }
 
     private fun tripFromFactoryTo(destination: LocationId) =
-        Trip.between(factoryLocationId, destination, map.distanceTo(destination))
+        Trip.between(factory.locationId, destination, map.distanceTo(destination))
 
     private fun arrivedAtWarehouse(truck: Truck) {
         warehouseController.transportArrived(truck)
