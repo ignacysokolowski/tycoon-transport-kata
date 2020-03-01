@@ -34,7 +34,12 @@ class DeliverySpy : DeliveryListener {
 }
 
 class FakeTransport : Transport {
+    var cargoPickedUp: CargoId? = null
     var goesBack = false
+
+    override fun pickUp(cargoId: CargoId) {
+        cargoPickedUp = cargoId
+    }
 
     override fun dropOff() = CargoId("dummy")
 

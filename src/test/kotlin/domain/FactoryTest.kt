@@ -76,4 +76,13 @@ class FactoryTest {
         factory.pickUpNextCargo()
         assertThat(factory.hasAllCargoDelivered(), equalTo(false))
     }
+
+    @Test fun `loads cargo on transport when arrives`() {
+        factory.produce(listOf(
+            Cargo(CargoId("1"), LocationId("A"))
+        ))
+        val transport = FakeTransport()
+        factory.transportArrived(transport)
+        assertThat(transport.cargoPickedUp, equalTo(CargoId("1")))
+    }
 }
