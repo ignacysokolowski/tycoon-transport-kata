@@ -37,8 +37,8 @@ class TransportApp(map: DistanceMap) : TruckListener {
         val truck = Truck.on(router.inPlaceTripAtOrigin(), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
+            distanceDriven += Distance(1)
         }
-        distanceDriven = truck.distanceDriven()
     }
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
