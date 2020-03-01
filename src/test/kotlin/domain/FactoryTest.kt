@@ -10,13 +10,15 @@ import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.CargoNotPickedUp
 import tycoon.transport.domain.Distance
+import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Trip
 
 class FactoryTest {
 
-    private val factory = Factory()
+    private val distanceMap = DistanceMap()
+    private val factory = Factory(distanceMap)
 
     @Test fun `has all cargo delivered if has not produced any yet`() {
         assertThat(factory.hasAllCargoDelivered(), equalTo(true))
@@ -81,6 +83,7 @@ class FactoryTest {
     }
 
     @Test fun `loads cargo on transport when arrives`() {
+        distanceMap.addDistanceTo(LocationId("A"), Distance(3))
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A"))
         ))
@@ -90,6 +93,7 @@ class FactoryTest {
     }
 
     @Test fun `dispatches transport to the cargo destination`() {
+        distanceMap.addDistanceTo(LocationId("A"), Distance(3))
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A"))
         ))
