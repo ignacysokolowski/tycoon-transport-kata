@@ -1,5 +1,6 @@
 package domain
 
+import com.natpryce.hamkrest.absent
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
@@ -84,5 +85,11 @@ class FactoryTest {
         val transport = FakeTransport()
         factory.transportArrived(transport)
         assertThat(transport.cargoPickedUp, equalTo(CargoId("1")))
+    }
+
+    @Test fun `does not load cargo if none waiting`() {
+        val transport = FakeTransport()
+        factory.transportArrived(transport)
+        assertThat(transport.cargoPickedUp, absent())
     }
 }

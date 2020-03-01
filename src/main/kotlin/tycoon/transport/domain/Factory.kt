@@ -17,7 +17,11 @@ class Factory : DeliveryListener {
     fun hasAllCargoDelivered() = containerStock.allDelivered()
 
     fun transportArrived(transport: Transport) {
-        val cargo = pickUpNextCargo()
+        val cargo = try {
+            pickUpNextCargo()
+        } catch (e: AllCargoPickedUp) {
+            return
+        }
         transport.pickUp(cargo.id)
     }
 }
