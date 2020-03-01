@@ -1,6 +1,5 @@
 package tycoon.transport.app
 
-import tycoon.transport.domain.AllCargoPickedUp
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoIds
 import tycoon.transport.domain.Distance
@@ -64,13 +63,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
     }
 
     private fun arrivedAtFactory(truck: Truck) {
-        val cargo = try {
-            factory.pickUpNextCargo()
-        } catch (e: AllCargoPickedUp) {
-            return
-        }
-        truck.pickUp(cargo.id)
-        truck.startTrip(router.tripTo(cargo.destination))
+        factory.transportArrived(truck)
     }
 
     private fun arrivedAtWarehouse(truck: Truck) {
