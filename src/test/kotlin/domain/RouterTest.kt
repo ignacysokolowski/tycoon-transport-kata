@@ -10,17 +10,19 @@ import tycoon.transport.domain.Trip
 
 class RouterTest {
 
-    private val originLocationId = LocationId("ORIGIN")
-    private val router = Router(originLocationId)
+    private val router = Router(LocationId("ORIGIN"))
 
     @Test fun `creates an in-place trip at the origin`() {
-        assertThat(router.inPlaceTripAtOrigin(), equalTo(Trip.inPlace(originLocationId)))
+        assertThat(
+            router.inPlaceTripAtOrigin(),
+            equalTo(Trip.inPlace(LocationId("ORIGIN")))
+        )
     }
 
     @Test fun `creates trips from the origin to a destination`() {
         assertThat(
             router.tripTo(LocationId("D")),
-            equalTo(Trip.between(originLocationId, LocationId("D"), Distance(3)))
+            equalTo(Trip.between(LocationId("ORIGIN"), LocationId("D"), Distance(3)))
         )
     }
 }
