@@ -23,5 +23,6 @@ class Factory : DeliveryListener {
             return
         }
         transport.pickUp(cargo.id)
+        transport.startTrip(Trip.between(locationId, cargo.destination, Distance(3)))
     }
 }

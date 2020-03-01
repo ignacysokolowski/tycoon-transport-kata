@@ -25,7 +25,7 @@ class Truck private constructor(
         this.cargoId = cargoId
     }
 
-    fun startTrip(trip: Trip) {
+    override fun startTrip(trip: Trip) {
         this.trip = trip
     }
 
