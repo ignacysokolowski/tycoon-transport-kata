@@ -14,32 +14,33 @@ class TransportAppTest {
     private val map = DistanceMap()
     private val app = TransportApp(map)
 
-    init {
-        app.setTrucks(1)
-    }
-
     @Test fun `ships cargo to a warehouse`() {
+        app.setTrucks(1)
         map.addDistanceTo(LocationId("B"), Distance(5))
         app.ship(listOf("B"))
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next shipment`() {
+        app.setTrucks(1)
         map.addDistanceTo(LocationId("B"), Distance(5))
         app.ship(listOf("B", "B"))
         assertThat(app.totalDeliveryTime(), equalTo(15))
     }
 
     @Test fun `total delivery time is zero before anything has been shipped`() {
+        app.setTrucks(1)
         assertThat(app.totalDeliveryTime(), equalTo(0))
     }
 
     @Test fun `total delivery time is zero after shipping no cargo`() {
+        app.setTrucks(1)
         app.ship(emptyList())
         assertThat(app.totalDeliveryTime(), equalTo(0))
     }
 
     @Test fun `can not ship to unknown destinations`() {
+        app.setTrucks(1)
         map.addDistanceTo(LocationId("B"), Distance(5))
         val exception = assertThrows<IllegalArgumentException> {
             app.ship(listOf("X"))
