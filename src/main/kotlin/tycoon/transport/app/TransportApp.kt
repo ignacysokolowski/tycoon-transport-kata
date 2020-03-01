@@ -12,10 +12,10 @@ import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
 class TransportApp(private val map: DistanceMap) : TruckListener {
-    private val factory = Factory()
     private val shipmentIds = ShipmentIds()
-    private var distanceDriven = Distance(0)
+    private val factory = Factory()
     private val warehouseController = WarehouseController(factory)
+    private var distanceDriven = Distance(0)
 
     fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
