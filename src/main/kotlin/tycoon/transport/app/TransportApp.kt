@@ -32,13 +32,13 @@ class TransportApp(map: DistanceMap) : TruckListener {
             throw IllegalStateException("No trucks at the factory")
         }
         try {
-            shipAll(shipmentsFrom(warehouseIds))
+            shipAll(shipmentsTo(warehouseIds))
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
     }
 
-    private fun shipmentsFrom(warehouseIds: List<String>) =
+    private fun shipmentsTo(warehouseIds: List<String>) =
         warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
 
     private fun shipAll(shipments: List<Shipment>) {
