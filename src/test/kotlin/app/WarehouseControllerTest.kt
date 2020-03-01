@@ -13,9 +13,9 @@ class WarehouseControllerTest {
     private val deliveryListener = DeliverySpy()
     private val controller = WarehouseController(deliveryListener)
 
-    @Test fun `drops off shipment from a transport that arrived and notifies about delivery`() {
+    @Test fun `drops off cargo from a transport that arrived and notifies about delivery`() {
         controller.transportArrived(FakeTransport())
-        assertThat(deliveryListener.shipmentsDelivered, equalTo(listOf(ShipmentId("dummy"))))
+        assertThat(deliveryListener.cargoDelivered, equalTo(listOf(ShipmentId("dummy"))))
     }
 
     @Test fun `directs transports back to the origin`() {
@@ -26,10 +26,10 @@ class WarehouseControllerTest {
 }
 
 class DeliverySpy : DeliveryListener {
-    val shipmentsDelivered = mutableListOf<ShipmentId>()
+    val cargoDelivered = mutableListOf<ShipmentId>()
 
-    override fun shipmentDelivered(shipmentId: ShipmentId) {
-        shipmentsDelivered.add(shipmentId)
+    override fun cargoDelivered(shipmentId: ShipmentId) {
+        cargoDelivered.add(shipmentId)
     }
 }
 

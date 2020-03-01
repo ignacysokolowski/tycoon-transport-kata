@@ -39,7 +39,7 @@ class Truck private constructor(
 
     override fun dropOff(): ShipmentId {
         val shipmentId = shipmentId
-            ?: throw NoShipmentCarried()
+            ?: throw NoCargoCarried()
         this.shipmentId = null
         return shipmentId
     }

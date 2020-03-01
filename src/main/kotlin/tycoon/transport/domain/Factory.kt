@@ -4,15 +4,15 @@ class Factory : DeliveryListener {
     val locationId = LocationId("FACTORY")
     private val containerStock = ContainerStock()
 
-    fun produce(shipments: List<Shipment>) {
-        containerStock.put(shipments)
+    fun produce(cargo: List<Cargo>) {
+        containerStock.put(cargo)
     }
 
-    fun pickUpNextShipment() = containerStock.pickUpNext()
+    fun pickUpNextCargo() = containerStock.pickUpNext()
 
-    override fun shipmentDelivered(shipmentId: ShipmentId) {
+    override fun cargoDelivered(shipmentId: ShipmentId) {
         containerStock.markDelivered(shipmentId)
     }
 
-    fun hasAllShipmentsDelivered() = containerStock.allDelivered()
+    fun hasAllCargoDelivered() = containerStock.allDelivered()
 }

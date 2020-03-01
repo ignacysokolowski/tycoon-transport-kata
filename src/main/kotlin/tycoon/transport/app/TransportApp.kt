@@ -1,13 +1,13 @@
 package tycoon.transport.app
 
-import tycoon.transport.domain.AllShipmentsPickedUp
+import tycoon.transport.domain.AllCargoPickedUp
+import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Router
-import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentIds
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
@@ -32,19 +32,19 @@ class TransportApp(map: DistanceMap) : TruckListener {
             throw IllegalStateException("No trucks at the factory")
         }
         try {
-            shipAll(shipmentsTo(warehouseIds))
+            shipAll(cargoTo(warehouseIds))
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
     }
 
-    private fun shipmentsTo(warehouseIds: List<String>) =
-        warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
+    private fun cargoTo(warehouseIds: List<String>) =
+        warehouseIds.map { Cargo(shipmentIds.next(), LocationId(it)) }
 
-    private fun shipAll(shipments: List<Shipment>) {
-        factory.produce(shipments)
+    private fun shipAll(cargo: List<Cargo>) {
+        factory.produce(cargo)
         val trucks = createTrucks()
-        while (!factory.hasAllShipmentsDelivered()) {
+        while (!factory.hasAllCargoDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
             totalDeliveryTime += 1
         }
@@ -63,13 +63,13 @@ class TransportApp(map: DistanceMap) : TruckListener {
     }
 
     private fun arrivedAtFactory(truck: Truck) {
-        val shipment = try {
-            factory.pickUpNextShipment()
-        } catch (e: AllShipmentsPickedUp) {
+        val cargo = try {
+            factory.pickUpNextCargo()
+        } catch (e: AllCargoPickedUp) {
             return
         }
-        truck.pickUp(shipment.id)
-        truck.startTrip(router.tripTo(shipment.destination))
+        truck.pickUp(cargo.id)
+        truck.startTrip(router.tripTo(cargo.destination))
     }
 
     private fun arrivedAtWarehouse(truck: Truck) {

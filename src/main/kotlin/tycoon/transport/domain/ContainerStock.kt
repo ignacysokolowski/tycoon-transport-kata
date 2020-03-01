@@ -3,26 +3,26 @@ package tycoon.transport.domain
 import java.util.ArrayDeque
 
 class ContainerStock {
-    private var waiting = ArrayDeque<Shipment>()
-    private val pickedUp = mutableListOf<Shipment>()
+    private var waiting = ArrayDeque<Cargo>()
+    private val pickedUp = mutableListOf<Cargo>()
 
-    fun put(shipments: List<Shipment>) {
-        waiting = ArrayDeque(shipments)
+    fun put(cargo: List<Cargo>) {
+        waiting = ArrayDeque(cargo)
     }
 
-    fun pickUpNext(): Shipment {
-        val shipment = try {
+    fun pickUpNext(): Cargo {
+        val cargo = try {
             waiting.pop()
         } catch (e: NoSuchElementException) {
-            throw AllShipmentsPickedUp()
+            throw AllCargoPickedUp()
         }
-        pickedUp.add(shipment)
-        return shipment
+        pickedUp.add(cargo)
+        return cargo
     }
 
     fun markDelivered(shipmentId: ShipmentId) {
         if (!pickedUp.removeIf { it.id == shipmentId }) {
-            throw ShipmentNotPickedUp()
+            throw CargoNotPickedUp()
         }
     }
 

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
-import tycoon.transport.domain.NoShipmentCarried
+import tycoon.transport.domain.NoCargoCarried
 import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
@@ -71,24 +71,24 @@ class TruckTest {
         )
     }
 
-    @Test fun `picks up shipments`() {
+    @Test fun `picks up cargo`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
         truck.pickUp(ShipmentId("1"))
         assertThat(truck.dropOff(), equalTo(ShipmentId("1")))
     }
 
-    @Test fun `can not drop off shipments if did not pick up`() {
+    @Test fun `can not drop off cargo if did not pick up`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        assertThrows<NoShipmentCarried> {
+        assertThrows<NoCargoCarried> {
             truck.dropOff()
         }
     }
 
-    @Test fun `has to pick up another shipment after dropping off`() {
+    @Test fun `has to pick up another cargo after dropping off`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
         truck.pickUp(ShipmentId("1"))
         truck.dropOff()
-        assertThrows<NoShipmentCarried> {
+        assertThrows<NoCargoCarried> {
             truck.dropOff()
         }
     }
