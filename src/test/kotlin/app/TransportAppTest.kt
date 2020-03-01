@@ -14,6 +14,10 @@ class TransportAppTest {
     private val map = DistanceMap()
     private val app = TransportApp(map)
 
+    init {
+        app.setTrucks(1)
+    }
+
     @Test fun `ships cargo to a warehouse`() {
         map.addDistanceTo(LocationId("B"), Distance(5))
         app.ship(listOf("B"))

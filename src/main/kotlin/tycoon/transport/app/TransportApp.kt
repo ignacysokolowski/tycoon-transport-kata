@@ -16,8 +16,12 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private val factory = Factory()
     private val router = Router(factory.locationId, map)
     private val warehouseController = WarehouseController(factory)
-    private val numberOfTrucks = 1
+    private var numberOfTrucks = 0
     private var totalDeliveryTime = 0
+
+    fun setTrucks(number: Int) {
+        numberOfTrucks = number
+    }
 
     fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
