@@ -15,7 +15,7 @@ class FactoryTest {
 
     private val factory = Factory()
 
-    @Test fun `has all shipments delivered if has not collected any yet`() {
+    @Test fun `has all shipments delivered if has not produced any yet`() {
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(true))
     }
 
@@ -26,14 +26,14 @@ class FactoryTest {
     }
 
     @Test fun `shipments waiting to be picked up are not delivered yet`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A"))
         ))
         assertThat(factory.hasAllShipmentsDelivered(), equalTo(false))
     }
 
     @Test fun `can be notified about delivery`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.shipmentDelivered(factory.pickUpNextShipment().id)
@@ -41,7 +41,7 @@ class FactoryTest {
     }
 
     @Test fun `delivering a single shipment does not deliver all`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A")),
             Shipment(ShipmentId("2"), LocationId("B"))
         ))
@@ -51,7 +51,7 @@ class FactoryTest {
     }
 
     @Test fun `can not be notified about delivery of a shipment that was not picked up`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.pickUpNextShipment()
@@ -61,7 +61,7 @@ class FactoryTest {
     }
 
     @Test fun `provides next shipment to pick up`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A")),
             Shipment(ShipmentId("2"), LocationId("B"))
         ))
@@ -70,7 +70,7 @@ class FactoryTest {
     }
 
     @Test fun `shipments picked up are not delivered yet`() {
-        factory.collectShipments(listOf(
+        factory.produce(listOf(
             Shipment(ShipmentId("1"), LocationId("A"))
         ))
         factory.pickUpNextShipment()

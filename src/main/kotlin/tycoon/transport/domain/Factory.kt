@@ -7,7 +7,7 @@ class Factory : DeliveryListener {
     private var shipmentsWaiting = ArrayDeque<Shipment>()
     private val shipmentsPickedUp = mutableListOf<Shipment>()
 
-    fun collectShipments(shipments: List<Shipment>) {
+    fun produce(shipments: List<Shipment>) {
         shipmentsWaiting = ArrayDeque(shipments)
     }
 

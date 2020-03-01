@@ -42,7 +42,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         warehouseIds.map { Shipment(shipmentIds.next(), LocationId(it)) }
 
     private fun shipAll(shipments: List<Shipment>) {
-        factory.collectShipments(shipments)
+        factory.produce(shipments)
         val trucks = createTrucks()
         while (!factory.hasAllShipmentsDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
