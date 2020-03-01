@@ -8,11 +8,10 @@ import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Router
 import tycoon.transport.domain.Shipment
 import tycoon.transport.domain.ShipmentIds
-import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
-class TransportApp(private val map: DistanceMap) : TruckListener {
+class TransportApp(map: DistanceMap) : TruckListener {
     private val shipmentIds = ShipmentIds()
     private val factory = Factory()
     private val router = Router(factory.locationId, map)
@@ -53,11 +52,8 @@ class TransportApp(private val map: DistanceMap) : TruckListener {
     private fun arrivedAtFactory(truck: Truck) {
         val shipment = factory.pickUpNextShipment()
         truck.pickUp(shipment.id)
-        truck.startTrip(tripFromFactoryTo(shipment.destination))
+        truck.startTrip(router.tripTo(shipment.destination))
     }
-
-    private fun tripFromFactoryTo(destination: LocationId) =
-        Trip.between(factory.locationId, destination, map.distanceTo(destination))
 
     private fun arrivedAtWarehouse(truck: Truck) {
         warehouseController.transportArrived(truck)
