@@ -35,11 +35,19 @@ class TransportAppTest {
         assertThat(app.totalDeliveryTime(), equalTo(5))
     }
 
-    @Test fun `two trucks can not deliver three cargo in parallel`() {
+    @Test fun `one truck travels back and delivers the third cargo in 5 hours`() {
         app.setTrucks(2)
         map.addDistanceTo(LocationId("B"), Distance(5))
         app.ship(listOf("B", "B", "B"))
         assertThat(app.totalDeliveryTime(), equalTo(15))
+    }
+
+    @Test fun `after a short trip, a truck can pick up a cargo to a farther warehouse`() {
+        app.setTrucks(2)
+        map.addDistanceTo(LocationId("A"), Distance(1))
+        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.ship(listOf("A", "B", "B"))
+        assertThat(app.totalDeliveryTime(), equalTo(7))
     }
 
     @Test fun `total delivery time is zero before anything has been shipped`() {
