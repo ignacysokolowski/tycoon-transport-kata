@@ -27,6 +27,9 @@ class TransportApp(map: DistanceMap) : TruckListener {
         if (warehouseIds.isEmpty()) {
             return
         }
+        if (numberOfTrucks == 0) {
+            throw IllegalStateException("No trucks at the factory")
+        }
         try {
             shipAll(shipmentsFrom(warehouseIds))
         } catch (e: LocationUnknown) {

@@ -39,6 +39,14 @@ class TransportAppTest {
         assertThat(app.totalDeliveryTime(), equalTo(0))
     }
 
+    @Test fun `can not ship without trucks`() {
+        app.setTrucks(0)
+        val exception = assertThrows<IllegalStateException> {
+            app.ship(listOf("B"))
+        }
+        assertThat(exception.message, equalTo("No trucks at the factory"))
+    }
+
     @Test fun `can not ship to unknown destinations`() {
         app.setTrucks(1)
         map.addDistanceTo(LocationId("B"), Distance(5))
