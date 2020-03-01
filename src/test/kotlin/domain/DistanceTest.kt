@@ -9,9 +9,10 @@ import tycoon.transport.domain.Distance
 class DistanceTest {
 
     @Test fun `can not be negative`() {
-        assertThrows<IllegalArgumentException> {
+        val error = assertThrows<IllegalArgumentException> {
             Distance(-1)
         }
+        assertThat(error.message, equalTo("Distance can not be negative"))
     }
 
     @Test fun `can be added to another distance`() {

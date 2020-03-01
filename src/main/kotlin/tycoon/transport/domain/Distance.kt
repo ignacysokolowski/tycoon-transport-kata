@@ -3,7 +3,7 @@ package tycoon.transport.domain
 data class Distance(val hours: Int) {
     init {
         if (hours < 0) {
-            throw IllegalArgumentException()
+            throw IllegalArgumentException("Distance can not be negative")
         }
     }
 
