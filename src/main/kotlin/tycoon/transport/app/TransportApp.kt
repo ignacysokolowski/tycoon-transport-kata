@@ -41,7 +41,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         }
     }
 
-    private fun createTrucks() = listOf(newTruck())
+    private fun createTrucks() = (1..1).map { newTruck() }
 
     private fun newTruck() = Truck.on(router.inPlaceTripAtOrigin(), this)
 
