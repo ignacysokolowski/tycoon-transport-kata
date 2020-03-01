@@ -16,7 +16,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private val factory = Factory()
     private val router = Router(factory.locationId, map)
     private val warehouseController = WarehouseController(factory)
-    private var distanceDriven = Distance(0)
+    private var totalDeliveryTime = 0
 
     fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
@@ -37,7 +37,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         val truck = Truck.on(router.inPlaceTripAtOrigin(), this)
         while (!factory.hasAllShipmentsDelivered()) {
             truck.drive(Distance(1))
-            distanceDriven += Distance(1)
+            totalDeliveryTime += 1
         }
     }
 
@@ -59,5 +59,5 @@ class TransportApp(map: DistanceMap) : TruckListener {
         warehouseController.transportArrived(truck)
     }
 
-    fun totalDeliveryTime() = distanceDriven.hours
+    fun totalDeliveryTime() = totalDeliveryTime
 }
