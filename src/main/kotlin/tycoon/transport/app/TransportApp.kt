@@ -45,7 +45,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         val trucks = createTrucks()
         while (!factory.hasAllShipmentsDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
-            totalDeliveryTime += numberOfTrucks
+            totalDeliveryTime += 1
         }
     }
 
