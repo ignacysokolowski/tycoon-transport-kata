@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
 interface Transport {
-    fun dropOff(): ShipmentId
+    fun dropOff(): CargoId
     fun goBack()
 }

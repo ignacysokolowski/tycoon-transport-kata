@@ -9,7 +9,7 @@ class Truck private constructor(
         fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
     }
 
-    private var shipmentId: ShipmentId? = null
+    private var cargoId: CargoId? = null
 
     init {
         notifyIfArrived()
@@ -21,8 +21,8 @@ class Truck private constructor(
         }
     }
 
-    fun pickUp(shipmentId: ShipmentId) {
-        this.shipmentId = shipmentId
+    fun pickUp(cargoId: CargoId) {
+        this.cargoId = cargoId
     }
 
     fun startTrip(trip: Trip) {
@@ -37,11 +37,11 @@ class Truck private constructor(
         notifyIfArrived()
     }
 
-    override fun dropOff(): ShipmentId {
-        val shipmentId = shipmentId
+    override fun dropOff(): CargoId {
+        val cargoId = cargoId
             ?: throw NoCargoCarried()
-        this.shipmentId = null
-        return shipmentId
+        this.cargoId = null
+        return cargoId
     }
 
     override fun goBack() {

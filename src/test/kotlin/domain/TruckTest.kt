@@ -4,10 +4,10 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.NoCargoCarried
-import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 
@@ -73,8 +73,8 @@ class TruckTest {
 
     @Test fun `picks up cargo`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        truck.pickUp(ShipmentId("1"))
-        assertThat(truck.dropOff(), equalTo(ShipmentId("1")))
+        truck.pickUp(CargoId("1"))
+        assertThat(truck.dropOff(), equalTo(CargoId("1")))
     }
 
     @Test fun `can not drop off cargo if did not pick up`() {
@@ -86,7 +86,7 @@ class TruckTest {
 
     @Test fun `has to pick up another cargo after dropping off`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        truck.pickUp(ShipmentId("1"))
+        truck.pickUp(CargoId("1"))
         truck.dropOff()
         assertThrows<NoCargoCarried> {
             truck.dropOff()

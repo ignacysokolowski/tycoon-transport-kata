@@ -20,8 +20,8 @@ class ContainerStock {
         return cargo
     }
 
-    fun markDelivered(shipmentId: ShipmentId) {
-        if (!pickedUp.removeIf { it.id == shipmentId }) {
+    fun markDelivered(cargoId: CargoId) {
+        if (!pickedUp.removeIf { it.id == cargoId }) {
             throw CargoNotPickedUp()
         }
     }

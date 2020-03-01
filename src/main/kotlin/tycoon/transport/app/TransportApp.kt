@@ -2,18 +2,18 @@ package tycoon.transport.app
 
 import tycoon.transport.domain.AllCargoPickedUp
 import tycoon.transport.domain.Cargo
+import tycoon.transport.domain.CargoIds
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Router
-import tycoon.transport.domain.ShipmentIds
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
 class TransportApp(map: DistanceMap) : TruckListener {
-    private val shipmentIds = ShipmentIds()
+    private val cargoIds = CargoIds()
     private val factory = Factory()
     private val router = Router(factory.locationId, map)
     private val warehouseController = WarehouseController(factory)
@@ -39,7 +39,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
     }
 
     private fun cargoTo(warehouseIds: List<String>) =
-        warehouseIds.map { Cargo(shipmentIds.next(), LocationId(it)) }
+        warehouseIds.map { Cargo(cargoIds.next(), LocationId(it)) }
 
     private fun shipAll(cargo: List<Cargo>) {
         factory.produce(cargo)

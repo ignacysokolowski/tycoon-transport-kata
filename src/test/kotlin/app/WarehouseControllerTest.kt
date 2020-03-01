@@ -4,8 +4,8 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.app.WarehouseController
+import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryListener
-import tycoon.transport.domain.ShipmentId
 import tycoon.transport.domain.Transport
 
 class WarehouseControllerTest {
@@ -15,7 +15,7 @@ class WarehouseControllerTest {
 
     @Test fun `drops off cargo from a transport that arrived and notifies about delivery`() {
         controller.transportArrived(FakeTransport())
-        assertThat(deliveryListener.cargoDelivered, equalTo(listOf(ShipmentId("dummy"))))
+        assertThat(deliveryListener.cargoDelivered, equalTo(listOf(CargoId("dummy"))))
     }
 
     @Test fun `directs transports back to the origin`() {
@@ -26,17 +26,17 @@ class WarehouseControllerTest {
 }
 
 class DeliverySpy : DeliveryListener {
-    val cargoDelivered = mutableListOf<ShipmentId>()
+    val cargoDelivered = mutableListOf<CargoId>()
 
-    override fun cargoDelivered(shipmentId: ShipmentId) {
-        cargoDelivered.add(shipmentId)
+    override fun cargoDelivered(cargoId: CargoId) {
+        cargoDelivered.add(cargoId)
     }
 }
 
 class FakeTransport : Transport {
     var goesBack = false
 
-    override fun dropOff() = ShipmentId("dummy")
+    override fun dropOff() = CargoId("dummy")
 
     override fun goBack() {
         goesBack = true

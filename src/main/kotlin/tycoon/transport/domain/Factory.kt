@@ -10,8 +10,8 @@ class Factory : DeliveryListener {
 
     fun pickUpNextCargo() = containerStock.pickUpNext()
 
-    override fun cargoDelivered(shipmentId: ShipmentId) {
-        containerStock.markDelivered(shipmentId)
+    override fun cargoDelivered(cargoId: CargoId) {
+        containerStock.markDelivered(cargoId)
     }
 
     fun hasAllCargoDelivered() = containerStock.allDelivered()
