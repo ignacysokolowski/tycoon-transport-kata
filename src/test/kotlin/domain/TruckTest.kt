@@ -71,25 +71,25 @@ class TruckTest {
         )
     }
 
-    @Test fun `picks up cargo`() {
+    @Test fun `loads cargo`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        truck.pickUp(CargoId("1"))
-        assertThat(truck.dropOff(), equalTo(CargoId("1")))
+        truck.load(CargoId("1"))
+        assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
-    @Test fun `can not drop off cargo if did not pick up`() {
+    @Test fun `can not unload cargo if did not load`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
         assertThrows<NoCargoCarried> {
-            truck.dropOff()
+            truck.unload()
         }
     }
 
-    @Test fun `has to pick up another cargo after dropping off`() {
+    @Test fun `has to load another cargo after unloading`() {
         val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
-        truck.pickUp(CargoId("1"))
-        truck.dropOff()
+        truck.load(CargoId("1"))
+        truck.unload()
         assertThrows<NoCargoCarried> {
-            truck.dropOff()
+            truck.unload()
         }
     }
 }

@@ -1,8 +1,8 @@
 package tycoon.transport.domain
 
 interface Transport {
-    fun pickUp(cargoId: CargoId)
-    fun dropOff(): CargoId
+    fun load(cargoId: CargoId)
+    fun unload(): CargoId
     fun goBack()
     fun startTrip(trip: Trip)
 }

@@ -23,7 +23,7 @@ class Factory(distanceMap: DistanceMap) : DeliveryListener {
         } catch (e: AllCargoPickedUp) {
             return
         }
-        transport.pickUp(cargo.id)
+        transport.load(cargo.id)
         transport.startTrip(router.tripTo(cargo.destination))
     }
 }

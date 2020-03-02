@@ -21,7 +21,7 @@ class Truck private constructor(
         }
     }
 
-    override fun pickUp(cargoId: CargoId) {
+    override fun load(cargoId: CargoId) {
         this.cargoId = cargoId
     }
 
@@ -37,7 +37,7 @@ class Truck private constructor(
         notifyIfArrived()
     }
 
-    override fun dropOff(): CargoId {
+    override fun unload(): CargoId {
         val cargoId = cargoId
             ?: throw NoCargoCarried()
         this.cargoId = null

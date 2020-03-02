@@ -12,7 +12,7 @@ class WarehouseControllerTest {
     private val deliveryListener = DeliverySpy()
     private val controller = WarehouseController(deliveryListener)
 
-    @Test fun `drops off cargo from a transport that arrived and notifies about delivery`() {
+    @Test fun `unloads cargo from a transport that arrived and notifies about delivery`() {
         controller.transportArrived(FakeTransport())
         assertThat(deliveryListener.cargoDelivered, equalTo(listOf(CargoId("dummy"))))
     }

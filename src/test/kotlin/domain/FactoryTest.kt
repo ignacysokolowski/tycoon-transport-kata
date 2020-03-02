@@ -89,7 +89,7 @@ class FactoryTest {
         ))
         val transport = FakeTransport()
         factory.transportArrived(transport)
-        assertThat(transport.cargoPickedUp, equalTo(CargoId("1")))
+        assertThat(transport.cargoLoaded, equalTo(CargoId("1")))
     }
 
     @Test fun `dispatches transport to the cargo destination`() {
@@ -108,7 +108,7 @@ class FactoryTest {
     @Test fun `does not load cargo if none waiting`() {
         val transport = FakeTransport()
         factory.transportArrived(transport)
-        assertThat(transport.cargoPickedUp, absent())
+        assertThat(transport.cargoLoaded, absent())
     }
 
     @Test fun `does not dispatch the transport if no cargo waiting`() {
