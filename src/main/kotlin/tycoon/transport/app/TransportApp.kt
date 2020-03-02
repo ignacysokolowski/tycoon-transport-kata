@@ -32,19 +32,19 @@ class TransportApp(map: DistanceMap) : TruckListener {
             throw IllegalStateException("No trucks at the factory")
         }
         try {
-            shipAll(cargoTo(warehouseIds))
+            shipAll(cargoesTo(warehouseIds))
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
     }
 
-    private fun cargoTo(warehouseIds: List<String>) =
+    private fun cargoesTo(warehouseIds: List<String>) =
         warehouseIds.map { Cargo(cargoIds.next(), LocationId(it)) }
 
-    private fun shipAll(cargo: List<Cargo>) {
-        factory.produce(cargo)
+    private fun shipAll(cargoes: List<Cargo>) {
+        factory.produce(cargoes)
         val trucks = createTrucks()
-        while (!factory.hasAllCargoDelivered()) {
+        while (!factory.hasAllCargoesDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
             totalDeliveryTime += 1
         }

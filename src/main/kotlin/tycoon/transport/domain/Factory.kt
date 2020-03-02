@@ -5,8 +5,8 @@ class Factory(distanceMap: DistanceMap) : DeliveryListener {
     private val router = Router(locationId, distanceMap)
     private val containerStock = ContainerStock()
 
-    fun produce(cargo: List<Cargo>) {
-        containerStock.put(cargo)
+    fun produce(cargoes: List<Cargo>) {
+        containerStock.put(cargoes)
     }
 
     fun pickUpNextCargo() = containerStock.pickUpNext()
@@ -15,7 +15,7 @@ class Factory(distanceMap: DistanceMap) : DeliveryListener {
         containerStock.markDelivered(cargoId)
     }
 
-    fun hasAllCargoDelivered() = containerStock.allDelivered()
+    fun hasAllCargoesDelivered() = containerStock.allDelivered()
 
     fun transportArrived(transport: Transport) {
         val cargo = try {

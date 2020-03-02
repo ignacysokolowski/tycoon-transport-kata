@@ -6,8 +6,8 @@ class ContainerStock {
     private var waiting = ArrayDeque<Cargo>()
     private val pickedUp = mutableListOf<Cargo>()
 
-    fun put(cargo: List<Cargo>) {
-        waiting = ArrayDeque(cargo)
+    fun put(cargoes: List<Cargo>) {
+        waiting = ArrayDeque(cargoes)
     }
 
     fun pickUpNext(): Cargo {

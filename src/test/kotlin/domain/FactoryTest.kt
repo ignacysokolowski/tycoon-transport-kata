@@ -20,8 +20,8 @@ class FactoryTest {
     private val distanceMap = DistanceMap()
     private val factory = Factory(distanceMap)
 
-    @Test fun `has all cargo delivered if has not produced any yet`() {
-        assertThat(factory.hasAllCargoDelivered(), equalTo(true))
+    @Test fun `has all cargoes delivered if has not produced any yet`() {
+        assertThat(factory.hasAllCargoesDelivered(), equalTo(true))
     }
 
     @Test fun `has no cargo to be picked up`() {
@@ -30,11 +30,11 @@ class FactoryTest {
         }
     }
 
-    @Test fun `cargo waiting to be picked up are not delivered yet`() {
+    @Test fun `cargoes waiting to be picked up are not delivered yet`() {
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A"))
         ))
-        assertThat(factory.hasAllCargoDelivered(), equalTo(false))
+        assertThat(factory.hasAllCargoesDelivered(), equalTo(false))
     }
 
     @Test fun `can be notified about delivery`() {
@@ -42,7 +42,7 @@ class FactoryTest {
             Cargo(CargoId("1"), LocationId("A"))
         ))
         factory.cargoDelivered(factory.pickUpNextCargo().id)
-        assertThat(factory.hasAllCargoDelivered(), equalTo(true))
+        assertThat(factory.hasAllCargoesDelivered(), equalTo(true))
     }
 
     @Test fun `delivering a single cargo does not deliver all`() {
@@ -52,7 +52,7 @@ class FactoryTest {
         ))
         factory.pickUpNextCargo()
         factory.cargoDelivered(factory.pickUpNextCargo().id)
-        assertThat(factory.hasAllCargoDelivered(), equalTo(false))
+        assertThat(factory.hasAllCargoesDelivered(), equalTo(false))
     }
 
     @Test fun `can not be notified about delivery of a cargo that was not picked up`() {
@@ -74,12 +74,12 @@ class FactoryTest {
         assertThat(factory.pickUpNextCargo(), equalTo(Cargo(CargoId("2"), LocationId("B"))))
     }
 
-    @Test fun `cargo picked up are not delivered yet`() {
+    @Test fun `cargoes picked up are not delivered yet`() {
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A"))
         ))
         factory.pickUpNextCargo()
-        assertThat(factory.hasAllCargoDelivered(), equalTo(false))
+        assertThat(factory.hasAllCargoesDelivered(), equalTo(false))
     }
 
     @Test fun `loads cargo on transport when arrives`() {
