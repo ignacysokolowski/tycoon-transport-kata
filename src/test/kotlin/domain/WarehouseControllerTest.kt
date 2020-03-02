@@ -5,8 +5,6 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryListener
-import tycoon.transport.domain.Transport
-import tycoon.transport.domain.Trip
 import tycoon.transport.domain.WarehouseController
 
 class WarehouseControllerTest {
@@ -31,25 +29,5 @@ class DeliverySpy : DeliveryListener {
 
     override fun cargoDelivered(cargoId: CargoId) {
         cargoDelivered.add(cargoId)
-    }
-}
-
-class FakeTransport : Transport {
-    var cargoPickedUp: CargoId? = null
-    var tripStarted: Trip? = null
-    var goesBack = false
-
-    override fun pickUp(cargoId: CargoId) {
-        cargoPickedUp = cargoId
-    }
-
-    override fun startTrip(trip: Trip) {
-        tripStarted = trip
-    }
-
-    override fun dropOff() = CargoId("dummy")
-
-    override fun goBack() {
-        goesBack = true
     }
 }
