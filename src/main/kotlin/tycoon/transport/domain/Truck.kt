@@ -40,6 +40,7 @@ class Truck private constructor(
         val cargoId = cargoId
             ?: throw NoCargoCarried()
         this.cargoId = null
+        goBack()
         return cargoId
     }
 

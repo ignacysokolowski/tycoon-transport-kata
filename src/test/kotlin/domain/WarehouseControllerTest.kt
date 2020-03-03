@@ -16,12 +16,6 @@ class WarehouseControllerTest {
         controller.transportArrived(FakeTransport())
         assertThat(deliveryListener.cargoesDelivered, equalTo(listOf(CargoId("dummy"))))
     }
-
-    @Test fun `directs transports back to the origin`() {
-        val transport = FakeTransport()
-        controller.transportArrived(transport)
-        assertThat(transport.goesBack, equalTo(true))
-    }
 }
 
 class DeliverySpy : DeliveryListener {
