@@ -10,7 +10,7 @@ import tycoon.transport.domain.Trip
 
 class TripTest {
 
-    @Test fun `starts with a journey to the destination having full distance`() {
+    @Test fun `starts with a journey of full distance to the destination`() {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
         assertThat(trip.journey(), equalTo(Journey.to(LocationId("B"), Distance(3))))
     }
