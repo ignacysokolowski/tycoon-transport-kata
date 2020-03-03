@@ -15,7 +15,7 @@ class TruckTest {
     private val truckListener = TruckSpy()
 
     @Test fun `announces arrival when placed on a zero-distance trip`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
     }
 
