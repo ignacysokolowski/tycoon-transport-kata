@@ -34,13 +34,6 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
-    @Test fun `does not drive if already at destination`() {
-        val truck = Truck.parked(router, truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
-        truck.drive(Distance(1))
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
-    }
-
     @Test fun `loads cargo and drives to its destination`() {
         router.setTripDistance(Distance(3))
         val truck = Truck.parked(router, truckListener)
@@ -62,6 +55,28 @@ class TruckTest {
         truck.load(Cargo(CargoId("1"), LocationId("B")))
         truck.drive(Distance(2))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+    }
+
+    @Test fun `does not drive before loading cargo`() {
+        val truck = Truck.parked(router, truckListener)
+        truck.drive(Distance(1))
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+    }
+
+    @Test fun `does not move after arrival to the destination`() {
+        router.setTripDistance(Distance(2))
+        val truck = Truck.parked(router, truckListener)
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
+        truck.drive(Distance(1))
+        truck.drive(Distance(1))
+        truck.drive(Distance(1))
+        assertThat(
+            truckListener.arrivals,
+            equalTo(listOf(
+                TruckArrival(truck, LocationId("A")),
+                TruckArrival(truck, LocationId("B"))
+            ))
+        )
     }
 
     @Test fun `unloads cargo`() {
