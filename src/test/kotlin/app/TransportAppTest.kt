@@ -45,11 +45,6 @@ class TransportAppTest {
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("A", "B", "B")), equalTo(7))
     }
 
-    @Test fun `total delivery time is zero before anything has been shipped`() {
-        app.setTrucks(1)
-        assertThat(app.totalDeliveryTime(), equalTo(0))
-    }
-
     @Test fun `total delivery time is zero after shipping no cargo`() {
         app.setTrucks(1)
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf()), equalTo(0))

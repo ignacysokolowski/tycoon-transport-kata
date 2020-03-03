@@ -29,7 +29,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         return totalDeliveryTime
     }
 
-    fun ship(warehouseIds: List<String>) {
+    private fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
             return
         }
@@ -74,6 +74,4 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private fun arrivedAtWarehouse(truck: Truck) {
         warehouseController.transportArrived(truck)
     }
-
-    fun totalDeliveryTime() = totalDeliveryTime
 }
