@@ -72,20 +72,20 @@ class TruckTest {
     }
 
     @Test fun `loads cargo`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         truck.load(CargoId("1"))
         assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
     @Test fun `can not unload cargo if did not load`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         assertThrows<NoCargoCarried> {
             truck.unload()
         }
     }
 
     @Test fun `has to load another cargo after unloading`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(10)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         truck.load(CargoId("1"))
         truck.unload()
         assertThrows<NoCargoCarried> {
