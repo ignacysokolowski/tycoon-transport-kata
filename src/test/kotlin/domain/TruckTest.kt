@@ -78,12 +78,6 @@ class TruckTest {
         assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
-    @Test fun `loads cargo when provided with its id`() {
-        val truck = Truck.parked(router, truckListener)
-        truck.load(CargoId("1"))
-        assertThat(truck.unload(), equalTo(CargoId("1")))
-    }
-
     @Test fun `can not unload cargo if did not load`() {
         val truck = Truck.parked(router, truckListener)
         assertThrows<NoCargoCarried> {

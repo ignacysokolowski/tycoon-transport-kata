@@ -10,10 +10,6 @@ class FakeTransport : Transport {
     var tripStarted: Trip? = null
     var goesBack = false
 
-    override fun load(cargoId: CargoId) {
-        cargoLoaded = cargoId
-    }
-
     override fun load(cargo: Cargo) {
         cargoLoaded = cargo.id
     }
