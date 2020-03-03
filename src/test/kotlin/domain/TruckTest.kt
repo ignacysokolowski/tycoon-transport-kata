@@ -59,13 +59,15 @@ class TruckTest {
     }
 
     @Test fun `drives back to the trip origin`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(2)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("A")), truckListener)
+        truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(2)))
         truck.drive(Distance(2))
         truck.goBack()
         truck.drive(Distance(2))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
+                TruckArrival(truck, LocationId("A")),
                 TruckArrival(truck, LocationId("B")),
                 TruckArrival(truck, LocationId("A"))
             ))
