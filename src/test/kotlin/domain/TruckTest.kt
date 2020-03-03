@@ -38,7 +38,7 @@ class TruckTest {
     }
 
     @Test fun `does not drive if already at destination`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
+        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
         truck.drive(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
