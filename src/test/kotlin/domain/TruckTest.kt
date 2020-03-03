@@ -4,6 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
@@ -72,6 +73,12 @@ class TruckTest {
     }
 
     @Test fun `loads cargo`() {
+        val truck = Truck.parked(router, truckListener)
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
+        assertThat(truck.unload(), equalTo(CargoId("1")))
+    }
+
+    @Test fun `loads cargo when provided with its id`() {
         val truck = Truck.parked(router, truckListener)
         truck.load(CargoId("1"))
         assertThat(truck.unload(), equalTo(CargoId("1")))
