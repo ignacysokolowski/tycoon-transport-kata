@@ -32,11 +32,6 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
-    @Test fun `announces arrival when placed on a zero-distance trip`() {
-        val truck = Truck.at(LocationId("A"), truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
-    }
-
     @Test fun `does not drive if already at destination`() {
         val truck = Truck.at(LocationId("A"), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
