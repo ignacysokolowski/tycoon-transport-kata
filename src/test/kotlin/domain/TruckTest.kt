@@ -23,8 +23,8 @@ class TruckTest {
     private val truckListener = TruckSpy()
 
     @Test fun `announces arrival at the initial location`() {
-        val truck = Truck.at(LocationId("B"), truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+        val truck = Truck.at(LocationId("A"), truckListener)
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `parks at the router's origin`() {
@@ -33,15 +33,15 @@ class TruckTest {
     }
 
     @Test fun `announces arrival when placed on a zero-distance trip`() {
-        val truck = Truck.at(LocationId("B"), truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+        val truck = Truck.at(LocationId("A"), truckListener)
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `does not drive if already at destination`() {
-        val truck = Truck.at(LocationId("B"), truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+        val truck = Truck.at(LocationId("A"), truckListener)
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
         truck.drive(Distance(1))
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `drives the whole distance to the trip destination`() {
