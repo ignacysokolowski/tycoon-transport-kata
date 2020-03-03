@@ -78,12 +78,6 @@ class TruckTest {
         )
     }
 
-    @Test fun `loads cargo`() {
-        val truck = Truck.parked(router, truckListener)
-        truck.load(Cargo(CargoId("1"), LocationId("B")))
-        assertThat(truck.unload(), equalTo(CargoId("1")))
-    }
-
     @Test fun `loads cargo and drives to its destination`() {
         router.setTripDistance(Distance(3))
         val truck = Truck.parked(router, truckListener)
@@ -97,6 +91,12 @@ class TruckTest {
                 TruckArrival(truck, LocationId("B"))
             ))
         )
+    }
+
+    @Test fun `unloads cargo`() {
+        val truck = Truck.parked(router, truckListener)
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
+        assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
     @Test fun `can not unload cargo if did not load`() {
