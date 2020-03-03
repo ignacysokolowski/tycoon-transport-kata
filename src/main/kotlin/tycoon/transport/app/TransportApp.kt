@@ -32,7 +32,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
             throw IllegalStateException("No trucks at the factory")
         }
         try {
-            shipAll(cargoesTo(warehouseIds))
+            ship(cargoesTo(warehouseIds))
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
@@ -42,7 +42,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private fun cargoesTo(warehouseIds: List<String>) =
         warehouseIds.map { Cargo(cargoIds.next(), LocationId(it)) }
 
-    private fun shipAll(cargoes: List<Cargo>) {
+    private fun ship(cargoes: List<Cargo>) {
         factory.produce(cargoes)
         val trucks = parkTrucksAtTheFactory()
         while (!factory.hasAllCargoesDelivered()) {
