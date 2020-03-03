@@ -24,8 +24,8 @@ class Truck private constructor(
     }
 
     override fun load(cargo: Cargo) {
-        this.cargoId = cargo.id
-        this.trip = router.tripTo(cargo.destination)
+        cargoId = cargo.id
+        trip = router.tripTo(cargo.destination)
     }
 
     fun drive(distance: Distance) {
