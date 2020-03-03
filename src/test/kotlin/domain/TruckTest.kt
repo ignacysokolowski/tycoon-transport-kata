@@ -57,8 +57,9 @@ class TruckTest {
     }
 
     @Test fun `only notifies about actual arrivals`() {
+        router.setTripDistance(Distance(3))
         val truck = Truck.parked(router, truckListener)
-        truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(3)))
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
         truck.drive(Distance(2))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
