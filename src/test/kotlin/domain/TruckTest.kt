@@ -8,15 +8,28 @@ import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.NoCargoCarried
+import tycoon.transport.domain.Router
 import tycoon.transport.domain.Trip
 import tycoon.transport.domain.Truck
 
+class FakeRouter : Router {
+    private val origin = LocationId("A")
+
+    override fun inPlaceTripAtOrigin() = Trip.inPlace(origin)
+}
+
 class TruckTest {
+    private val router = FakeRouter()
     private val truckListener = TruckSpy()
 
     @Test fun `announces arrival at the initial location`() {
         val truck = Truck.at(LocationId("B"), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+    }
+
+    @Test fun `parks at the router's origin`() {
+        val truck = Truck.parked(router, truckListener)
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `announces arrival when placed on a zero-distance trip`() {
