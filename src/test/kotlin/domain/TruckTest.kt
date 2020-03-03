@@ -45,14 +45,14 @@ class TruckTest {
     }
 
     @Test fun `can start a new trip`() {
-        val truck = Truck.on(Trip.between(LocationId("A"), LocationId("B"), Distance(0)), truckListener)
-        truck.startTrip(Trip.between(LocationId("B"), LocationId("A"), Distance(1)))
+        val truck = Truck.on(Trip.inPlace(LocationId("A")), truckListener)
+        truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(1)))
         truck.drive(Distance(1))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
-                TruckArrival(truck, LocationId("B")),
-                TruckArrival(truck, LocationId("A"))
+                TruckArrival(truck, LocationId("A")),
+                TruckArrival(truck, LocationId("B"))
             ))
         )
     }
