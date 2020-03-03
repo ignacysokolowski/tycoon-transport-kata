@@ -6,9 +6,6 @@ class Truck private constructor(
 ) : Transport {
 
     companion object {
-        fun at(locationId: LocationId, listener: TruckListener) =
-            Truck(Trip.inPlace(locationId), listener)
-
         fun parked(router: Router, listener: TruckListener) =
             Truck(router.inPlaceTripAtOrigin(), listener)
     }
