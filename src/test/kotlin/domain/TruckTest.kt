@@ -15,8 +15,14 @@ import tycoon.transport.domain.Truck
 
 class FakeRouter : Router {
     private val origin = LocationId("A")
+    private var tripDistance = Distance(0)
+
+    fun setTripDistance(distance: Distance) {
+        this.tripDistance = distance
+    }
 
     override fun inPlaceTripAtOrigin() = Trip.inPlace(origin)
+    override fun tripTo(destination: LocationId) = Trip.between(origin, destination, tripDistance)
 }
 
 class TruckTest {
@@ -76,6 +82,21 @@ class TruckTest {
         val truck = Truck.parked(router, truckListener)
         truck.load(Cargo(CargoId("1"), LocationId("B")))
         assertThat(truck.unload(), equalTo(CargoId("1")))
+    }
+
+    @Test fun `loads cargo and drives to its destination`() {
+        router.setTripDistance(Distance(3))
+        val truck = Truck.parked(router, truckListener)
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
+        truck.drive(Distance(1))
+        truck.drive(Distance(2))
+        assertThat(
+            truckListener.arrivals,
+            equalTo(listOf(
+                TruckArrival(truck, LocationId("A")),
+                TruckArrival(truck, LocationId("B"))
+            ))
+        )
     }
 
     @Test fun `can not unload cargo if did not load`() {

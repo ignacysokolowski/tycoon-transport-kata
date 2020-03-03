@@ -2,12 +2,13 @@ package tycoon.transport.domain
 
 class Truck private constructor(
     private var trip: Trip,
+    private val router: Router,
     private val listener: TruckListener
 ) : Transport {
 
     companion object {
         fun parked(router: Router, listener: TruckListener) =
-            Truck(router.inPlaceTripAtOrigin(), listener)
+            Truck(router.inPlaceTripAtOrigin(), router, listener)
     }
 
     private var cargoId: CargoId? = null
@@ -24,6 +25,7 @@ class Truck private constructor(
 
     override fun load(cargo: Cargo) {
         this.cargoId = cargo.id
+        this.trip = router.tripTo(cargo.destination)
     }
 
     override fun startTrip(trip: Trip) {
