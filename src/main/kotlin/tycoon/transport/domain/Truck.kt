@@ -44,7 +44,7 @@ class Truck private constructor(
         return cargoId
     }
 
-    fun goBack() {
+    private fun goBack() {
         trip = trip.backToOrigin()
     }
 }
