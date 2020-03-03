@@ -8,7 +8,6 @@ class Truck private constructor(
     companion object {
         fun at(locationId: LocationId, listener: TruckListener) =
             Truck(Trip.inPlace(locationId), listener)
-        fun on(trip: Trip, listener: TruckListener) = Truck(trip, listener)
     }
 
     private var cargoId: CargoId? = null
