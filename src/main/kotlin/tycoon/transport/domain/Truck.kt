@@ -28,10 +28,6 @@ class Truck private constructor(
         this.trip = router.tripTo(cargo.destination)
     }
 
-    fun startTrip(trip: Trip) {
-        this.trip = trip
-    }
-
     fun drive(distance: Distance) {
         if (trip.journeyComplete()) {
             return
