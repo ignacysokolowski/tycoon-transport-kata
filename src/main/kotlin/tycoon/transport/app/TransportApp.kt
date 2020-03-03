@@ -7,7 +7,6 @@ import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
-import tycoon.transport.domain.Router
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 import tycoon.transport.domain.WarehouseController
@@ -15,7 +14,6 @@ import tycoon.transport.domain.WarehouseController
 class TransportApp(map: DistanceMap) : TruckListener {
     private val cargoIds = CargoIds()
     private val factory = Factory(map)
-    private val router = Router(factory.locationId, map)
     private val warehouseController = WarehouseController(factory)
     private var numberOfTrucks = 0
     private var totalDeliveryTime = 0
@@ -52,7 +50,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
 
     private fun createTrucks() = (1..numberOfTrucks).map { newTruck() }
 
-    private fun newTruck() = Truck.on(router.inPlaceTripAtOrigin(), this)
+    private fun newTruck() = Truck.at(factory.locationId, this)
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
         if (locationId == factory.locationId) {
