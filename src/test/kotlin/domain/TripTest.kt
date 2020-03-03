@@ -23,7 +23,11 @@ class TripTest {
     @Test fun `changes direction of the journey when turned back to origin`() {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
         assertThat(trip.backToOrigin().journey(), equalTo(Journey.to(LocationId("A"), Distance(3))))
-        assertThat(trip.backToOrigin().backToOrigin().journey(), equalTo(Journey.to(LocationId("B"), Distance(3))))
+    }
+
+    @Test fun `does not turn back if already heading origin`() {
+        val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
+        assertThat(trip.backToOrigin().backToOrigin(), equalTo(trip.backToOrigin()))
     }
 
     @Test fun `resets the journey progress when turned back to origin`() {
