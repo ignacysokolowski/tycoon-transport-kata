@@ -22,7 +22,7 @@ class Truck private constructor(
         }
     }
 
-    fun load(cargo: Cargo) {
+    override fun load(cargo: Cargo) {
         this.cargoId = cargo.id
     }
 
