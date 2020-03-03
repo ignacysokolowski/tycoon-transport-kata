@@ -16,7 +16,7 @@ class Truck private constructor(
     }
 
     private fun notifyIfArrived() {
-        if (trip.atDestination()) {
+        if (trip.journeyComplete()) {
             listener.truckArrived(this, trip.destination())
         }
     }
@@ -30,7 +30,7 @@ class Truck private constructor(
     }
 
     fun drive(distance: Distance) {
-        if (trip.atDestination()) {
+        if (trip.journeyComplete()) {
             return
         }
         trip = trip.advancedBy(distance)

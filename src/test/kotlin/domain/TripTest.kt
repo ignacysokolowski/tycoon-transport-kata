@@ -33,13 +33,13 @@ class TripTest {
 
     @Test fun `does not complete the journey before advanced to its distance`() {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(3))
-        assertThat(trip.atDestination(), equalTo(false))
-        assertThat(trip.advancedBy(Distance(1)).atDestination(), equalTo(false))
+        assertThat(trip.journeyComplete(), equalTo(false))
+        assertThat(trip.advancedBy(Distance(1)).journeyComplete(), equalTo(false))
     }
 
     @Test fun `can be advanced to the destination to complete the journey`() {
         val trip = Trip.between(LocationId("A"), LocationId("B"), Distance(2))
-        assertThat(trip.advancedBy(Distance(1)).advancedBy(Distance(1)).atDestination(), equalTo(true))
+        assertThat(trip.advancedBy(Distance(1)).advancedBy(Distance(1)).journeyComplete(), equalTo(true))
     }
 
     @Test fun `trip in place has a zero-distance journey`() {
