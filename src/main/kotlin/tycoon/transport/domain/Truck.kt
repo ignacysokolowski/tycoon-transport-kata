@@ -28,7 +28,7 @@ class Truck private constructor(
         this.trip = router.tripTo(cargo.destination)
     }
 
-    override fun startTrip(trip: Trip) {
+    fun startTrip(trip: Trip) {
         this.trip = trip
     }
 

@@ -9,16 +9,12 @@ import tycoon.transport.domain.AllCargoPickedUp
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.CargoNotPickedUp
-import tycoon.transport.domain.Distance
-import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
-import tycoon.transport.domain.Trip
 
 class FactoryTest {
 
-    private val distanceMap = DistanceMap()
-    private val factory = Factory(distanceMap)
+    private val factory = Factory()
 
     @Test fun `has all cargoes delivered if has not produced any yet`() {
         assertThat(factory.hasAllCargoesDelivered(), equalTo(true))
@@ -83,7 +79,6 @@ class FactoryTest {
     }
 
     @Test fun `loads cargo on transport when arrives`() {
-        distanceMap.addDistanceTo(LocationId("A"), Distance(3))
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A"))
         ))
@@ -92,28 +87,9 @@ class FactoryTest {
         assertThat(transport.cargoLoaded, equalTo(CargoId("1")))
     }
 
-    @Test fun `dispatches transport to the cargo destination`() {
-        distanceMap.addDistanceTo(LocationId("A"), Distance(3))
-        factory.produce(listOf(
-            Cargo(CargoId("1"), LocationId("A"))
-        ))
-        val transport = FakeTransport()
-        factory.transportArrived(transport)
-        assertThat(
-            transport.tripStarted,
-            equalTo(Trip.between(factory.locationId, LocationId("A"), Distance(3)))
-        )
-    }
-
     @Test fun `does not load cargo if none waiting`() {
         val transport = FakeTransport()
         factory.transportArrived(transport)
         assertThat(transport.cargoLoaded, absent())
-    }
-
-    @Test fun `does not dispatch the transport if no cargo waiting`() {
-        val transport = FakeTransport()
-        factory.transportArrived(transport)
-        assertThat(transport.tripStarted, absent())
     }
 }

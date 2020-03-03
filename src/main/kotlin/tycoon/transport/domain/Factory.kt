@@ -1,8 +1,7 @@
 package tycoon.transport.domain
 
-class Factory(distanceMap: DistanceMap) : DeliveryListener {
+class Factory : DeliveryListener {
     val locationId = LocationId("FACTORY")
-    private val router = MapRouter(locationId, distanceMap)
     private val containerStock = ContainerStock()
 
     fun produce(cargoes: List<Cargo>) {
@@ -24,6 +23,5 @@ class Factory(distanceMap: DistanceMap) : DeliveryListener {
             return
         }
         transport.load(cargo)
-        transport.startTrip(router.tripTo(cargo.destination))
     }
 }
