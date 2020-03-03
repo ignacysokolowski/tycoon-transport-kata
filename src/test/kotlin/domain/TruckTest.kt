@@ -20,7 +20,7 @@ class TruckTest {
     }
 
     @Test fun `announces arrival when placed on a zero-distance trip`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
+        val truck = Truck.at(LocationId("B"), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
     }
 
@@ -30,14 +30,14 @@ class TruckTest {
     }
 
     @Test fun `does not drive if already at destination`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
+        val truck = Truck.at(LocationId("B"), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
         truck.drive(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
     }
 
     @Test fun `drives the whole distance to the trip destination`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("A")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(3)))
         truck.drive(Distance(1))
         truck.drive(Distance(2))
@@ -51,14 +51,14 @@ class TruckTest {
     }
 
     @Test fun `only notifies about actual arrivals`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("A")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(3)))
         truck.drive(Distance(2))
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
     @Test fun `drives back to the trip origin`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("A")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(2)))
         truck.drive(Distance(2))
         truck.goBack()
@@ -74,20 +74,20 @@ class TruckTest {
     }
 
     @Test fun `loads cargo`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         truck.load(CargoId("1"))
         assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
     @Test fun `can not unload cargo if did not load`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         assertThrows<NoCargoCarried> {
             truck.unload()
         }
     }
 
     @Test fun `has to load another cargo after unloading`() {
-        val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
+        val truck = Truck.at(LocationId("A"), truckListener)
         truck.load(CargoId("1"))
         truck.unload()
         assertThrows<NoCargoCarried> {
