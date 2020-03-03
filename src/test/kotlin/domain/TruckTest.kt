@@ -14,6 +14,11 @@ import tycoon.transport.domain.Truck
 class TruckTest {
     private val truckListener = TruckSpy()
 
+    @Test fun `announces arrival at the initial location`() {
+        val truck = Truck.at(LocationId("B"), truckListener)
+        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
+    }
+
     @Test fun `announces arrival when placed on a zero-distance trip`() {
         val truck = Truck.on(Trip.inPlace(LocationId("B")), truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("B")))))
