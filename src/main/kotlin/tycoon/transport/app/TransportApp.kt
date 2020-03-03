@@ -43,14 +43,14 @@ class TransportApp(map: DistanceMap) : TruckListener {
 
     private fun shipAll(cargoes: List<Cargo>) {
         factory.produce(cargoes)
-        val trucks = createTrucks()
+        val trucks = parkTrucksAtTheFactory()
         while (!factory.hasAllCargoesDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
             totalDeliveryTime += 1
         }
     }
 
-    private fun createTrucks() = (1..numberOfTrucks).map { newTruck() }
+    private fun parkTrucksAtTheFactory() = (1..numberOfTrucks).map { newTruck() }
 
     private fun newTruck() = Truck.parked(truckRouter, this)
 
