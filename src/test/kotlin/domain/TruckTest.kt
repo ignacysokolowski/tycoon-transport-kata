@@ -22,12 +22,7 @@ class TruckTest {
     private val router = FakeRouter()
     private val truckListener = TruckSpy()
 
-    @Test fun `announces arrival at the initial location`() {
-        val truck = Truck.at(LocationId("A"), truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
-    }
-
-    @Test fun `parks at the router's origin`() {
+    @Test fun `announces arrival at the parking location`() {
         val truck = Truck.parked(router, truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
