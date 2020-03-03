@@ -93,7 +93,7 @@ class TruckTest {
 
     @Test fun `has to load another cargo after unloading`() {
         val truck = Truck.parked(router, truckListener)
-        truck.load(CargoId("1"))
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
         truck.unload()
         assertThrows<NoCargoCarried> {
             truck.unload()
