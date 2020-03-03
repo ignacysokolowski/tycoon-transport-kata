@@ -41,9 +41,10 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
     }
 
-    @Test fun `drives the whole distance to the trip destination`() {
+    @Test fun `loads cargo and drives to its destination`() {
+        router.setTripDistance(Distance(3))
         val truck = Truck.parked(router, truckListener)
-        truck.startTrip(Trip.between(LocationId("A"), LocationId("B"), Distance(3)))
+        truck.load(Cargo(CargoId("1"), LocationId("B")))
         truck.drive(Distance(1))
         truck.drive(Distance(2))
         assertThat(
@@ -74,21 +75,6 @@ class TruckTest {
                 TruckArrival(truck, LocationId("A")),
                 TruckArrival(truck, LocationId("B")),
                 TruckArrival(truck, LocationId("A"))
-            ))
-        )
-    }
-
-    @Test fun `loads cargo and drives to its destination`() {
-        router.setTripDistance(Distance(3))
-        val truck = Truck.parked(router, truckListener)
-        truck.load(Cargo(CargoId("1"), LocationId("B")))
-        truck.drive(Distance(1))
-        truck.drive(Distance(2))
-        assertThat(
-            truckListener.arrivals,
-            equalTo(listOf(
-                TruckArrival(truck, LocationId("A")),
-                TruckArrival(truck, LocationId("B"))
             ))
         )
     }
