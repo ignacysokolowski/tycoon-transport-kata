@@ -24,6 +24,11 @@ class TransportApp(map: DistanceMap) : TruckListener {
         numberOfTrucks = number
     }
 
+    fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {
+        ship(warehouseIds)
+        return totalDeliveryTime
+    }
+
     fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
             return

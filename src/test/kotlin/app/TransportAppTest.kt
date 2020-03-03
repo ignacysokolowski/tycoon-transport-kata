@@ -17,8 +17,7 @@ class TransportAppTest {
     @Test fun `ships cargo to a warehouse`() {
         app.setTrucks(1)
         map.addDistanceTo(LocationId("B"), Distance(5))
-        app.ship(listOf("B"))
-        assertThat(app.totalDeliveryTime(), equalTo(5))
+        assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B")), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next cargo`() {
