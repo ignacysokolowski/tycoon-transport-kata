@@ -25,13 +25,8 @@ class TransportApp(map: DistanceMap) : TruckListener {
     }
 
     fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {
-        ship(warehouseIds)
-        return totalDeliveryTime
-    }
-
-    private fun ship(warehouseIds: List<String>) {
         if (warehouseIds.isEmpty()) {
-            return
+            return 0
         }
         if (numberOfTrucks == 0) {
             throw IllegalStateException("No trucks at the factory")
@@ -41,6 +36,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
+        return totalDeliveryTime
     }
 
     private fun cargoesTo(warehouseIds: List<String>) =
