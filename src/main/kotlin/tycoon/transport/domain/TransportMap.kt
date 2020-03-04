@@ -9,17 +9,13 @@ class TransportMap(private val factory: Factory) : DistanceMap {
             ?: throw LocationUnknown()
     }
 
-    fun addDistanceTo(location: LocationId, distance: Distance) {
-        distances[location] = distance
-    }
-
     fun addLocation(
         id: LocationId,
         location: Location,
         distance: Distance
     ) {
         locations[id] = location
-        addDistanceTo(id, distance)
+        distances[id] = distance
     }
 
     fun locationAt(locationId: LocationId): Location {
