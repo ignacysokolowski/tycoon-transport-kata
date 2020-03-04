@@ -5,6 +5,7 @@ import tycoon.transport.domain.CargoIds
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
@@ -57,7 +58,8 @@ class TransportApp(map: DistanceMap) : TruckListener {
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
         if (locationId == factory.locationId) {
-            factory.transportArrived(truck)
+            val location: Location = factory
+            location.transportArrived(truck)
         } else {
             warehouseController.transportArrived(truck)
         }
