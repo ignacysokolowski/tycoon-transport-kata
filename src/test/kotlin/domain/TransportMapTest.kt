@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Factory
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.TransportMap
@@ -16,7 +17,7 @@ class TransportMapTest {
     private val map = TransportMap(factory)
 
     @Test fun `provides the factory by its location id`() {
-        assertThat(map.locationAt(factory.locationId), equalTo(factory))
+        assertThat(map.locationAt(factory.locationId), equalTo(factory as Location))
     }
 
     @Test fun `does not provide unknown locations`() {

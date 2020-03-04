@@ -12,7 +12,7 @@ class TransportMap(private val factory: Factory) : DistanceMap {
         distances[location] = distance
     }
 
-    fun locationAt(locationId: LocationId): Factory {
+    fun locationAt(locationId: LocationId): Location {
         if (locationId == factory.locationId) {
             return factory
         }
