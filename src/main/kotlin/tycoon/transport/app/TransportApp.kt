@@ -57,14 +57,10 @@ class TransportApp(map: DistanceMap) : TruckListener {
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
         if (locationId == factory.locationId) {
-            arrivedAtFactory(truck)
+            factory.transportArrived(truck)
         } else {
             arrivedAtWarehouse(truck)
         }
-    }
-
-    private fun arrivedAtFactory(truck: Truck) {
-        factory.transportArrived(truck)
     }
 
     private fun arrivedAtWarehouse(truck: Truck) {
