@@ -59,11 +59,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
         if (locationId == factory.locationId) {
             factory.transportArrived(truck)
         } else {
-            arrivedAtWarehouse(truck)
+            warehouseController.transportArrived(truck)
         }
-    }
-
-    private fun arrivedAtWarehouse(truck: Truck) {
-        warehouseController.transportArrived(truck)
     }
 }
