@@ -1,7 +1,7 @@
 package tycoon.transport.domain
 
 class Factory : Location, DeliveryListener {
-    val locationId = LocationId("FACTORY")
+    override val locationId = LocationId("FACTORY")
     private val containerStock = ContainerStock()
 
     fun produce(cargoes: List<Cargo>) {
