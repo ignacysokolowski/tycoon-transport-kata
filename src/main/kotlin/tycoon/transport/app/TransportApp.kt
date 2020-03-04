@@ -60,11 +60,6 @@ class TransportApp(map: DistanceMap) : TruckListener {
         locationAt(locationId).transportArrived(truck)
     }
 
-    private fun locationAt(locationId: LocationId): Location {
-        return if (locationId == factory.locationId) {
-            factory
-        } else {
-            warehouseController
-        }
-    }
+    private fun locationAt(locationId: LocationId): Location =
+        if (locationId == factory.locationId) factory else warehouseController
 }
