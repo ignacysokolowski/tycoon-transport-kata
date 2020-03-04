@@ -15,8 +15,8 @@ class TransportMapTest {
     private val factory = Factory()
     private val map = TransportMap(factory)
 
-    @Test fun `provides the factory`() {
-        assertThat(map.factory(), equalTo(factory))
+    @Test fun `provides the factory by its location id`() {
+        assertThat(map.factory(factory.locationId), equalTo(factory))
     }
 
     @Test fun `tells the distance to a location`() {
