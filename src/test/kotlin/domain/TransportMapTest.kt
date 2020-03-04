@@ -38,7 +38,7 @@ class TransportMapTest {
     }
 
     @Test fun `tells the distance to a location`() {
-        map.addDistanceTo(LocationId("A"), Distance(5))
+        map.addLocation(LocationId("A"), LocationStub(), Distance(5))
         assertThat(map.distanceTo(LocationId("A")), equalTo(Distance(5)))
     }
 
