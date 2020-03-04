@@ -5,12 +5,12 @@ import tycoon.transport.domain.Transport
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
-data class TruckArrival(val transport: Transport, val destination: LocationId)
+data class TransportArrival(val transport: Transport, val destination: LocationId)
 
 class TruckSpy : TruckListener {
-    val arrivals = mutableListOf<TruckArrival>()
+    val arrivals = mutableListOf<TransportArrival>()
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
-        arrivals.add(TruckArrival(truck, locationId))
+        arrivals.add(TransportArrival(truck, locationId))
     }
 }

@@ -31,7 +31,7 @@ class TruckTest {
 
     @Test fun `announces arrival at the parking location`() {
         val truck = Truck.parked(router, truckListener)
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+        assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, LocationId("A")))))
     }
 
     @Test fun `loads cargo and drives to its destination`() {
@@ -43,8 +43,8 @@ class TruckTest {
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
-                TruckArrival(truck, LocationId("A")),
-                TruckArrival(truck, LocationId("B"))
+                TransportArrival(truck, LocationId("A")),
+                TransportArrival(truck, LocationId("B"))
             ))
         )
     }
@@ -54,13 +54,13 @@ class TruckTest {
         val truck = Truck.parked(router, truckListener)
         truck.load(Cargo(CargoId("1"), LocationId("B")))
         truck.drive(Distance(2))
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+        assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, LocationId("A")))))
     }
 
     @Test fun `does not drive before loading cargo`() {
         val truck = Truck.parked(router, truckListener)
         truck.drive(Distance(1))
-        assertThat(truckListener.arrivals, equalTo(listOf(TruckArrival(truck, LocationId("A")))))
+        assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, LocationId("A")))))
     }
 
     @Test fun `does not move after arrival to the destination`() {
@@ -73,8 +73,8 @@ class TruckTest {
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
-                TruckArrival(truck, LocationId("A")),
-                TruckArrival(truck, LocationId("B"))
+                TransportArrival(truck, LocationId("A")),
+                TransportArrival(truck, LocationId("B"))
             ))
         )
     }
@@ -95,9 +95,9 @@ class TruckTest {
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
-                TruckArrival(truck, LocationId("A")),
-                TruckArrival(truck, LocationId("B")),
-                TruckArrival(truck, LocationId("A"))
+                TransportArrival(truck, LocationId("A")),
+                TransportArrival(truck, LocationId("B")),
+                TransportArrival(truck, LocationId("A"))
             ))
         )
     }
