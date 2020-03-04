@@ -60,7 +60,7 @@ class TransportApp : TruckListener {
 
     private fun newTruck() = Truck.parked(truckRouter, this)
 
-    override fun truckArrived(truck: Transport, locationId: LocationId) {
+    override fun transportArrived(truck: Transport, locationId: LocationId) {
         map.locationAt(locationId).transportArrived(truck)
     }
 }

@@ -1,5 +1,5 @@
 package tycoon.transport.domain
 
 interface TruckListener {
-    fun truckArrived(truck: Transport, locationId: LocationId)
+    fun transportArrived(truck: Transport, locationId: LocationId)
 }

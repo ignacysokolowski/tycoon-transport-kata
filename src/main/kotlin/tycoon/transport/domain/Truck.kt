@@ -19,7 +19,7 @@ class Truck private constructor(
 
     private fun notifyIfArrived() {
         if (trip.journeyComplete()) {
-            listener.truckArrived(this, trip.destination())
+            listener.transportArrived(this, trip.destination())
         }
     }
 
