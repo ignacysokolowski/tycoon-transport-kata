@@ -5,13 +5,13 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
-import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
+import tycoon.transport.domain.TransportMap
 
-class DistanceMapTest {
+class TransportMapTest {
 
-    private val map = DistanceMap()
+    private val map = TransportMap()
 
     @Test fun `tells the distance to a location`() {
         map.addDistanceTo(LocationId("A"), Distance(5))

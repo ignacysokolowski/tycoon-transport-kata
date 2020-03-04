@@ -3,18 +3,18 @@ package tycoon.transport.app
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoIds
 import tycoon.transport.domain.Distance
-import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
+import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 import tycoon.transport.domain.WarehouseController
 
 class TransportApp : TruckListener {
-    private val map = DistanceMap()
+    private val map = TransportMap()
     private val cargoIds = CargoIds()
     private val factory = Factory()
     private val truckRouter = MapRouter(factory.locationId, map)

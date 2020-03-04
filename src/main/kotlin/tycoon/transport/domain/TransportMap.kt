@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class DistanceMap {
+class TransportMap {
     private val distances = mutableMapOf<LocationId, Distance>()
 
     fun distanceTo(location: LocationId): Distance {
