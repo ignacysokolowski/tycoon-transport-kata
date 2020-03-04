@@ -5,13 +5,19 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.domain.Distance
+import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.TransportMap
 
 class TransportMapTest {
 
-    private val map = TransportMap()
+    private val factory = Factory()
+    private val map = TransportMap(factory)
+
+    @Test fun `provides the factory`() {
+        assertThat(map.factory(), equalTo(factory))
+    }
 
     @Test fun `tells the distance to a location`() {
         map.addDistanceTo(LocationId("A"), Distance(5))

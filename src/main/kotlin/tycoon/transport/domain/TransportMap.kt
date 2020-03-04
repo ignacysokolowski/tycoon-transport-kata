@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class TransportMap : DistanceMap {
+class TransportMap(private val factory: Factory) : DistanceMap {
     private val distances = mutableMapOf<LocationId, Distance>()
 
     override fun distanceTo(location: LocationId): Distance {
@@ -11,4 +11,6 @@ class TransportMap : DistanceMap {
     fun addDistanceTo(location: LocationId, distance: Distance) {
         distances[location] = distance
     }
+
+    fun factory() = factory
 }
