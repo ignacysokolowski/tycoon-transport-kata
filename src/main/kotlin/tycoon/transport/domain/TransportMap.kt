@@ -12,5 +12,5 @@ class TransportMap(private val factory: Factory) : DistanceMap {
         distances[location] = distance
     }
 
-    fun factory(locationId: LocationId) = factory
+    fun locationAt(locationId: LocationId) = factory
 }
