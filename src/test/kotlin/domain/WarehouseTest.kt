@@ -5,12 +5,13 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryListener
+import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Warehouse
 
 class WarehouseTest {
 
     private val deliveryListener = DeliverySpy()
-    private val warehouse = Warehouse(deliveryListener)
+    private val warehouse = Warehouse(LocationId("A"), deliveryListener)
 
     @Test fun `unloads cargo from a transport that arrived and notifies about delivery`() {
         warehouse.transportArrived(FakeTransport())
