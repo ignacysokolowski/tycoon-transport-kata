@@ -62,11 +62,10 @@ class TransportApp(map: DistanceMap) : TruckListener {
     }
 
     private fun locationAt(locationId: LocationId): Location {
-        val location = if (locationId == factory.locationId) {
+        return if (locationId == factory.locationId) {
             factory
         } else {
             warehouseController
         }
-        return location
     }
 }
