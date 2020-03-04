@@ -1,9 +1,9 @@
 package tycoon.transport.domain
 
-class TransportMap {
+class TransportMap : DistanceMap {
     private val distances = mutableMapOf<LocationId, Distance>()
 
-    fun distanceTo(location: LocationId): Distance {
+    override fun distanceTo(location: LocationId): Distance {
         return distances[location]
             ?: throw LocationUnknown()
     }
