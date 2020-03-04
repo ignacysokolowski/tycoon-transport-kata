@@ -7,17 +7,17 @@ import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
-import tycoon.transport.domain.Transport
-import tycoon.transport.domain.TransportListener
+import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.Warehouse
 
-class TransportApp : TransportListener {
+class TransportApp {
     private val cargoIds = CargoIds()
     private val factory = Factory()
     private val map = TransportMap(factory)
     private val truckRouter = MapRouter(factory.locationId, map)
+    private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private var numberOfTrucks = 0
     private var totalDeliveryTime = 0
 
@@ -58,9 +58,5 @@ class TransportApp : TransportListener {
 
     private fun parkTrucksAtTheFactory() = (1..numberOfTrucks).map { newTruck() }
 
-    private fun newTruck() = Truck.parked(truckRouter, this)
-
-    override fun transportArrived(transport: Transport, locationId: LocationId) {
-        map.locationAt(locationId).transportArrived(transport)
-    }
+    private fun newTruck() = Truck.parked(truckRouter, transportArrivalNotifier)
 }
