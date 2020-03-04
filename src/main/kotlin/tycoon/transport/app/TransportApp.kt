@@ -13,7 +13,8 @@ import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 import tycoon.transport.domain.WarehouseController
 
-class TransportApp(private val map: DistanceMap) : TruckListener {
+class TransportApp : TruckListener {
+    private val map = DistanceMap()
     private val cargoIds = CargoIds()
     private val factory = Factory()
     private val truckRouter = MapRouter(factory.locationId, map)

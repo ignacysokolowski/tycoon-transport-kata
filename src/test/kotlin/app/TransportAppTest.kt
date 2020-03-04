@@ -6,13 +6,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
 import tycoon.transport.domain.Distance
-import tycoon.transport.domain.DistanceMap
 import tycoon.transport.domain.LocationId
 
 class TransportAppTest {
 
-    private val map = DistanceMap()
-    private val app = TransportApp(map)
+    private val app = TransportApp()
 
     @Test fun `ships cargo to a warehouse`() {
         app.setTrucks(1)
