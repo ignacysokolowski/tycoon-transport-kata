@@ -9,12 +9,23 @@ import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
+import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportMap
+
+class LocationStub : Location {
+    override fun transportArrived(transport: Transport) {}
+}
 
 class TransportMapTest {
 
     private val factory = Factory()
     private val map = TransportMap(factory)
+
+    @Test fun `contains locations`() {
+        val location: Location = LocationStub()
+        map.addLocation(LocationId("A"), location)
+        assertThat(map.locationAt(LocationId("A")), equalTo(location))
+    }
 
     @Test fun `provides the factory by its location id`() {
         assertThat(map.locationAt(factory.locationId), equalTo(factory as Location))
