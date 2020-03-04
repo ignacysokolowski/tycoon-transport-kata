@@ -9,7 +9,7 @@ data class TransportArrival(val transport: Transport, val destination: LocationI
 class TruckSpy : TruckListener {
     val arrivals = mutableListOf<TransportArrival>()
 
-    override fun transportArrived(truck: Transport, locationId: LocationId) {
-        arrivals.add(TransportArrival(truck, locationId))
+    override fun transportArrived(transport: Transport, locationId: LocationId) {
+        arrivals.add(TransportArrival(transport, locationId))
     }
 }
