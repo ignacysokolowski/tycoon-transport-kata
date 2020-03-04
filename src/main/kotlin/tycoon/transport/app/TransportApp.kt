@@ -26,7 +26,7 @@ class TransportApp : TruckListener {
         numberOfTrucks = number
     }
 
-    fun addDistanceTo(locationId: LocationId, distance: Distance) {
+    fun addWarehouse(locationId: LocationId, distance: Distance) {
         map.addDistanceTo(locationId, distance)
     }
 
