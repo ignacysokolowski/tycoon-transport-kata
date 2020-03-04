@@ -17,7 +17,6 @@ class TransportApp : TruckListener {
     private val factory = Factory()
     private val map = TransportMap(factory)
     private val truckRouter = MapRouter(factory.locationId, map)
-    private val warehouseController = WarehouseController(factory)
     private var numberOfTrucks = 0
     private var totalDeliveryTime = 0
 
@@ -26,7 +25,7 @@ class TransportApp : TruckListener {
     }
 
     fun addWarehouse(locationId: LocationId, distance: Distance) {
-        map.addLocation(locationId, warehouseController, distance)
+        map.addLocation(locationId, WarehouseController(factory), distance)
     }
 
     fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {
