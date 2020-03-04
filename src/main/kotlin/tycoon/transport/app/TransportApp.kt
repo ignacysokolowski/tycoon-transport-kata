@@ -57,11 +57,12 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private fun newTruck() = Truck.parked(truckRouter, this)
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
+        val location: Location
         if (locationId == factory.locationId) {
-            val location: Location = factory
+            location = factory
             location.transportArrived(truck)
         } else {
-            val location: Location = warehouseController
+            location = warehouseController
             location.transportArrived(truck)
         }
     }
