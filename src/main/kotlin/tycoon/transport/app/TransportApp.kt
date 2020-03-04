@@ -66,5 +66,5 @@ class TransportApp : TruckListener {
     }
 
     private fun locationAt(locationId: LocationId): Location =
-        if (locationId == factory.locationId) factory else warehouseController
+        map.locationAt(locationId)
 }
