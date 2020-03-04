@@ -1,10 +1,11 @@
 package domain
 
 import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Transport
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
 
-data class TruckArrival(val truck: Truck, val destination: LocationId)
+data class TruckArrival(val transport: Transport, val destination: LocationId)
 
 class TruckSpy : TruckListener {
     val arrivals = mutableListOf<TruckArrival>()
