@@ -16,32 +16,32 @@ class TransportAppTest {
 
     @Test fun `ships cargo to a warehouse`() {
         app.setTrucks(1)
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B")), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next cargo`() {
         app.setTrucks(1)
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(15))
     }
 
     @Test fun `two trucks deliver cargo in parallel`() {
         app.setTrucks(2)
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(5))
     }
 
     @Test fun `one truck travels back and delivers the third cargo in 5 hours`() {
         app.setTrucks(2)
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B", "B")), equalTo(15))
     }
 
     @Test fun `after a short trip, a truck can pick up a cargo to a farther warehouse`() {
         app.setTrucks(2)
-        map.addDistanceTo(LocationId("A"), Distance(1))
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("A"), Distance(1))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("A", "B", "B")), equalTo(7))
     }
 
@@ -60,7 +60,7 @@ class TransportAppTest {
 
     @Test fun `can not ship to unknown destinations`() {
         app.setTrucks(1)
-        map.addDistanceTo(LocationId("B"), Distance(5))
+        app.addDistanceTo(LocationId("B"), Distance(5))
         val exception = assertThrows<IllegalArgumentException> {
             app.timeToDeliverCargoesToWarehouses(listOf("X"))
         }
