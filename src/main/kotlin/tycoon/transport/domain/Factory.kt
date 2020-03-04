@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class Factory : DeliveryListener {
+class Factory : Location, DeliveryListener {
     val locationId = LocationId("FACTORY")
     private val containerStock = ContainerStock()
 
@@ -16,7 +16,7 @@ class Factory : DeliveryListener {
 
     fun hasAllCargoesDelivered() = containerStock.allDelivered()
 
-    fun transportArrived(transport: Transport) {
+    override fun transportArrived(transport: Transport) {
         val cargo = try {
             pickUpNextCargo()
         } catch (e: AllCargoPickedUp) {
