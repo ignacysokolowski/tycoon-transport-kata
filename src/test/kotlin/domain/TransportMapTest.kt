@@ -23,7 +23,7 @@ class TransportMapTest {
 
     @Test fun `contains locations`() {
         val location: Location = LocationStub(LocationId("A"))
-        map.addLocation(LocationId("A"), location, Distance(5))
+        map.addLocation(location, Distance(5))
         assertThat(map.locationAt(LocationId("A")), equalTo(location))
     }
 
@@ -38,7 +38,7 @@ class TransportMapTest {
     }
 
     @Test fun `tells the distance to a location`() {
-        map.addLocation(LocationId("A"), LocationStub(LocationId("A")), Distance(5))
+        map.addLocation(LocationStub(LocationId("A")), Distance(5))
         assertThat(map.distanceTo(LocationId("A")), equalTo(Distance(5)))
     }
 

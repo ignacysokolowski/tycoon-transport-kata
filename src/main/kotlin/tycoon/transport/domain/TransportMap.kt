@@ -5,7 +5,6 @@ class TransportMap(private val factory: Factory) : DistanceMap {
     private val distances = mutableMapOf<LocationId, Distance>()
 
     fun addLocation(
-        id: LocationId,
         location: Location,
         distance: Distance
     ) {
