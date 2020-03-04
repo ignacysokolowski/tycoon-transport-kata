@@ -61,7 +61,8 @@ class TransportApp(map: DistanceMap) : TruckListener {
             val location: Location = factory
             location.transportArrived(truck)
         } else {
-            warehouseController.transportArrived(truck)
+            val location: Location = warehouseController
+            location.transportArrived(truck)
         }
     }
 }
