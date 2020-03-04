@@ -10,7 +10,7 @@ import tycoon.transport.domain.MapRouter
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
-import tycoon.transport.domain.WarehouseController
+import tycoon.transport.domain.Warehouse
 
 class TransportApp : TruckListener {
     private val cargoIds = CargoIds()
@@ -25,7 +25,7 @@ class TransportApp : TruckListener {
     }
 
     fun addWarehouse(locationId: LocationId, distance: Distance) {
-        map.addLocation(locationId, WarehouseController(factory), distance)
+        map.addLocation(locationId, Warehouse(factory), distance)
     }
 
     fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {
