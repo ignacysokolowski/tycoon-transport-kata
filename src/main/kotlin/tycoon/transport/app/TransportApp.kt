@@ -57,8 +57,7 @@ class TransportApp(map: DistanceMap) : TruckListener {
     private fun newTruck() = Truck.parked(truckRouter, this)
 
     override fun truckArrived(truck: Truck, locationId: LocationId) {
-        val location = locationAt(locationId)
-        location.transportArrived(truck)
+        locationAt(locationId).transportArrived(truck)
     }
 
     private fun locationAt(locationId: LocationId): Location {
