@@ -7,6 +7,7 @@ import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
+import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.TruckListener
@@ -59,7 +60,7 @@ class TransportApp : TruckListener {
 
     private fun newTruck() = Truck.parked(truckRouter, this)
 
-    override fun truckArrived(truck: Truck, locationId: LocationId) {
+    override fun truckArrived(truck: Transport, locationId: LocationId) {
         map.locationAt(locationId).transportArrived(truck)
     }
 }
