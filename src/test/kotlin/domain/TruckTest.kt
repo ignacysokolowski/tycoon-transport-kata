@@ -27,7 +27,7 @@ class FakeRouter : Router {
 
 class TruckTest {
     private val router = FakeRouter()
-    private val truckListener = TruckSpy()
+    private val truckListener = TransportSpy()
 
     @Test fun `announces arrival at the parking location`() {
         val truck = Truck.parked(router, truckListener)

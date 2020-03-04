@@ -8,12 +8,12 @@ import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
 import tycoon.transport.domain.Transport
+import tycoon.transport.domain.TransportListener
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
-import tycoon.transport.domain.TruckListener
 import tycoon.transport.domain.Warehouse
 
-class TransportApp : TruckListener {
+class TransportApp : TransportListener {
     private val cargoIds = CargoIds()
     private val factory = Factory()
     private val map = TransportMap(factory)

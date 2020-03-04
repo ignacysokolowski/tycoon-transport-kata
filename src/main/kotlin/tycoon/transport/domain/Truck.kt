@@ -3,11 +3,11 @@ package tycoon.transport.domain
 class Truck private constructor(
     private var trip: Trip,
     private val router: Router,
-    private val listener: TruckListener
+    private val listener: TransportListener
 ) : Transport {
 
     companion object {
-        fun parked(router: Router, listener: TruckListener) =
+        fun parked(router: Router, listener: TransportListener) =
             Truck(router.inPlaceTripAtOrigin(), router, listener)
     }
 

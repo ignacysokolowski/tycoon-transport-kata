@@ -1,5 +1,5 @@
 package tycoon.transport.domain
 
-interface TruckListener {
+interface TransportListener {
     fun transportArrived(transport: Transport, locationId: LocationId)
 }
