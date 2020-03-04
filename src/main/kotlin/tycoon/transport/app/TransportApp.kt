@@ -60,10 +60,9 @@ class TransportApp(map: DistanceMap) : TruckListener {
         val location: Location
         if (locationId == factory.locationId) {
             location = factory
-            location.transportArrived(truck)
         } else {
             location = warehouseController
-            location.transportArrived(truck)
         }
+        location.transportArrived(truck)
     }
 }
