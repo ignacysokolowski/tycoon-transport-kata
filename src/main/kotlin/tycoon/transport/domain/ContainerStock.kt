@@ -10,11 +10,10 @@ class ContainerStock {
     }
 
     fun pickUpNext(): Cargo {
-        val cargo = try {
+        return try {
             waiting.pop()
         } catch (e: NoSuchElementException) {
             throw AllCargoPickedUp()
         }
-        return cargo
     }
 }
