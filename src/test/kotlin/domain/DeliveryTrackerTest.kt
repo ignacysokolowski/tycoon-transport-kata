@@ -24,4 +24,10 @@ class DeliveryTrackerTest {
         tracker.cargoDelivered(CargoId("1"))
         assertThat(tracker.allCargoesDelivered(), equalTo(true))
     }
+
+    @Test fun `ignores delivery of cargo that was not scheduled`() {
+        tracker.scheduleDeliveryOf(CargoId("1"))
+        tracker.cargoDelivered(CargoId("2"))
+        assertThat(tracker.allCargoesDelivered(), equalTo(false))
+    }
 }

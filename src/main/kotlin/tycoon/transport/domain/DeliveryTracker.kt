@@ -8,7 +8,7 @@ class DeliveryTracker : DeliveryListener {
     }
 
     override fun cargoDelivered(cargoId: CargoId) {
-        scheduled.clear()
+        scheduled.remove(cargoId)
     }
 
     fun allCargoesDelivered() = scheduled.isEmpty()
