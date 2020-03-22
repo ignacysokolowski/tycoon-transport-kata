@@ -1,9 +1,9 @@
 package tycoon.transport.domain
 
-class DeliveryTracker : DeliveryListener {
+class DeliveryTracker : DeliveryScheduler, DeliveryListener {
     private val scheduled = mutableListOf<CargoId>()
 
-    fun scheduleDeliveryOf(cargoId: CargoId) {
+    override fun scheduleDeliveryOf(cargoId: CargoId) {
         scheduled.add(cargoId)
     }
 
