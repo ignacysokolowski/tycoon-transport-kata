@@ -7,9 +7,10 @@ import tycoon.transport.domain.DeliveryTracker
 
 class DeliveryTrackerTest {
 
+    private val tracker = DeliveryTracker()
+
     @Test
     fun `reports all cargoes delivered before anything scheduled`() {
-        val tracker = DeliveryTracker()
         assertThat(tracker.allCargoesDelivered(), equalTo(true))
     }
 }
