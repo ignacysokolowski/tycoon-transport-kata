@@ -9,12 +9,22 @@ import tycoon.transport.domain.AllCargoPickedUp
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.CargoNotPickedUp
+import tycoon.transport.domain.DeliveryScheduler
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 
+class DeliverySchedulerSpy : DeliveryScheduler {
+    val cargoesScheduled = mutableListOf<CargoId>()
+
+    override fun scheduleDeliveryOf(cargoId: CargoId) {
+        cargoesScheduled.add(cargoId)
+    }
+}
+
 class FactoryTest {
 
-    private val factory = Factory()
+    private val deliveryScheduler = DeliverySchedulerSpy()
+    private val factory = Factory(deliveryScheduler)
 
     @Test fun `has all cargoes delivered if has not produced any yet`() {
         assertThat(factory.hasAllCargoesDelivered(), equalTo(true))
@@ -76,6 +86,17 @@ class FactoryTest {
         ))
         factory.pickUpNextCargo()
         assertThat(factory.hasAllCargoesDelivered(), equalTo(false))
+    }
+
+    @Test fun `schedules delivery of produced cargoes`() {
+        factory.produce(listOf(
+            Cargo(CargoId("1"), LocationId("A")),
+            Cargo(CargoId("2"), LocationId("A"))
+        ))
+        assertThat(
+            deliveryScheduler.cargoesScheduled,
+            equalTo(listOf(CargoId("1"), CargoId("2")))
+        )
     }
 
     @Test fun `loads cargo on transport when arrives`() {

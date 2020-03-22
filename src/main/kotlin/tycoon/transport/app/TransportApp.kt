@@ -2,6 +2,7 @@ package tycoon.transport.app
 
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoIds
+import tycoon.transport.domain.DeliveryTracker
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
@@ -16,7 +17,7 @@ import tycoon.transport.domain.Warehouse
 
 class TransportApp : TimeListener {
     private val cargoIds = CargoIds()
-    private val factory = Factory()
+    private val factory = Factory(DeliveryTracker())
     private val map = TransportMap(factory)
     private val truckRouter = MapRouter(factory.locationId, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
