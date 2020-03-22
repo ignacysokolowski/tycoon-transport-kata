@@ -9,7 +9,7 @@ import tycoon.transport.domain.TimeListener
 class StopWatchTest {
 
     private val timeListener = TimeSpy()
-    private val stopWatch = StopWatch(timeListener as TimeListener)
+    private val stopWatch = StopWatch(timeListener)
 
     @Test fun `counts time elapsed until instructed to stop counting`() {
         stopWatch.countUntil { timeListener.ticks == 3 }
