@@ -1,5 +1,11 @@
 package tycoon.transport.domain
 
 class DeliveryTracker {
-    fun allCargoesDelivered() = true
+    private var allCargoDelivered = true
+
+    fun scheduleDeliveryOf(cargoId: CargoId) {
+        allCargoDelivered = false
+    }
+
+    fun allCargoesDelivered() = allCargoDelivered
 }
