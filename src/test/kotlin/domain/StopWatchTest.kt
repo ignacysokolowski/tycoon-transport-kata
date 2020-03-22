@@ -11,16 +11,9 @@ class StopWatchTest {
     private val timeListener = TimeSpy()
     private val stopWatch = StopWatch(timeListener as TimeListener)
 
-    @Test fun `increases the time elapsed until should it stop`() {
-        var ticks = 0
-        stopWatch.countUntil { ticks++; ticks > 3 }
+    @Test fun `counts time elapsed until instructed to stop counting`() {
+        stopWatch.countUntil { timeListener.ticks == 3 }
         assertThat(stopWatch.timeElapsed(), equalTo(3))
-    }
-
-    @Test fun `notifies the time listener on every tick of the clock`() {
-        var ticks = 0
-        stopWatch.countUntil { ticks++; ticks > 3 }
-        assertThat(timeListener.ticks, equalTo(3))
     }
 
     @Test fun `no time elapsed before starting`() {
