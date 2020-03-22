@@ -4,10 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import tycoon.transport.domain.CargoId
-import tycoon.transport.domain.DeliveryScheduler
 import tycoon.transport.domain.Distance
-import tycoon.transport.domain.Factory
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
@@ -20,9 +17,7 @@ class LocationStub(override val locationId: LocationId) : Location {
 
 class TransportMapTest {
 
-    private val factory = Factory(object : DeliveryScheduler {
-        override fun scheduleDeliveryOf(cargoId: CargoId) {}
-    })
+    private val factory = LocationStub(LocationId("FACTORY"))
     private val map = TransportMap(factory)
 
     @Test fun `contains locations`() {
