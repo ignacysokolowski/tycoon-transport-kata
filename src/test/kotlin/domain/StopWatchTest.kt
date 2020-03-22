@@ -10,12 +10,12 @@ class StopWatchTest {
     private val stopWatch = StopWatch()
 
     @Test fun `no time elapsed before starting`() {
-        assertThat(stopWatch.timeElapsed, equalTo(0))
+        assertThat(stopWatch.timeElapsed(), equalTo(0))
     }
 
     @Test fun `increases the time elapsed until should it stop`() {
         var ticks = 0
         stopWatch.countUntil { ticks++; ticks > 3 }
-        assertThat(stopWatch.timeElapsed, equalTo(3))
+        assertThat(stopWatch.timeElapsed(), equalTo(3))
     }
 }
