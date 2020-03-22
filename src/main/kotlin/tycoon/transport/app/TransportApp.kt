@@ -19,7 +19,7 @@ class TransportApp {
     private val truckRouter = MapRouter(factory.locationId, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private var numberOfTrucks = 0
-    private var trucks = listOf<Truck>()
+    private var trucks = mutableListOf<Truck>()
     private var totalDeliveryTime = 0
 
     fun setTrucks(number: Int) {
@@ -50,14 +50,14 @@ class TransportApp {
 
     private fun ship(cargoes: List<Cargo>) {
         factory.produce(cargoes)
-        trucks = parkTrucksAtTheFactory()
+        parkTrucksAtTheFactory()
         while (!factory.hasAllCargoesDelivered()) {
             trucks.forEach { it.drive(Distance(1)) }
             totalDeliveryTime += 1
         }
     }
 
-    private fun parkTrucksAtTheFactory() = (1..numberOfTrucks).map { newTruck() }
+    private fun parkTrucksAtTheFactory() = repeat(numberOfTrucks) { trucks.add(newTruck()) }
 
     private fun newTruck() = Truck.parked(truckRouter, transportArrivalNotifier)
 }
