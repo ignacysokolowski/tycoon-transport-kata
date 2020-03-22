@@ -17,7 +17,8 @@ import tycoon.transport.domain.Warehouse
 
 class TransportApp : TimeListener {
     private val cargoIds = CargoIds()
-    private val factory = Factory(DeliveryTracker())
+    private val deliveryTracker = DeliveryTracker()
+    private val factory = Factory(deliveryTracker)
     private val map = TransportMap(factory)
     private val truckRouter = MapRouter(factory.locationId, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
