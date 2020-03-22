@@ -1,15 +1,15 @@
 package tycoon.transport.domain
 
 class DeliveryTracker : DeliveryListener {
-    private var allCargoDelivered = true
+    private val scheduled = mutableListOf<CargoId>()
 
     fun scheduleDeliveryOf(cargoId: CargoId) {
-        allCargoDelivered = false
+        scheduled.add(cargoId)
     }
 
     override fun cargoDelivered(cargoId: CargoId) {
-        allCargoDelivered = true
+        scheduled.clear()
     }
 
-    fun allCargoesDelivered() = allCargoDelivered
+    fun allCargoesDelivered() = scheduled.isEmpty()
 }
