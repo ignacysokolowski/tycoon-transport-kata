@@ -1,5 +1,11 @@
 package tycoon.transport.domain
 
 class StopWatch {
-    val timeElapsed = 0
+    var timeElapsed = 0
+
+    fun countUntil(shouldStop: () -> Boolean) {
+        while (!shouldStop()) {
+            timeElapsed++
+        }
+    }
 }
