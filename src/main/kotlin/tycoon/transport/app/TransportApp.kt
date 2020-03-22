@@ -23,7 +23,6 @@ class TransportApp : TimeListener {
     private val stopWatch = StopWatch(this)
     private var numberOfTrucks = 0
     private var trucks = mutableListOf<Truck>()
-    private var totalDeliveryTime = 0
 
     fun setTrucks(number: Int) {
         numberOfTrucks = number
@@ -45,7 +44,7 @@ class TransportApp : TimeListener {
         } catch (e: LocationUnknown) {
             throw IllegalArgumentException("Unknown destination")
         }
-        return totalDeliveryTime
+        return stopWatch.timeElapsed()
     }
 
     private fun cargoesTo(warehouseIds: List<String>) =
@@ -63,6 +62,5 @@ class TransportApp : TimeListener {
 
     override fun tick() {
         trucks.forEach { it.drive(Distance(1)) }
-        totalDeliveryTime += 1
     }
 }
