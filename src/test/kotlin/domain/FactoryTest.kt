@@ -4,8 +4,6 @@ import com.natpryce.hamkrest.absent
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import tycoon.transport.domain.AllCargoPickedUp
 import tycoon.transport.domain.Cargo
 import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryScheduler
@@ -24,12 +22,6 @@ class FactoryTest {
 
     private val deliveryScheduler = DeliverySchedulerSpy()
     private val factory = Factory(deliveryScheduler)
-
-    @Test fun `has no cargo to be picked up`() {
-        assertThrows<AllCargoPickedUp> {
-            factory.pickUpNextCargo()
-        }
-    }
 
     @Test fun `schedules delivery of produced cargoes`() {
         factory.produce(listOf(
