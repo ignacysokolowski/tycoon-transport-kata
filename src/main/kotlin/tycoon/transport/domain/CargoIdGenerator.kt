@@ -1,6 +1,6 @@
 package tycoon.transport.domain
 
-class CargoIds {
+class CargoIdGenerator {
     private var next = 0
 
     fun next(): CargoId {

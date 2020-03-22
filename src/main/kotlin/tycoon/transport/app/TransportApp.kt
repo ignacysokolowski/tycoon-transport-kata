@@ -1,7 +1,7 @@
 package tycoon.transport.app
 
 import tycoon.transport.domain.Cargo
-import tycoon.transport.domain.CargoIds
+import tycoon.transport.domain.CargoIdGenerator
 import tycoon.transport.domain.DeliveryTracker
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Factory
@@ -16,7 +16,7 @@ import tycoon.transport.domain.Truck
 import tycoon.transport.domain.Warehouse
 
 class TransportApp : TimeListener {
-    private val cargoIds = CargoIds()
+    private val cargoIdGenerator = CargoIdGenerator()
     private val deliveryTracker = DeliveryTracker()
     private val factory = Factory(deliveryTracker)
     private val map = TransportMap(factory)
@@ -50,7 +50,7 @@ class TransportApp : TimeListener {
     }
 
     private fun cargoesTo(warehouseIds: List<String>) =
-        warehouseIds.map { Cargo(cargoIds.next(), LocationId(it)) }
+        warehouseIds.map { Cargo(cargoIdGenerator.next(), LocationId(it)) }
 
     private fun ship(cargoes: List<Cargo>) {
         factory.produce(cargoes)
