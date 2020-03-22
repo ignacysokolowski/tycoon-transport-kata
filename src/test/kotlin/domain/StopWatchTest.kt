@@ -18,9 +18,10 @@ class StopWatchTest {
     }
 
     @Test fun `does not count forever, breaks at the time limit`() {
-        assertThrows<RuntimeException> {
+        val error = assertThrows<RuntimeException> {
             stopWatch.countUntil { false }
         }
+        assertThat(error.message, equalTo("Exceeded the time limit of 10"))
         assertThat(stopWatch.timeElapsed(), equalTo(10))
     }
 

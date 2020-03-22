@@ -6,7 +6,7 @@ class StopWatch(private val timeListener: TimeListener, private val timeLimit: I
     fun countUntil(shouldStop: () -> Boolean) {
         while (!shouldStop()) {
             if (timeElapsed >= timeLimit) {
-                throw RuntimeException()
+                throw RuntimeException("Exceeded the time limit of $timeLimit")
             }
             timeListener.tick()
             timeElapsed++
