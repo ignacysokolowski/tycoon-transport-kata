@@ -22,7 +22,7 @@ class TransportApp : TimeListener {
     private val map = TransportMap(factory)
     private val truckRouter = MapRouter(factory.locationId, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
-    private val stopWatch = StopWatch(this)
+    private val stopWatch = StopWatch(this, timeLimit = 100)
     private var numberOfTrucks = 0
     private var trucks = mutableListOf<Truck>()
 
