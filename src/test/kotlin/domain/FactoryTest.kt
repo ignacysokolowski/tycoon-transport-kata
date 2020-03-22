@@ -31,15 +31,6 @@ class FactoryTest {
         }
     }
 
-    @Test fun `provides next cargo to pick up`() {
-        factory.produce(listOf(
-            Cargo(CargoId("1"), LocationId("A")),
-            Cargo(CargoId("2"), LocationId("B"))
-        ))
-        assertThat(factory.pickUpNextCargo(), equalTo(Cargo(CargoId("1"), LocationId("A"))))
-        assertThat(factory.pickUpNextCargo(), equalTo(Cargo(CargoId("2"), LocationId("B"))))
-    }
-
     @Test fun `schedules delivery of produced cargoes`() {
         factory.produce(listOf(
             Cargo(CargoId("1"), LocationId("A")),
@@ -51,13 +42,17 @@ class FactoryTest {
         )
     }
 
-    @Test fun `loads cargo on transport when arrives`() {
+    @Test fun `loads next cargo on transport when arrives`() {
         factory.produce(listOf(
-            Cargo(CargoId("1"), LocationId("A"))
+            Cargo(CargoId("1"), LocationId("A")),
+            Cargo(CargoId("2"), LocationId("B"))
         ))
-        val transport = FakeTransport()
-        factory.transportArrived(transport)
-        assertThat(transport.cargoLoaded, equalTo(CargoId("1")))
+        val transport1 = FakeTransport()
+        val transport2 = FakeTransport()
+        factory.transportArrived(transport1)
+        factory.transportArrived(transport2)
+        assertThat(transport1.cargoLoaded, equalTo(CargoId("1")))
+        assertThat(transport2.cargoLoaded, equalTo(CargoId("2")))
     }
 
     @Test fun `does not load cargo if none waiting`() {
