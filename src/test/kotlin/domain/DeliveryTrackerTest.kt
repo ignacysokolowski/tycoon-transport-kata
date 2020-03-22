@@ -10,10 +10,6 @@ class DeliveryTrackerTest {
 
     private val tracker = DeliveryTracker()
 
-    @Test fun `reports all cargoes delivered before anything scheduled`() {
-        assertThat(tracker.allCargoesDelivered(), equalTo(true))
-    }
-
     @Test fun `schedules cargo delivery`() {
         tracker.scheduleDeliveryOf(CargoId("1"))
         assertThat(tracker.allCargoesDelivered(), equalTo(false))
@@ -36,5 +32,9 @@ class DeliveryTrackerTest {
         tracker.scheduleDeliveryOf(CargoId("2"))
         tracker.cargoDelivered(CargoId("2"))
         assertThat(tracker.allCargoesDelivered(), equalTo(false))
+    }
+
+    @Test fun `reports all cargoes delivered before anything scheduled`() {
+        assertThat(tracker.allCargoesDelivered(), equalTo(true))
     }
 }
