@@ -14,7 +14,7 @@ data class Trip private constructor(
 
     fun journey() = journey
 
-    fun destination() = journey.destination
+    fun journeyDestination() = journey.destination
 
     fun backToOrigin(): Trip {
         if (headingBackToOrigin()) {
