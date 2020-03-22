@@ -30,4 +30,11 @@ class DeliveryTrackerTest {
         tracker.cargoDelivered(CargoId("2"))
         assertThat(tracker.allCargoesDelivered(), equalTo(false))
     }
+
+    @Test fun `delivering a single cargo does not deliver all`() {
+        tracker.scheduleDeliveryOf(CargoId("1"))
+        tracker.scheduleDeliveryOf(CargoId("2"))
+        tracker.cargoDelivered(CargoId("2"))
+        assertThat(tracker.allCargoesDelivered(), equalTo(false))
+    }
 }
