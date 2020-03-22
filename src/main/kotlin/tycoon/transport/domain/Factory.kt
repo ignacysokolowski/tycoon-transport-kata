@@ -9,11 +9,9 @@ class Factory(private val deliveryScheduler: DeliveryScheduler) : Location {
         cargoes.forEach { deliveryScheduler.scheduleDeliveryOf(it.id) }
     }
 
-    private fun pickUpNextCargo() = containerStock.pickUpNext()
-
     override fun transportArrived(transport: Transport) {
         val cargo = try {
-            pickUpNextCargo()
+            containerStock.pickUpNext()
         } catch (e: AllCargoPickedUp) {
             return
         }
