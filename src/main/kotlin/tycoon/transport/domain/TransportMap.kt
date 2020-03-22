@@ -1,7 +1,7 @@
 package tycoon.transport.domain
 
-class TransportMap(factory: Factory) : DistanceMap, LocationMap {
-    private val locations = mutableMapOf<LocationId, Location>(factory.locationId to factory)
+class TransportMap(factory: Location) : DistanceMap, LocationMap {
+    private val locations = mutableMapOf(factory.locationId to factory)
     private val distances = mutableMapOf<LocationId, Distance>()
 
     fun addLocation(
