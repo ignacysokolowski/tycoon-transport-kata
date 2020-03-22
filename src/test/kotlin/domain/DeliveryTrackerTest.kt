@@ -18,4 +18,10 @@ class DeliveryTrackerTest {
         tracker.scheduleDeliveryOf(CargoId("1"))
         assertThat(tracker.allCargoesDelivered(), equalTo(false))
     }
+
+    @Test fun `can be notified about delivery`() {
+        tracker.scheduleDeliveryOf(CargoId("1"))
+        tracker.cargoDelivered(CargoId("1"))
+        assertThat(tracker.allCargoesDelivered(), equalTo(true))
+    }
 }
