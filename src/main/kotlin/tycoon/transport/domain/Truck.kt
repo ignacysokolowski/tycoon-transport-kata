@@ -37,10 +37,10 @@ class Truck private constructor(
     }
 
     override fun unload(): CargoId {
-        val cargoId = this.carriedCargoId
+        val unloadedCargoId = this.carriedCargoId
             ?: throw NoCargoCarried()
         this.carriedCargoId = null
         trip = trip.backToOrigin()
-        return cargoId
+        return unloadedCargoId
     }
 }
