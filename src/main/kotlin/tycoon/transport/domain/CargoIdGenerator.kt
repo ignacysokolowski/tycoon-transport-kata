@@ -1,10 +1,10 @@
 package tycoon.transport.domain
 
 class CargoIdGenerator {
-    private var next = 0
+    private var latest = 0
 
     fun next(): CargoId {
-        next += 1
-        return CargoId(next.toString())
+        latest += 1
+        return CargoId(latest.toString())
     }
 }
