@@ -11,7 +11,7 @@ class Truck private constructor(
             Truck(router.inPlaceTripAtOrigin(), router, listener)
     }
 
-    private var carriedCargo: CargoId? = null
+    private var carriedCargoId: CargoId? = null
 
     init {
         notifyIfArrived()
@@ -24,7 +24,7 @@ class Truck private constructor(
     }
 
     override fun load(cargo: Cargo) {
-        carriedCargo = cargo.id
+        carriedCargoId = cargo.id
         trip = router.tripTo(cargo.destination)
     }
 
@@ -37,9 +37,9 @@ class Truck private constructor(
     }
 
     override fun unload(): CargoId {
-        val cargoId = this.carriedCargo
+        val cargoId = this.carriedCargoId
             ?: throw NoCargoCarried()
-        this.carriedCargo = null
+        this.carriedCargoId = null
         trip = trip.backToOrigin()
         return cargoId
     }
