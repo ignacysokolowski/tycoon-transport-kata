@@ -1,17 +1,17 @@
-package domain
+package domain.carrier
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
-import tycoon.transport.domain.NoCargoCarried
-import tycoon.transport.domain.Router
-import tycoon.transport.domain.Trip
-import tycoon.transport.domain.Truck
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
+import tycoon.transport.domain.carrier.Distance
+import tycoon.transport.domain.carrier.NoCargoCarried
+import tycoon.transport.domain.carrier.Router
+import tycoon.transport.domain.carrier.Trip
+import tycoon.transport.domain.carrier.Truck
 
 class FakeRouter : Router {
     private val origin = LocationId("A")

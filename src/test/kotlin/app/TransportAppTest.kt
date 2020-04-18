@@ -5,8 +5,8 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
-import tycoon.transport.domain.Distance
 import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.carrier.Distance
 
 class TransportAppTest {
 

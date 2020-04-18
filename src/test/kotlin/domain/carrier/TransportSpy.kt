@@ -1,8 +1,8 @@
-package domain
+package domain.carrier
 
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Transport
-import tycoon.transport.domain.TransportListener
+import tycoon.transport.domain.carrier.TransportListener
 
 data class TransportArrival(val transport: Transport, val destination: LocationId)
 

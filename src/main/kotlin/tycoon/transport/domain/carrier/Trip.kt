@@ -1,4 +1,6 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.carrier
+
+import tycoon.transport.domain.LocationId
 
 data class Trip private constructor(
     private val origin: LocationId,

@@ -1,17 +1,17 @@
 package tycoon.transport.app
 
 import tycoon.transport.domain.DeliveryTracker
-import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
-import tycoon.transport.domain.MapRouter
 import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
-import tycoon.transport.domain.Truck
 import tycoon.transport.domain.Warehouse
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoIdGenerator
+import tycoon.transport.domain.carrier.Distance
+import tycoon.transport.domain.carrier.MapRouter
+import tycoon.transport.domain.carrier.Truck
 import tycoon.transport.domain.time.StopWatch
 import tycoon.transport.domain.time.TimeListener
 

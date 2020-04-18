@@ -1,4 +1,4 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.carrier
 
 data class Distance(val hours: Int) {
     init {
