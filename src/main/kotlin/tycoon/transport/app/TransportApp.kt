@@ -8,12 +8,12 @@ import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.MapRouter
-import tycoon.transport.domain.StopWatch
-import tycoon.transport.domain.TimeListener
 import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.Warehouse
+import tycoon.transport.domain.time.StopWatch
+import tycoon.transport.domain.time.TimeListener
 
 class TransportApp : TimeListener {
     private val cargoIdGenerator = CargoIdGenerator()

@@ -1,4 +1,4 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.time
 
 class StopWatch(private val timeListener: TimeListener, private val timeLimit: Int) {
     private var timeElapsed = 0

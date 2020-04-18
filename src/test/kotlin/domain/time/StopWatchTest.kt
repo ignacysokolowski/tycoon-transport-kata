@@ -1,11 +1,11 @@
-package domain
+package domain.time
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import tycoon.transport.domain.StopWatch
-import tycoon.transport.domain.TimeListener
+import tycoon.transport.domain.time.StopWatch
+import tycoon.transport.domain.time.TimeListener
 
 class StopWatchTest {
 
