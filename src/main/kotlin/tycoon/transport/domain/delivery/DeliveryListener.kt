@@ -1,4 +1,4 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.delivery
 
 import tycoon.transport.domain.cargo.CargoId
 

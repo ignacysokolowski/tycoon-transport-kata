@@ -2,6 +2,7 @@ package tycoon.transport.domain
 
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.DistanceMap
+import tycoon.transport.domain.delivery.Location
 
 class TransportMap(factory: Location) : DistanceMap, LocationMap {
     private val locations = mutableMapOf(factory.locationId to factory)

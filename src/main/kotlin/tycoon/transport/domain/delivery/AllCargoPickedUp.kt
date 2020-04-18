@@ -1,3 +1,3 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.delivery
 
 class AllCargoPickedUp : RuntimeException()

@@ -1,14 +1,14 @@
-package domain
+package domain.delivery
 
 import com.natpryce.hamkrest.absent
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.DeliveryScheduler
-import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
+import tycoon.transport.domain.delivery.DeliveryScheduler
+import tycoon.transport.domain.delivery.Factory
 
 class DeliverySchedulerSpy : DeliveryScheduler {
     val cargoesScheduled = mutableListOf<CargoId>()

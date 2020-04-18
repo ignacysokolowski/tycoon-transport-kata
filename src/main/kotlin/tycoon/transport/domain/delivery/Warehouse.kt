@@ -1,4 +1,7 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.delivery
+
+import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Transport
 
 class Warehouse(
     override val locationId: LocationId,

@@ -1,5 +1,7 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.delivery
 
+import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Transport
 import tycoon.transport.domain.cargo.Cargo
 
 class Factory(private val deliveryScheduler: DeliveryScheduler) : Location {

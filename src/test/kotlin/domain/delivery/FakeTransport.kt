@@ -1,4 +1,4 @@
-package domain
+package domain.delivery
 
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.cargo.Cargo
