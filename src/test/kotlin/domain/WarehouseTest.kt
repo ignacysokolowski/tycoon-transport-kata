@@ -3,10 +3,10 @@ package domain
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryListener
 import tycoon.transport.domain.LocationId
 import tycoon.transport.domain.Warehouse
+import tycoon.transport.domain.cargo.CargoId
 
 class WarehouseTest {
 

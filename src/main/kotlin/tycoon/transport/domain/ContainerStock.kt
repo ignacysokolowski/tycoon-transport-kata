@@ -1,6 +1,7 @@
 package tycoon.transport.domain
 
 import java.util.ArrayDeque
+import tycoon.transport.domain.cargo.Cargo
 
 class ContainerStock {
     private var waiting = ArrayDeque<Cargo>()

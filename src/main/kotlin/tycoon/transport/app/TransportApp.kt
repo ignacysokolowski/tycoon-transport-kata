@@ -1,7 +1,5 @@
 package tycoon.transport.app
 
-import tycoon.transport.domain.Cargo
-import tycoon.transport.domain.CargoIdGenerator
 import tycoon.transport.domain.DeliveryTracker
 import tycoon.transport.domain.Distance
 import tycoon.transport.domain.Factory
@@ -12,6 +10,8 @@ import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.Truck
 import tycoon.transport.domain.Warehouse
+import tycoon.transport.domain.cargo.Cargo
+import tycoon.transport.domain.cargo.CargoIdGenerator
 import tycoon.transport.domain.time.StopWatch
 import tycoon.transport.domain.time.TimeListener
 

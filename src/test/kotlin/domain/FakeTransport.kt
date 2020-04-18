@@ -1,8 +1,8 @@
 package domain
 
-import tycoon.transport.domain.Cargo
-import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.Transport
+import tycoon.transport.domain.cargo.Cargo
+import tycoon.transport.domain.cargo.CargoId
 
 class FakeTransport : Transport {
     var cargoLoaded: CargoId? = null

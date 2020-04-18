@@ -4,11 +4,11 @@ import com.natpryce.hamkrest.absent
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.Cargo
-import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryScheduler
 import tycoon.transport.domain.Factory
 import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.cargo.Cargo
+import tycoon.transport.domain.cargo.CargoId
 
 class DeliverySchedulerSpy : DeliveryScheduler {
     val cargoesScheduled = mutableListOf<CargoId>()

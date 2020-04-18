@@ -1,5 +1,8 @@
 package tycoon.transport.domain
 
+import tycoon.transport.domain.cargo.Cargo
+import tycoon.transport.domain.cargo.CargoId
+
 class Truck private constructor(
     private var trip: Trip,
     private val router: Router,

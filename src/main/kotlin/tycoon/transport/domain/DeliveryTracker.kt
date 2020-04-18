@@ -1,5 +1,7 @@
 package tycoon.transport.domain
 
+import tycoon.transport.domain.cargo.CargoId
+
 class DeliveryTracker : DeliveryScheduler, DeliveryListener {
     private val scheduled = mutableListOf<CargoId>()
 

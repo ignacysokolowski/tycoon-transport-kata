@@ -3,8 +3,8 @@ package domain
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.CargoId
 import tycoon.transport.domain.DeliveryTracker
+import tycoon.transport.domain.cargo.CargoId
 
 class DeliveryTrackerTest {
 

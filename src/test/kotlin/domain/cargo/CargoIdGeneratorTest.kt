@@ -1,10 +1,10 @@
-package domain
+package domain.cargo
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.CargoId
-import tycoon.transport.domain.CargoIdGenerator
+import tycoon.transport.domain.cargo.CargoId
+import tycoon.transport.domain.cargo.CargoIdGenerator
 
 class CargoIdGeneratorTest {
     private val generator = CargoIdGenerator()

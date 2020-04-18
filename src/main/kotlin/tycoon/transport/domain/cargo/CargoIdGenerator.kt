@@ -1,4 +1,4 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.cargo
 
 class CargoIdGenerator {
     private var latest = 0

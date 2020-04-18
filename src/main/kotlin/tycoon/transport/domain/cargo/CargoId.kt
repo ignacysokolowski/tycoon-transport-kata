@@ -1,3 +1,3 @@
-package tycoon.transport.domain
+package tycoon.transport.domain.cargo
 
 data class CargoId(private val value: String)

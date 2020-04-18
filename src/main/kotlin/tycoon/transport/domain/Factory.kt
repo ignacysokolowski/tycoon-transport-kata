@@ -1,5 +1,7 @@
 package tycoon.transport.domain
 
+import tycoon.transport.domain.cargo.Cargo
+
 class Factory(private val deliveryScheduler: DeliveryScheduler) : Location {
     override val locationId = LocationId("FACTORY")
     private val containerStock = ContainerStock()
