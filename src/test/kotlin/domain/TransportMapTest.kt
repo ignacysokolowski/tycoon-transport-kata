@@ -38,7 +38,7 @@ class TransportMapTest {
         }
     }
 
-    @Test fun `provides legs between the factory and a destination`() {
+    @Test fun `routes from the factory to a station`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThat(
             map.legBetween(Location("FACTORY"), Location("A")),
@@ -46,13 +46,13 @@ class TransportMapTest {
         )
     }
 
-    @Test fun `only provides legs to existing locations`() {
+    @Test fun `only routes to existing stations`() {
         assertThrows<LegNotFound> {
             map.legBetween(Location("FACTORY"), Location("A"))
         }
     }
 
-    @Test fun `provides legs only from the factory`() {
+    @Test fun `only routes from the factory`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThrows<LegNotFound> {
             map.legBetween(Location("X"), Location("A"))
