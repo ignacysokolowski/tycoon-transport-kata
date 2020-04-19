@@ -9,35 +9,35 @@ import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.delivery.Location
+import tycoon.transport.domain.delivery.Station
 
-class LocationStub(override val locationId: LocationId) : Location {
+class StationStub(override val locationId: LocationId) : Station {
     override fun transportArrived(transport: Transport) {}
 }
 
 class TransportMapTest {
 
-    private val factory = LocationStub(LocationId("FACTORY"))
+    private val factory = StationStub(LocationId("FACTORY"))
     private val map = TransportMap(factory)
 
-    @Test fun `contains locations`() {
-        val location: Location = LocationStub(LocationId("A"))
-        map.addLocation(location, Distance(5))
-        assertThat(map.locationAt(LocationId("A")), equalTo(location))
+    @Test fun `contains stations`() {
+        val station: Station = StationStub(LocationId("A"))
+        map.addStation(station, Distance(5))
+        assertThat(map.stationAt(LocationId("A")), equalTo(station))
     }
 
     @Test fun `provides the factory by its location id`() {
-        assertThat(map.locationAt(factory.locationId), equalTo(factory as Location))
+        assertThat(map.stationAt(factory.locationId), equalTo(factory as Station))
     }
 
-    @Test fun `does not provide unknown locations`() {
+    @Test fun `does not provide unknown stations`() {
         assertThrows<LocationUnknown> {
-            map.locationAt(LocationId("A"))
+            map.stationAt(LocationId("A"))
         }
     }
 
     @Test fun `tells the distance to a location`() {
-        map.addLocation(LocationStub(LocationId("A")), Distance(5))
+        map.addStation(StationStub(LocationId("A")), Distance(5))
         assertThat(map.distanceTo(LocationId("A")), equalTo(Distance(5)))
     }
 

@@ -31,7 +31,7 @@ class TransportApp : TimeListener {
     }
 
     fun addWarehouse(locationId: LocationId, distance: Distance) {
-        map.addLocation(Warehouse(locationId, deliveryTracker), distance)
+        map.addStation(Warehouse(locationId, deliveryTracker), distance)
     }
 
     fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {

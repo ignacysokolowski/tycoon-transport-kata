@@ -6,7 +6,7 @@ import tycoon.transport.domain.Transport
 class Warehouse(
     override val locationId: LocationId,
     private val deliveryListener: DeliveryListener
-) : Location {
+) : Station {
     override fun transportArrived(transport: Transport) {
         deliveryListener.cargoDelivered(transport.unload())
     }

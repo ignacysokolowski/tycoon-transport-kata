@@ -4,21 +4,21 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.domain.LocationId
-import tycoon.transport.domain.LocationMap
 import tycoon.transport.domain.LocationUnknown
+import tycoon.transport.domain.StationMap
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
-import tycoon.transport.domain.delivery.Location
+import tycoon.transport.domain.delivery.Station
 
-class LocationMapStub(private val locations: Map<LocationId, Location>) : LocationMap {
-    override fun locationAt(locationId: LocationId): Location {
-        return locations[locationId] ?: throw LocationUnknown()
+class StationMapStub(private val stations: Map<LocationId, Station>) : StationMap {
+    override fun stationAt(locationId: LocationId): Station {
+        return stations[locationId] ?: throw LocationUnknown()
     }
 }
 
-class LocationSpy(override val locationId: LocationId) : Location {
+class StationSpy(override val locationId: LocationId) : Station {
     val arrivals = mutableListOf<Transport>()
 
     override fun transportArrived(transport: Transport) {
@@ -33,13 +33,13 @@ class DummyTransport : Transport {
 
 class TransportArrivalNotifierTest {
 
-    @Test fun `notifies location about transport arrival`() {
-        val location = LocationSpy(LocationId("A"))
-        val notifier = TransportArrivalNotifier(LocationMapStub(mapOf(location.locationId to location)))
+    @Test fun `notifies stations about transport arrival`() {
+        val station = StationSpy(LocationId("A"))
+        val notifier = TransportArrivalNotifier(StationMapStub(mapOf(station.locationId to station)))
         val transport = DummyTransport()
 
         notifier.transportArrived(transport, LocationId("A"))
 
-        assertThat(location.arrivals, equalTo(listOf<Transport>(transport)))
+        assertThat(station.arrivals, equalTo(listOf<Transport>(transport)))
     }
 }
