@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.Journey
+import tycoon.transport.domain.carrier.Leg
 import tycoon.transport.domain.carrier.Trip
 
 class TripTest {
@@ -64,5 +65,12 @@ class TripTest {
     @Test fun `trip in place can not be advanced`() {
         val trip = Trip.inPlace(Location("A"))
         assertThat(trip.advancedBy(Distance(1)), equalTo(trip))
+    }
+
+    @Test fun `can be created from a leg`() {
+        assertThat(
+            Trip.from(Leg(Location("A"), Location("B"), Distance(3))),
+            equalTo(Trip.between(Location("A"), Location("B"), Distance(3)))
+        )
     }
 }

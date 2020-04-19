@@ -12,6 +12,7 @@ data class Trip private constructor(
             Trip(origin, distance, Journey.to(destination, distance))
 
         fun inPlace(location: Location) = between(location, location, Distance(0))
+        fun from(leg: Leg) = between(leg.origin, leg.destination, leg.distance)
     }
 
     fun journey() = journey
