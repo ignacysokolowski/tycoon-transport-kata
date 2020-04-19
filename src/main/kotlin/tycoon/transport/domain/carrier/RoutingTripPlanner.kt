@@ -8,7 +8,6 @@ class RoutingTripPlanner(
 ) {
     fun inPlaceTripAtOrigin() = Trip.inPlace(origin)
 
-    fun tripTo(destination: Location): Trip {
-        return Trip.from(router.legBetween(origin, destination))
-    }
+    fun tripTo(destination: Location) =
+        Trip.from(router.legBetween(origin, destination))
 }
