@@ -34,11 +34,7 @@ class TransportMap(private val factory: Station) : DistanceMap, StationMap, Rout
         if (origin != factory.location) {
             throw LegNotFound()
         }
-        if (destination == factory.location) {
-            throw LegNotFound()
-        }
-        distances[destination]
+        return legs.firstOrNull { it.destination == destination }
             ?: throw LegNotFound()
-        return legs.first()
     }
 }
