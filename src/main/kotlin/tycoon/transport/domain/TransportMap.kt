@@ -31,10 +31,7 @@ class TransportMap(private val factory: Station) : DistanceMap, StationMap, Rout
     }
 
     override fun legBetween(origin: Location, destination: Location): Leg {
-        if (origin != factory.location) {
-            throw LegNotFound()
-        }
-        return legs.firstOrNull { it.destination == destination }
+        return legs.firstOrNull { it.origin == origin && it.destination == destination }
             ?: throw LegNotFound()
     }
 }
