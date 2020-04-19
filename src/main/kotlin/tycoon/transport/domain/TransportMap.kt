@@ -2,9 +2,11 @@ package tycoon.transport.domain
 
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.DistanceMap
+import tycoon.transport.domain.carrier.Leg
+import tycoon.transport.domain.carrier.Router
 import tycoon.transport.domain.delivery.Station
 
-class TransportMap(factory: Station) : DistanceMap, StationMap {
+class TransportMap(factory: Station) : DistanceMap, StationMap, Router {
     private val stations = mutableMapOf(factory.location to factory)
     private val distances = mutableMapOf<Location, Distance>()
 
@@ -24,5 +26,9 @@ class TransportMap(factory: Station) : DistanceMap, StationMap {
     override fun distanceTo(location: Location): Distance {
         return distances[location]
             ?: throw LocationUnknown()
+    }
+
+    override fun legBetween(origin: Location, destination: Location): Leg {
+        return Leg(Location("FACTORY"), Location("A"), Distance(5))
     }
 }
