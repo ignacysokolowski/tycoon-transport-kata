@@ -38,17 +38,6 @@ class TransportMapTest {
         }
     }
 
-    @Test fun `tells the distance to a location`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
-        assertThat(map.distanceTo(Location("A")), equalTo(Distance(5)))
-    }
-
-    @Test fun `can not tell the distance to unknown locations`() {
-        assertThrows<LocationUnknown> {
-            map.distanceTo(Location("A"))
-        }
-    }
-
     @Test fun `provides legs between the factory and a destination`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThat(
