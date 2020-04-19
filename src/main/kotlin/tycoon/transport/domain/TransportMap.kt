@@ -9,10 +9,7 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     private val stations = mutableMapOf(factory.location to factory)
     private val legs = mutableListOf<Leg>()
 
-    fun addStation(
-        station: Station,
-        distance: Distance
-    ) {
+    fun addStation(station: Station, distance: Distance) {
         addStationBehind(factory.location, station, distance)
     }
 
