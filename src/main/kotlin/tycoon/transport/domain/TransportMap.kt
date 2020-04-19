@@ -9,6 +9,7 @@ import tycoon.transport.domain.delivery.Station
 class TransportMap(private val factory: Station) : DistanceMap, StationMap, Router {
     private val stations = mutableMapOf(factory.location to factory)
     private val distances = mutableMapOf<Location, Distance>()
+    private val legs = mutableListOf<Leg>()
 
     fun addStation(
         station: Station,
@@ -16,6 +17,7 @@ class TransportMap(private val factory: Station) : DistanceMap, StationMap, Rout
     ) {
         stations[station.location] = station
         distances[station.location] = distance
+        legs.add(Leg(factory.location, station.location, distance))
     }
 
     override fun stationAt(location: Location): Station {
@@ -37,6 +39,6 @@ class TransportMap(private val factory: Station) : DistanceMap, StationMap, Rout
         }
         distances[destination]
             ?: throw LegNotFound()
-        return Leg(factory.location, destination, Distance(5))
+        return legs.first()
     }
 }
