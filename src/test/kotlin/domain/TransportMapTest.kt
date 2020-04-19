@@ -45,6 +45,12 @@ class TransportMapTest {
         }
     }
 
+    @Test fun `does not allow adding stations behind non-existent stations`() {
+        assertThrows<LocationUnknown> {
+            map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
+        }
+    }
+
     @Test fun `routes from the factory to a station`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThat(

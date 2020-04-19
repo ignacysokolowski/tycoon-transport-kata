@@ -14,6 +14,9 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
+        if (!stations.containsKey(location)) {
+            throw LocationUnknown()
+        }
         stations[station.location] = station
         legs.add(Leg(location, station.location, distance))
     }
