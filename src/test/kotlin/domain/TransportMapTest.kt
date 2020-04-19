@@ -61,4 +61,10 @@ class TransportMapTest {
             map.legBetween(Location("X"), Location("A"))
         }
     }
+
+    @Test fun `does not provide legs to the factory`() {
+        assertThrows<LegNotFound> {
+            map.legBetween(Location("FACTORY"), Location("FACTORY"))
+        }
+    }
 }
