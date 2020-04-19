@@ -50,19 +50,28 @@ class TransportMapTest {
     }
 
     @Test fun `provides legs between the factory and a destination`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
         assertThat(
             map.legBetween(Location("FACTORY"), Location("A")),
             equalTo(Leg(Location("FACTORY"), Location("A"), Distance(5)))
         )
     }
 
+    @Test fun `only provides legs to existing locations`() {
+        assertThrows<LegNotFound> {
+            map.legBetween(Location("FACTORY"), Location("A"))
+        }
+    }
+
     @Test fun `provides legs only from the factory`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
         assertThrows<LegNotFound> {
             map.legBetween(Location("X"), Location("A"))
         }
     }
 
     @Test fun `does not provide legs to the factory`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
         assertThrows<LegNotFound> {
             map.legBetween(Location("FACTORY"), Location("FACTORY"))
         }
