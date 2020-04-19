@@ -4,7 +4,7 @@ import com.natpryce.hamkrest.absent
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
 import tycoon.transport.domain.delivery.DeliveryScheduler
@@ -25,8 +25,8 @@ class FactoryTest {
 
     @Test fun `schedules delivery of produced cargoes`() {
         factory.produce(listOf(
-            Cargo(CargoId("1"), LocationId("A")),
-            Cargo(CargoId("2"), LocationId("A"))
+            Cargo(CargoId("1"), Location("A")),
+            Cargo(CargoId("2"), Location("A"))
         ))
         assertThat(
             deliveryScheduler.cargoesScheduled,
@@ -36,8 +36,8 @@ class FactoryTest {
 
     @Test fun `loads next cargo on transport when arrives`() {
         factory.produce(listOf(
-            Cargo(CargoId("1"), LocationId("A")),
-            Cargo(CargoId("2"), LocationId("B"))
+            Cargo(CargoId("1"), Location("A")),
+            Cargo(CargoId("2"), Location("B"))
         ))
         val transport1 = FakeTransport()
         val transport2 = FakeTransport()

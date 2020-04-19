@@ -5,7 +5,7 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tycoon.transport.app.TransportApp
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.carrier.Distance
 
 class TransportAppTest {
@@ -14,32 +14,32 @@ class TransportAppTest {
 
     @Test fun `ships cargo to a warehouse`() {
         app.setTrucks(1)
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B")), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next cargo`() {
         app.setTrucks(1)
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(15))
     }
 
     @Test fun `two trucks deliver cargo in parallel`() {
         app.setTrucks(2)
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(5))
     }
 
     @Test fun `one truck travels back and delivers the third cargo in 5 hours`() {
         app.setTrucks(2)
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B", "B")), equalTo(15))
     }
 
     @Test fun `after a short trip, a truck can pick up a cargo to a farther warehouse`() {
         app.setTrucks(2)
-        app.addWarehouse(LocationId("A"), Distance(1))
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("A"), Distance(1))
+        app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("A", "B", "B")), equalTo(7))
     }
 
@@ -58,7 +58,7 @@ class TransportAppTest {
 
     @Test fun `can not ship to unknown destinations`() {
         app.setTrucks(1)
-        app.addWarehouse(LocationId("B"), Distance(5))
+        app.addWarehouse(Location("B"), Distance(5))
         val exception = assertThrows<IllegalArgumentException> {
             app.timeToDeliverCargoesToWarehouses(listOf("X"))
         }

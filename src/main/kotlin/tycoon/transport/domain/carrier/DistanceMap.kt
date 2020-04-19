@@ -1,7 +1,7 @@
 package tycoon.transport.domain.carrier
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 
 interface DistanceMap {
-    fun distanceTo(location: LocationId): Distance
+    fun distanceTo(location: Location): Distance
 }

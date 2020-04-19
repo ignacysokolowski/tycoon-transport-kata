@@ -1,5 +1,5 @@
 package tycoon.transport.domain.cargo
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 
-data class Cargo(val id: CargoId, val destination: LocationId)
+data class Cargo(val id: CargoId, val destination: Location)

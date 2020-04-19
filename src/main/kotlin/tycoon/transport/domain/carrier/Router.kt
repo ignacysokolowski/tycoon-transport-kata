@@ -1,8 +1,8 @@
 package tycoon.transport.domain.carrier
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 
 interface Router {
     fun inPlaceTripAtOrigin(): Trip
-    fun tripTo(destination: LocationId): Trip
+    fun tripTo(destination: Location): Trip
 }

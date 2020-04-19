@@ -3,24 +3,24 @@ package domain.carrier
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.Journey
 
 class JourneyTest {
 
     @Test fun `is at destination if has no distance`() {
-        assertThat(Journey.to(LocationId("A"), Distance(0)).atDestination(), equalTo(true))
+        assertThat(Journey.to(Location("A"), Distance(0)).atDestination(), equalTo(true))
     }
 
     @Test fun `is not at destination if has a distance`() {
-        assertThat(Journey.to(LocationId("A"), Distance(1)).atDestination(), equalTo(false))
+        assertThat(Journey.to(Location("A"), Distance(1)).atDestination(), equalTo(false))
     }
 
     @Test fun `gets a shorter distance when advanced`() {
         assertThat(
-            Journey.to(LocationId("A"), Distance(3)).advancedBy(Distance(1)),
-            equalTo(Journey.to(LocationId("A"), Distance(2)))
+            Journey.to(Location("A"), Distance(3)).advancedBy(Distance(1)),
+            equalTo(Journey.to(Location("A"), Distance(2)))
         )
     }
 }

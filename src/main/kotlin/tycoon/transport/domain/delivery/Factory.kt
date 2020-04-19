@@ -1,11 +1,11 @@
 package tycoon.transport.domain.delivery
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.cargo.Cargo
 
 class Factory(private val deliveryScheduler: DeliveryScheduler) : Station {
-    override val locationId = LocationId("FACTORY")
+    override val location = Location("FACTORY")
     private val containerStock = ContainerStock()
 
     fun produce(cargoes: List<Cargo>) {

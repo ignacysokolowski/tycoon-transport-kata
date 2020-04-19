@@ -3,7 +3,7 @@ package domain
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.StationMap
 import tycoon.transport.domain.Transport
@@ -12,13 +12,13 @@ import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
 import tycoon.transport.domain.delivery.Station
 
-class StationMapStub(private val stations: Map<LocationId, Station>) : StationMap {
-    override fun stationAt(locationId: LocationId): Station {
-        return stations[locationId] ?: throw LocationUnknown()
+class StationMapStub(private val stations: Map<Location, Station>) : StationMap {
+    override fun stationAt(location: Location): Station {
+        return stations[location] ?: throw LocationUnknown()
     }
 }
 
-class StationSpy(override val locationId: LocationId) : Station {
+class StationSpy(override val location: Location) : Station {
     val arrivals = mutableListOf<Transport>()
 
     override fun transportArrived(transport: Transport) {
@@ -34,11 +34,11 @@ class DummyTransport : Transport {
 class TransportArrivalNotifierTest {
 
     @Test fun `notifies stations about transport arrival`() {
-        val station = StationSpy(LocationId("A"))
-        val notifier = TransportArrivalNotifier(StationMapStub(mapOf(station.locationId to station)))
+        val station = StationSpy(Location("A"))
+        val notifier = TransportArrivalNotifier(StationMapStub(mapOf(station.location to station)))
         val transport = DummyTransport()
 
-        notifier.transportArrived(transport, LocationId("A"))
+        notifier.transportArrived(transport, Location("A"))
 
         assertThat(station.arrivals, equalTo(listOf<Transport>(transport)))
     }

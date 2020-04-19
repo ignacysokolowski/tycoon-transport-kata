@@ -1,6 +1,6 @@
 package tycoon.transport.app
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
@@ -20,7 +20,7 @@ class TransportApp : TimeListener {
     private val deliveryTracker = DeliveryTracker()
     private val factory = Factory(deliveryTracker)
     private val map = TransportMap(factory)
-    private val truckRouter = MapRouter(factory.locationId, map)
+    private val truckRouter = MapRouter(factory.location, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private val stopWatch = StopWatch(this, timeLimit = 100)
     private var numberOfTrucks = 0
@@ -30,8 +30,8 @@ class TransportApp : TimeListener {
         numberOfTrucks = number
     }
 
-    fun addWarehouse(locationId: LocationId, distance: Distance) {
-        map.addStation(Warehouse(locationId, deliveryTracker), distance)
+    fun addWarehouse(location: Location, distance: Distance) {
+        map.addStation(Warehouse(location, deliveryTracker), distance)
     }
 
     fun timeToDeliverCargoesToWarehouses(warehouseIds: List<String>): Int {
@@ -50,7 +50,7 @@ class TransportApp : TimeListener {
     }
 
     private fun cargoesTo(warehouseIds: List<String>) =
-        warehouseIds.map { Cargo(cargoIdGenerator.next(), LocationId(it)) }
+        warehouseIds.map { Cargo(cargoIdGenerator.next(), Location(it)) }
 
     private fun ship(cargoes: List<Cargo>) {
         factory.produce(cargoes)

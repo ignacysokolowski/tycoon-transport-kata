@@ -1,10 +1,10 @@
 package tycoon.transport.domain.delivery
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 import tycoon.transport.domain.Transport
 
 class Warehouse(
-    override val locationId: LocationId,
+    override val location: Location,
     private val deliveryListener: DeliveryListener
 ) : Station {
     override fun transportArrived(transport: Transport) {

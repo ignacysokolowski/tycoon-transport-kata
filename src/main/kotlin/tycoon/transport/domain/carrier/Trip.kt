@@ -1,17 +1,17 @@
 package tycoon.transport.domain.carrier
 
-import tycoon.transport.domain.LocationId
+import tycoon.transport.domain.Location
 
 data class Trip private constructor(
-    private val origin: LocationId,
+    private val origin: Location,
     private val distance: Distance,
     private val journey: Journey
 ) {
     companion object {
-        fun between(origin: LocationId, destination: LocationId, distance: Distance) =
+        fun between(origin: Location, destination: Location, distance: Distance) =
             Trip(origin, distance, Journey.to(destination, distance))
 
-        fun inPlace(locationId: LocationId) = between(locationId, locationId, Distance(0))
+        fun inPlace(location: Location) = between(location, location, Distance(0))
     }
 
     fun journey() = journey
