@@ -17,6 +17,10 @@ class TransportMap(private val factory: Station) : StationMap, Router {
         legs.add(Leg(factory.location, station.location, distance))
     }
 
+    fun addStationBehind(location: Location, station: Station, distance: Distance) {
+        legs.add(Leg(location, station.location, distance))
+    }
+
     override fun stationAt(location: Location): Station {
         return stations[location]
             ?: throw LocationUnknown()

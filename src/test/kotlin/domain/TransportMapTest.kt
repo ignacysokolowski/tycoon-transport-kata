@@ -52,10 +52,19 @@ class TransportMapTest {
         }
     }
 
-    @Test fun `only routes from the factory`() {
+    @Test fun `only routes from existing stations`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThrows<LegNotFound> {
             map.legBetween(Location("X"), Location("A"))
         }
+    }
+
+    @Test fun `routes from intermediate stations`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
+        assertThat(
+            map.legBetween(Location("A"), Location("B")),
+            equalTo(Leg(Location("A"), Location("B"), Distance(2)))
+        )
     }
 }
