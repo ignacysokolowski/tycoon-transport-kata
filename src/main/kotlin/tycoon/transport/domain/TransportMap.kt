@@ -18,6 +18,7 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
+        stations[station.location] = station
         legs.add(Leg(location, station.location, distance))
     }
 
