@@ -22,17 +22,17 @@ class TransportMapTest {
     private val factory = StationStub(Location("FACTORY"))
     private val map = TransportMap(factory)
 
-    @Test fun `contains stations`() {
+    @Test fun `localizes stations by their locations`() {
         val station: Station = StationStub(Location("A"))
         map.addStation(station, Distance(5))
         assertThat(map.stationAt(Location("A")), equalTo(station))
     }
 
-    @Test fun `provides the factory by its location`() {
+    @Test fun `localizes the factory by its location`() {
         assertThat(map.stationAt(factory.location), equalTo(factory as Station))
     }
 
-    @Test fun `does not provide unknown stations`() {
+    @Test fun `does not localize unknown stations`() {
         assertThrows<LocationUnknown> {
             map.stationAt(Location("A"))
         }
