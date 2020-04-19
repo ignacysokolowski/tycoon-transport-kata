@@ -1,13 +1,13 @@
 package tycoon.transport.app
 
+import tycoon.transport.domain.LegNotFound
 import tycoon.transport.domain.Location
-import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.TransportArrivalNotifier
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoIdGenerator
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.MapBasedTripPlanner
+import tycoon.transport.domain.carrier.RoutingTripPlanner
 import tycoon.transport.domain.carrier.Truck
 import tycoon.transport.domain.delivery.DeliveryTracker
 import tycoon.transport.domain.delivery.Factory
@@ -20,7 +20,7 @@ class TransportApp : TimeListener {
     private val deliveryTracker = DeliveryTracker()
     private val factory = Factory(deliveryTracker)
     private val map = TransportMap(factory)
-    private val truckTripPlanner = MapBasedTripPlanner(factory.location, map)
+    private val truckTripPlanner = RoutingTripPlanner(factory.location, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private val stopWatch = StopWatch(this, timeLimit = 100)
     private var numberOfTrucks = 0
@@ -43,7 +43,7 @@ class TransportApp : TimeListener {
         }
         try {
             ship(cargoesTo(warehouseIds))
-        } catch (e: LocationUnknown) {
+        } catch (e: LegNotFound) {
             throw IllegalArgumentException("Unknown destination")
         }
         return stopWatch.timeElapsed()
