@@ -2,6 +2,6 @@ package tycoon.transport.domain.carrier
 
 import tycoon.transport.domain.Location
 
-class RoutingTripPlanner {
-    fun inPlaceTripAtOrigin() = Trip.inPlace(Location("ORIGIN"))
+class RoutingTripPlanner(private val origin: Location) {
+    fun inPlaceTripAtOrigin() = Trip.inPlace(origin)
 }
