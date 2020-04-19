@@ -9,11 +9,11 @@ import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoId
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.NoCargoCarried
-import tycoon.transport.domain.carrier.Router
 import tycoon.transport.domain.carrier.Trip
+import tycoon.transport.domain.carrier.TripPlanner
 import tycoon.transport.domain.carrier.Truck
 
-class FakeRouter : Router {
+class FakeTripPlanner : TripPlanner {
     private val origin = Location("A")
     private var tripDistance = Distance(0)
 
@@ -26,17 +26,17 @@ class FakeRouter : Router {
 }
 
 class TruckTest {
-    private val router = FakeRouter()
+    private val tripPlanner = FakeTripPlanner()
     private val truckListener = TransportSpy()
 
     @Test fun `announces arrival at the parking location`() {
-        val truck = Truck.parked(router, truckListener)
+        val truck = Truck.parked(tripPlanner, truckListener)
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
     @Test fun `loads cargo and drives to its destination`() {
-        router.setTripDistance(Distance(3))
-        val truck = Truck.parked(router, truckListener)
+        tripPlanner.setTripDistance(Distance(3))
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.drive(Distance(1))
         truck.drive(Distance(2))
@@ -50,22 +50,22 @@ class TruckTest {
     }
 
     @Test fun `only notifies about actual arrivals`() {
-        router.setTripDistance(Distance(3))
-        val truck = Truck.parked(router, truckListener)
+        tripPlanner.setTripDistance(Distance(3))
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.drive(Distance(2))
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
     @Test fun `does not drive before loading cargo`() {
-        val truck = Truck.parked(router, truckListener)
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.drive(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
     @Test fun `does not move after arrival to the destination`() {
-        router.setTripDistance(Distance(2))
-        val truck = Truck.parked(router, truckListener)
+        tripPlanner.setTripDistance(Distance(2))
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.drive(Distance(1))
         truck.drive(Distance(1))
@@ -80,14 +80,14 @@ class TruckTest {
     }
 
     @Test fun `unloads cargo`() {
-        val truck = Truck.parked(router, truckListener)
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         assertThat(truck.unload(), equalTo(CargoId("1")))
     }
 
     @Test fun `returns to the origin after unloading the cargo`() {
-        router.setTripDistance(Distance(2))
-        val truck = Truck.parked(router, truckListener)
+        tripPlanner.setTripDistance(Distance(2))
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.drive(Distance(2))
         truck.unload()
@@ -103,14 +103,14 @@ class TruckTest {
     }
 
     @Test fun `can not unload cargo if did not load`() {
-        val truck = Truck.parked(router, truckListener)
+        val truck = Truck.parked(tripPlanner, truckListener)
         assertThrows<NoCargoCarried> {
             truck.unload()
         }
     }
 
     @Test fun `has to load another cargo after unloading`() {
-        val truck = Truck.parked(router, truckListener)
+        val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.unload()
         assertThrows<NoCargoCarried> {

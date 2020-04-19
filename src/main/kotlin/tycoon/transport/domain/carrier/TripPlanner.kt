@@ -2,7 +2,7 @@ package tycoon.transport.domain.carrier
 
 import tycoon.transport.domain.Location
 
-interface Router {
+interface TripPlanner {
     fun inPlaceTripAtOrigin(): Trip
     fun tripTo(destination: Location): Trip
 }

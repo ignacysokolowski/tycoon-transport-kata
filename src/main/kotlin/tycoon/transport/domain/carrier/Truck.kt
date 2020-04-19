@@ -6,13 +6,13 @@ import tycoon.transport.domain.cargo.CargoId
 
 class Truck private constructor(
     private var trip: Trip,
-    private val router: Router,
+    private val tripPlanner: TripPlanner,
     private val listener: TransportListener
 ) : Transport {
 
     companion object {
-        fun parked(router: Router, listener: TransportListener) =
-            Truck(router.inPlaceTripAtOrigin(), router, listener)
+        fun parked(tripPlanner: TripPlanner, listener: TransportListener) =
+            Truck(tripPlanner.inPlaceTripAtOrigin(), tripPlanner, listener)
     }
 
     private var carriedCargoId: CargoId? = null
@@ -29,7 +29,7 @@ class Truck private constructor(
 
     override fun load(cargo: Cargo) {
         carriedCargoId = cargo.id
-        trip = router.tripTo(cargo.destination)
+        trip = tripPlanner.tripTo(cargo.destination)
     }
 
     fun drive(distance: Distance) {

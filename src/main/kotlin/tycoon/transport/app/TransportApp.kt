@@ -7,7 +7,7 @@ import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoIdGenerator
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.MapRouter
+import tycoon.transport.domain.carrier.MapBasedTripPlanner
 import tycoon.transport.domain.carrier.Truck
 import tycoon.transport.domain.delivery.DeliveryTracker
 import tycoon.transport.domain.delivery.Factory
@@ -20,7 +20,7 @@ class TransportApp : TimeListener {
     private val deliveryTracker = DeliveryTracker()
     private val factory = Factory(deliveryTracker)
     private val map = TransportMap(factory)
-    private val truckRouter = MapRouter(factory.location, map)
+    private val truckTripPlanner = MapBasedTripPlanner(factory.location, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private val stopWatch = StopWatch(this, timeLimit = 100)
     private var numberOfTrucks = 0
@@ -60,7 +60,7 @@ class TransportApp : TimeListener {
 
     private fun parkTrucksAtTheFactory() = repeat(numberOfTrucks) { trucks.add(newTruck()) }
 
-    private fun newTruck() = Truck.parked(truckRouter, transportArrivalNotifier)
+    private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
 
     override fun tick() {
         trucks.forEach { it.drive(Distance(1)) }
