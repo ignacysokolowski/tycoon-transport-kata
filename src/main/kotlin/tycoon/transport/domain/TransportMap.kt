@@ -29,6 +29,9 @@ class TransportMap(factory: Station) : DistanceMap, StationMap, Router {
     }
 
     override fun legBetween(origin: Location, destination: Location): Leg {
+        if (origin != Location("FACTORY")) {
+            throw LegNotFound()
+        }
         return Leg(Location("FACTORY"), Location("A"), Distance(5))
     }
 }

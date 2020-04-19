@@ -4,6 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tycoon.transport.domain.LegNotFound
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Transport
@@ -53,5 +54,11 @@ class TransportMapTest {
             map.legBetween(Location("FACTORY"), Location("A")),
             equalTo(Leg(Location("FACTORY"), Location("A"), Distance(5)))
         )
+    }
+
+    @Test fun `provides legs only from the factory`() {
+        assertThrows<LegNotFound> {
+            map.legBetween(Location("X"), Location("A"))
+        }
     }
 }
