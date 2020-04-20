@@ -53,9 +53,10 @@ class TransportMapTest {
 
     @Test fun `does not allow overwriting stations`() {
         map.addStation(StationStub(Location("A")), Distance(5))
-        assertThrows<IllegalArgumentException> {
+        val error = assertThrows<IllegalArgumentException> {
             map.addStation(StationStub(Location("A")), Distance(5))
         }
+        assertThat(error.message, equalTo("Can not add two stations at the same location"))
     }
 
     @Test fun `does not allow adding stations behind stations not directly connected to the factory`() {

@@ -15,7 +15,7 @@ class TransportMap(private val factory: Station) : StationMap, Router {
 
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
         if (stations.containsKey(station.location)) {
-            throw IllegalArgumentException()
+            throw IllegalArgumentException("Can not add two stations at the same location")
         }
         if (!directlyConnectedToTheFactory(location)) {
             throw IllegalArgumentException(
