@@ -17,6 +17,9 @@ class TransportMap(private val factory: Station) : StationMap, Router {
         if (!stations.containsKey(location)) {
             throw LocationUnknown()
         }
+        if (stationAt(location) != factory && firstLegBetween(factory.location, location) == null) {
+            throw IllegalArgumentException()
+        }
         stations[station.location] = station
         legs.add(Leg(location, station.location, distance))
     }

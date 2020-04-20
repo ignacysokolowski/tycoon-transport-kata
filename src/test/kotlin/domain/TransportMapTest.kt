@@ -51,6 +51,14 @@ class TransportMapTest {
         }
     }
 
+    @Test fun `does not allow adding stations behind stations not directly connected to the factory`() {
+        map.addStation(StationStub(Location("A")), Distance(2))
+        map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
+        assertThrows<IllegalArgumentException> {
+            map.addStationBehind(Location("B"), StationStub(Location("C")), Distance(2))
+        }
+    }
+
     @Test fun `routes from the factory to a station`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         assertThat(
