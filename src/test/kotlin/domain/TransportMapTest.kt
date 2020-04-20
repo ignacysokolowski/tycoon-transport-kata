@@ -51,6 +51,13 @@ class TransportMapTest {
         }
     }
 
+    @Test fun `does not allow overwriting stations`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
+        assertThrows<IllegalArgumentException> {
+            map.addStation(StationStub(Location("A")), Distance(5))
+        }
+    }
+
     @Test fun `does not allow adding stations behind stations not directly connected to the factory`() {
         map.addStation(StationStub(Location("A")), Distance(2))
         map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
