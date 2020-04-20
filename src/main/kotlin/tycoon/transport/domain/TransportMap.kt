@@ -14,9 +14,6 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
-        if (!stations.containsKey(location)) {
-            throw LocationUnknown()
-        }
         if (stationAt(location) != factory && firstLegBetween(factory.location, location) == null) {
             throw IllegalArgumentException(
                 "Can not add stations behind $location as " +
