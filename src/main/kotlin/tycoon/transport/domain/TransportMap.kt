@@ -14,7 +14,7 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
-        if (stationAt(location) != factory && firstLegBetween(factory.location, location) == null) {
+        if (notDirectlyConnectedToTheFactory(location)) {
             throw IllegalArgumentException(
                 "Can not add stations behind $location as " +
                     "it's not directly connected to the factory"
@@ -23,6 +23,9 @@ class TransportMap(private val factory: Station) : StationMap, Router {
         stations[station.location] = station
         legs.add(Leg(location, station.location, distance))
     }
+
+    private fun notDirectlyConnectedToTheFactory(location: Location) =
+        stationAt(location) != factory && firstLegBetween(factory.location, location) == null
 
     override fun stationAt(location: Location): Station {
         return stations[location]
