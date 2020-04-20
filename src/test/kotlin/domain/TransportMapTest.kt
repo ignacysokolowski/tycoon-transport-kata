@@ -103,4 +103,12 @@ class TransportMapTest {
             equalTo(Leg(Location("A"), Location("B"), Distance(2)))
         )
     }
+
+    @Test fun `does not route between stations that are not connected`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStation(StationStub(Location("B")), Distance(5))
+        assertThrows<LegNotFound> {
+            map.firstLegBetween(Location("A"), Location("B"))
+        }
+    }
 }
