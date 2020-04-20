@@ -34,9 +34,14 @@ class TransportMap(private val factory: Station) : StationMap, Router {
 
     override fun firstLegBetween(origin: Location, destination: Location): Leg {
         return legBetween(origin, destination)
+            ?: legBetween(origin, lastLegTo(destination).origin)
             ?: throw LegNotFound()
     }
 
     private fun legBetween(origin: Location, destination: Location) =
         legs.firstOrNull { it.origin == origin && it.destination == destination }
+
+    private fun lastLegTo(destination: Location) =
+        legs.firstOrNull { it.destination == destination }
+            ?: throw LegNotFound()
 }

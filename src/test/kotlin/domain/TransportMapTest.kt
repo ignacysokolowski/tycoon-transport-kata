@@ -86,6 +86,15 @@ class TransportMapTest {
         }
     }
 
+    @Test fun `routes to the first intermediate station between origin and destination`() {
+        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
+        assertThat(
+            map.firstLegBetween(Location("FACTORY"), Location("B")),
+            equalTo(Leg(Location("FACTORY"), Location("A"), Distance(5)))
+        )
+    }
+
     @Test fun `routes from intermediate stations`() {
         map.addStation(StationStub(Location("A")), Distance(5))
         map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
