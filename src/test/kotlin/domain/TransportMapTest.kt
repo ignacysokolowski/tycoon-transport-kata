@@ -24,7 +24,7 @@ class TransportMapTest {
 
     @Test fun `localizes stations by their locations`() {
         val station: Station = StationStub(Location("A"))
-        map.addStation(station, Distance(5))
+        map.addStationBehind(factory.location, station, Distance(5))
         assertThat(map.stationAt(Location("A")), equalTo(station))
     }
 
@@ -33,7 +33,7 @@ class TransportMapTest {
     }
 
     @Test fun `localizes stations behind other stations`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         val station: Station = StationStub(Location("B"))
         map.addStationBehind(Location("A"), station, Distance(2))
         assertThat(map.stationAt(Location("B")), equalTo(station))
@@ -52,15 +52,15 @@ class TransportMapTest {
     }
 
     @Test fun `does not allow adding two stations at the same location`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         val error = assertThrows<IllegalArgumentException> {
-            map.addStation(StationStub(Location("A")), Distance(5))
+            map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         }
         assertThat(error.message, equalTo("Can not add two stations at the same location"))
     }
 
     @Test fun `does not allow adding stations behind stations not directly connected to the factory`() {
-        map.addStation(StationStub(Location("A")), Distance(2))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(2))
         map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
         val error = assertThrows<IllegalArgumentException> {
             map.addStationBehind(Location("B"), StationStub(Location("C")), Distance(2))
@@ -74,7 +74,7 @@ class TransportMapTest {
     }
 
     @Test fun `routes from the factory to a station`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         assertThat(
             map.firstLegBetween(Location("FACTORY"), Location("A")),
             equalTo(Leg(Location("FACTORY"), Location("A"), Distance(5)))
@@ -88,14 +88,14 @@ class TransportMapTest {
     }
 
     @Test fun `only routes from existing stations`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         assertThrows<LegNotFound> {
             map.firstLegBetween(Location("X"), Location("A"))
         }
     }
 
     @Test fun `routes to the first intermediate station between origin and destination`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(Location("FACTORY"), StationStub(Location("A")), Distance(5))
         map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
         assertThat(
             map.firstLegBetween(Location("FACTORY"), Location("B")),
@@ -104,7 +104,7 @@ class TransportMapTest {
     }
 
     @Test fun `routes from intermediate stations`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
         map.addStationBehind(Location("A"), StationStub(Location("B")), Distance(2))
         assertThat(
             map.firstLegBetween(Location("A"), Location("B")),
@@ -113,8 +113,8 @@ class TransportMapTest {
     }
 
     @Test fun `does not route between stations that are not connected`() {
-        map.addStation(StationStub(Location("A")), Distance(5))
-        map.addStation(StationStub(Location("B")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("A")), Distance(5))
+        map.addStationBehind(factory.location, StationStub(Location("B")), Distance(5))
         assertThrows<LegNotFound> {
             map.firstLegBetween(Location("A"), Location("B"))
         }

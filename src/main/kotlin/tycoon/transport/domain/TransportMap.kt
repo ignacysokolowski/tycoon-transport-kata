@@ -9,10 +9,6 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     private val stations = mutableMapOf(factory.location to factory)
     private val legs = mutableListOf<Leg>()
 
-    fun addStation(station: Station, distance: Distance) {
-        addStationBehind(factory.location, station, distance)
-    }
-
     fun addStationBehind(location: Location, station: Station, distance: Distance) {
         if (hasStationAt(station.location)) {
             throw IllegalArgumentException("Can not add two stations at the same location")
