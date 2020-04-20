@@ -9,5 +9,5 @@ class RoutingTripPlanner(
     override fun inPlaceTripAtOrigin() = Trip.inPlace(origin)
 
     override fun tripTo(destination: Location) =
-        Trip.from(router.legBetween(origin, destination))
+        Trip.from(router.firstLegBetween(origin, destination))
 }

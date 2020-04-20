@@ -25,18 +25,18 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     private fun directlyConnectedToTheFactory(location: Location) =
-        stationAt(location) == factory || firstLegBetween(factory.location, location) != null
+        stationAt(location) == factory || legBetween(factory.location, location) != null
 
     override fun stationAt(location: Location): Station {
         return stations[location]
             ?: throw LocationUnknown()
     }
 
-    override fun legBetween(origin: Location, destination: Location): Leg {
-        return firstLegBetween(origin, destination)
+    override fun firstLegBetween(origin: Location, destination: Location): Leg {
+        return legBetween(origin, destination)
             ?: throw LegNotFound()
     }
 
-    private fun firstLegBetween(origin: Location, destination: Location) =
+    private fun legBetween(origin: Location, destination: Location) =
         legs.firstOrNull { it.origin == origin && it.destination == destination }
 }

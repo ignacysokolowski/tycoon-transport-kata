@@ -22,7 +22,7 @@ class RoutingTripPlannerTest {
         )
     }
 
-    @Test fun `creates trips from the origin to a destination`() {
+    @Test fun `creates trips on the first leg between the origin and destination`() {
         assertThat(
             tripPlanner.tripTo(Location("D")),
             equalTo(Trip.between(Location("ORIGIN"), Location("D"), Distance(4)))
@@ -31,6 +31,6 @@ class RoutingTripPlannerTest {
 }
 
 class RouterStub : Router {
-    override fun legBetween(origin: Location, destination: Location) =
+    override fun firstLegBetween(origin: Location, destination: Location) =
         Leg(origin, destination, Distance(4))
 }
