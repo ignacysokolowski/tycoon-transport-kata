@@ -27,7 +27,10 @@ class TransportMap(private val factory: Station) : StationMap, Router {
     }
 
     override fun legBetween(origin: Location, destination: Location): Leg {
-        return legs.firstOrNull { it.origin == origin && it.destination == destination }
+        return firstLegBetween(origin, destination)
             ?: throw LegNotFound()
     }
+
+    private fun firstLegBetween(origin: Location, destination: Location) =
+        legs.firstOrNull { it.origin == origin && it.destination == destination }
 }
