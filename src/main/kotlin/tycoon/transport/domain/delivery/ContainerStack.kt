@@ -3,7 +3,7 @@ package tycoon.transport.domain.delivery
 import java.util.ArrayDeque
 import tycoon.transport.domain.cargo.Cargo
 
-class ContainerStock {
+class ContainerStack {
     private var waiting = ArrayDeque<Cargo>()
 
     fun put(cargoes: List<Cargo>) {

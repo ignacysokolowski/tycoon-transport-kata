@@ -6,16 +6,16 @@ import tycoon.transport.domain.cargo.Cargo
 
 class Factory(private val deliveryScheduler: DeliveryScheduler) : Station {
     override val location = Location("FACTORY")
-    private val containerStock = ContainerStock()
+    private val containerStack = ContainerStack()
 
     fun produce(cargoes: List<Cargo>) {
-        containerStock.put(cargoes)
+        containerStack.put(cargoes)
         cargoes.forEach { deliveryScheduler.scheduleDeliveryOf(it.id) }
     }
 
     override fun transportArrived(transport: Transport) {
         val cargo = try {
-            containerStock.pickUpNext()
+            containerStack.pickUpNext()
         } catch (e: AllCargoPickedUp) {
             return
         }
