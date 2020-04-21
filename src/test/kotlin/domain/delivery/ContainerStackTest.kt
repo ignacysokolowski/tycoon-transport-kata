@@ -23,7 +23,7 @@ class ContainerStackTest {
         assertThat(stack.pickUpNext(), equalTo(cargoes[1]))
     }
 
-    @Test fun `does not allow to pick up anymore after all cargo have been picked up`() {
+    @Test fun `all cargo gets picked up eventually`() {
         val stack = ContainerStack()
         stack.put(listOf(Cargo(CargoId("1"), Location("A"))))
         stack.pickUpNext()
