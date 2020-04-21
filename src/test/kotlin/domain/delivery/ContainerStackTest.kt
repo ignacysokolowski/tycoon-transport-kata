@@ -35,7 +35,7 @@ class ContainerStackTest {
         assertThrows<AllCargoPickedUp> { ContainerStack().pickUpNext() }
     }
 
-    @Test fun `allows to put cargo one by one`() {
+    @Test fun `allows to put more cargo after pickup`() {
         val cargoes = listOf(
             Cargo(CargoId("1"), Location("A")),
             Cargo(CargoId("2"), Location("B")),

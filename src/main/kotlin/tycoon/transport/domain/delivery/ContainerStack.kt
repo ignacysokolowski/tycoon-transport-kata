@@ -4,11 +4,7 @@ import java.util.ArrayDeque
 import tycoon.transport.domain.cargo.Cargo
 
 class ContainerStack {
-    private var waiting = ArrayDeque<Cargo>()
-
-    fun put(cargoes: List<Cargo>) {
-        waiting = ArrayDeque(cargoes)
-    }
+    private val waiting = ArrayDeque<Cargo>()
 
     fun put(cargo: Cargo) {
         waiting.add(cargo)
