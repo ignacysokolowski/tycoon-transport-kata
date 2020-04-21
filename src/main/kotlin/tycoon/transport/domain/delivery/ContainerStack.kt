@@ -10,6 +10,10 @@ class ContainerStack {
         waiting = ArrayDeque(cargoes)
     }
 
+    fun put(cargo: Cargo) {
+        waiting.add(cargo)
+    }
+
     fun pickUpNext(): Cargo {
         return try {
             waiting.pop()

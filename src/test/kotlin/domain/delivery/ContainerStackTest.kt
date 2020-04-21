@@ -33,4 +33,19 @@ class ContainerStackTest {
     @Test fun `is empty before anything was put on it`() {
         assertThrows<AllCargoPickedUp> { ContainerStack().pickUpNext() }
     }
+
+    @Test fun `allows to put cargo one by one`() {
+        val cargoes = listOf(
+            Cargo(CargoId("1"), Location("A")),
+            Cargo(CargoId("2"), Location("B")),
+            Cargo(CargoId("3"), Location("C"))
+        )
+        val stack = ContainerStack()
+        stack.put(cargoes[0])
+        stack.put(cargoes[1])
+        assertThat(stack.pickUpNext(), equalTo(cargoes[0]))
+        stack.put(cargoes[2])
+        assertThat(stack.pickUpNext(), equalTo(cargoes[1]))
+        assertThat(stack.pickUpNext(), equalTo(cargoes[2]))
+    }
 }
