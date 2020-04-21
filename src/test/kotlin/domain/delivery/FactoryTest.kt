@@ -52,4 +52,19 @@ class FactoryTest {
         factory.transportArrived(transport)
         assertThat(transport.cargoLoaded, absent())
     }
+
+    @Test fun `puts newly produced cargo on the stack after pickup`() {
+        val transport2 = FakeTransport()
+        val transport3 = FakeTransport()
+        val transport1 = FakeTransport()
+        factory.produce(listOf(Cargo(CargoId("1"), Location("A"))))
+        factory.produce(listOf(Cargo(CargoId("2"), Location("B"))))
+        factory.transportArrived(transport1)
+        factory.produce(listOf(Cargo(CargoId("3"), Location("C"))))
+        factory.transportArrived(transport2)
+        factory.transportArrived(transport3)
+        assertThat(transport1.cargoLoaded, equalTo(CargoId("1")))
+        assertThat(transport2.cargoLoaded, equalTo(CargoId("2")))
+        assertThat(transport3.cargoLoaded, equalTo(CargoId("3")))
+    }
 }
