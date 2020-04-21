@@ -18,14 +18,15 @@ class ContainerStackTest {
             Cargo(CargoId("2"), Location("B"))
         )
         val stack = ContainerStack()
-        stack.put(cargoes)
+        stack.put(cargoes[0])
+        stack.put(cargoes[1])
         assertThat(stack.pickUpNext(), equalTo(cargoes[0]))
         assertThat(stack.pickUpNext(), equalTo(cargoes[1]))
     }
 
     @Test fun `all cargo gets picked up eventually`() {
         val stack = ContainerStack()
-        stack.put(listOf(Cargo(CargoId("1"), Location("A"))))
+        stack.put(Cargo(CargoId("1"), Location("A")))
         stack.pickUpNext()
         assertThrows<AllCargoPickedUp> { stack.pickUpNext() }
     }
