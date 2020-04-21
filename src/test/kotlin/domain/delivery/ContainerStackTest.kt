@@ -29,4 +29,8 @@ class ContainerStackTest {
         stack.pickUpNext()
         assertThrows<AllCargoPickedUp> { stack.pickUpNext() }
     }
+
+    @Test fun `has no cargo waiting to be picked up before anything was put on it`() {
+        assertThrows<AllCargoPickedUp> { ContainerStack().pickUpNext() }
+    }
 }
