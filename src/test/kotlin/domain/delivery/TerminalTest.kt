@@ -7,8 +7,9 @@ import tycoon.transport.domain.delivery.TerminalEmpty
 
 class TerminalTest {
 
+    private val terminal = Terminal()
+
     @Test fun `is empty before any transport was enqueued`() {
-        val terminal = Terminal()
         assertThrows<TerminalEmpty> { terminal.nextTransport() }
     }
 }
