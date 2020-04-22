@@ -17,7 +17,7 @@ class TripTest {
     }
 
     @Test fun `shortens the journey when advanced`() {
-        val trip = Trip.between(Location("A"), Location("B"), Distance(3)).advancedBy(Distance(1))
+        val trip = Trip.between(Location("A"), Location("B"), Distance(3)).advanced()
         assertThat(trip.journey(), equalTo(Journey.to(Location("B"), Distance(2))))
     }
 
@@ -32,24 +32,24 @@ class TripTest {
     }
 
     @Test fun `resets the journey progress when turned back to origin`() {
-        val trip = Trip.between(Location("A"), Location("B"), Distance(3)).advancedBy(Distance(1)).backToOrigin()
+        val trip = Trip.between(Location("A"), Location("B"), Distance(3)).advanced().backToOrigin()
         assertThat(trip.journey(), equalTo(Journey.to(Location("A"), Distance(3))))
     }
 
     @Test fun `does not complete the journey before advanced to its distance`() {
         val trip = Trip.between(Location("A"), Location("B"), Distance(3))
         assertThat(trip.journeyComplete(), equalTo(false))
-        assertThat(trip.advancedBy(Distance(1)).journeyComplete(), equalTo(false))
+        assertThat(trip.advanced().journeyComplete(), equalTo(false))
     }
 
     @Test fun `can be advanced to the destination to complete the journey`() {
         val trip = Trip.between(Location("A"), Location("B"), Distance(2))
-        assertThat(trip.advancedBy(Distance(1)).advancedBy(Distance(1)).journeyComplete(), equalTo(true))
+        assertThat(trip.advanced().advanced().journeyComplete(), equalTo(true))
     }
 
     @Test fun `can be advanced to the origin after turning back`() {
         val trip = Trip.between(Location("A"), Location("B"), Distance(1))
-        assertThat(trip.advancedBy(Distance(1)).backToOrigin().advancedBy(Distance(1)).journeyComplete(), equalTo(true))
+        assertThat(trip.advanced().backToOrigin().advanced().journeyComplete(), equalTo(true))
     }
 
     @Test fun `trip in place has a zero-distance journey`() {
@@ -64,7 +64,7 @@ class TripTest {
 
     @Test fun `trip in place can not be advanced`() {
         val trip = Trip.inPlace(Location("A"))
-        assertThat(trip.advancedBy(Distance(1)), equalTo(trip))
+        assertThat(trip.advanced(), equalTo(trip))
     }
 
     @Test fun `can be created from a leg`() {

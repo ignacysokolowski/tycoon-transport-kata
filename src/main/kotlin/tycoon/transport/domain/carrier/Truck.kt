@@ -36,7 +36,7 @@ class Truck private constructor(
         if (trip.journeyComplete()) {
             return
         }
-        trip = trip.advancedBy(Distance(1))
+        trip = trip.advanced()
         notifyIfArrived()
     }
 
