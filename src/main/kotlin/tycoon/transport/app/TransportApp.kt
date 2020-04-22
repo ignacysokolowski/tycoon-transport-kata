@@ -67,6 +67,6 @@ class TransportApp : TimeListener {
     private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
 
     override fun tick() {
-        trucks.forEach { it.move(Distance(1)) }
+        trucks.forEach { it.move() }
     }
 }

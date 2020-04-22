@@ -32,11 +32,11 @@ class Truck private constructor(
         trip = tripPlanner.tripTo(cargo.destination)
     }
 
-    fun move(distance: Distance) {
+    fun move() {
         if (trip.journeyComplete()) {
             return
         }
-        trip = trip.advancedBy(distance)
+        trip = trip.advancedBy(Distance(1))
         notifyIfArrived()
     }
 
