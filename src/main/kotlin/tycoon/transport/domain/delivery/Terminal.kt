@@ -1,7 +1,20 @@
 package tycoon.transport.domain.delivery
 
+import java.util.ArrayDeque
+import tycoon.transport.domain.Transport
+
 class Terminal {
-    fun nextTransport() {
-        throw TerminalEmpty()
+    private val queue = ArrayDeque<Transport>()
+
+    fun enqueue(transport: Transport) {
+        queue.add(transport)
+    }
+
+    fun nextTransport(): Transport {
+        try {
+            return queue.pop()
+        } catch (e: NoSuchElementException) {
+            throw TerminalEmpty()
+        }
     }
 }
