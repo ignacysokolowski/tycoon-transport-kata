@@ -35,11 +35,11 @@ class TruckTest {
     }
 
     @Test fun `loads cargo and moves to its destination`() {
-        tripPlanner.setTripDistance(Distance(3))
+        tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
         truck.move(Distance(1))
-        truck.move(Distance(2))
+        truck.move(Distance(1))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
@@ -50,10 +50,10 @@ class TruckTest {
     }
 
     @Test fun `only notifies about actual arrivals`() {
-        tripPlanner.setTripDistance(Distance(3))
+        tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.move(Distance(2))
+        truck.move(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
@@ -89,9 +89,11 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.move(Distance(2))
+        truck.move(Distance(1))
+        truck.move(Distance(1))
         truck.unload()
-        truck.move(Distance(2))
+        truck.move(Distance(1))
+        truck.move(Distance(1))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
