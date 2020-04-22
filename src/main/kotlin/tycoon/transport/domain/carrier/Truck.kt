@@ -32,7 +32,7 @@ class Truck private constructor(
         trip = tripPlanner.tripTo(cargo.destination)
     }
 
-    fun drive(distance: Distance) {
+    fun move(distance: Distance) {
         if (trip.journeyComplete()) {
             return
         }

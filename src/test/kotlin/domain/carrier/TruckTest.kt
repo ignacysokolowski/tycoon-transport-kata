@@ -34,12 +34,12 @@ class TruckTest {
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
-    @Test fun `loads cargo and drives to its destination`() {
+    @Test fun `loads cargo and moves to its destination`() {
         tripPlanner.setTripDistance(Distance(3))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.drive(Distance(1))
-        truck.drive(Distance(2))
+        truck.move(Distance(1))
+        truck.move(Distance(2))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
@@ -53,13 +53,13 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(3))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.drive(Distance(2))
+        truck.move(Distance(2))
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
-    @Test fun `does not drive before loading cargo`() {
+    @Test fun `does not move before loading cargo`() {
         val truck = Truck.parked(tripPlanner, truckListener)
-        truck.drive(Distance(1))
+        truck.move(Distance(1))
         assertThat(truckListener.arrivals, equalTo(listOf(TransportArrival(truck, Location("A")))))
     }
 
@@ -67,9 +67,9 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.drive(Distance(1))
-        truck.drive(Distance(1))
-        truck.drive(Distance(1))
+        truck.move(Distance(1))
+        truck.move(Distance(1))
+        truck.move(Distance(1))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
@@ -89,9 +89,9 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.drive(Distance(2))
+        truck.move(Distance(2))
         truck.unload()
-        truck.drive(Distance(2))
+        truck.move(Distance(2))
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
