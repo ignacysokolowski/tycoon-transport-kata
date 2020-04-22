@@ -15,10 +15,6 @@ class DistanceTest {
         assertThat(error.message, equalTo("Distance can not be negative"))
     }
 
-    @Test fun `can be added to another distance`() {
-        assertThat(Distance(2) + Distance(3), equalTo(Distance(5)))
-    }
-
     @Test fun `can be subtracted from another distance`() {
         assertThat(Distance(3) - Distance(2), equalTo(Distance(1)))
     }
