@@ -32,7 +32,7 @@ data class Trip private constructor(
         if (this.distance == Distance(0)) {
             return copy()
         }
-        return copy(journey = journey.advancedBy(Distance(1)))
+        return copy(journey = journey.advanced())
     }
 
     fun journeyComplete() = journey.atDestination()

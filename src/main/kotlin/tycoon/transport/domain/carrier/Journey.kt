@@ -10,6 +10,6 @@ data class Journey private constructor(
         fun to(destination: Location, distance: Distance) = Journey(destination, distance)
     }
 
-    fun advancedBy(distance: Distance) = copy(distance = this.distance - distance)
+    fun advanced() = copy(distance = this.distance - Distance(1))
     fun atDestination() = distance == Distance(0)
 }

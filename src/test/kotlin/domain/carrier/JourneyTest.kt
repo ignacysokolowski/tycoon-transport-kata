@@ -19,7 +19,7 @@ class JourneyTest {
 
     @Test fun `gets a shorter distance when advanced`() {
         assertThat(
-            Journey.to(Location("A"), Distance(3)).advancedBy(Distance(1)),
+            Journey.to(Location("A"), Distance(3)).advanced(),
             equalTo(Journey.to(Location("A"), Distance(2)))
         )
     }
