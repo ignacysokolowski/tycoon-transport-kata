@@ -23,4 +23,11 @@ class JourneyTest {
             equalTo(Journey.to(Location("A"), Distance(2)))
         )
     }
+
+    @Test fun `can not be advanced when already at destination`() {
+        assertThat(
+            Journey.to(Location("A"), Distance(0)).advanced(),
+            equalTo(Journey.to(Location("A"), Distance(0)))
+        )
+    }
 }
