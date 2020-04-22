@@ -16,5 +16,6 @@ data class Journey private constructor(
         }
         return copy(distance = this.distance - Distance(1))
     }
+
     fun atDestination() = distance == Distance(0)
 }
