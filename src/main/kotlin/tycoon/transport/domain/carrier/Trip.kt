@@ -28,12 +28,7 @@ data class Trip private constructor(
 
     private fun headingBackToOrigin() = journey.destination == origin
 
-    fun advanced(): Trip {
-        if (this.distance == Distance(0)) {
-            return copy()
-        }
-        return copy(journey = journey.advanced())
-    }
+    fun advanced() = copy(journey = journey.advanced())
 
     fun journeyComplete() = journey.atDestination()
 }
