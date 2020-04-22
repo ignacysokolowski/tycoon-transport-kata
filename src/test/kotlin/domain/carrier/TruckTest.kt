@@ -38,8 +38,7 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.move()
-        truck.move()
+        repeat(2) { truck.move() }
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
@@ -67,9 +66,7 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.move()
-        truck.move()
-        truck.move()
+        repeat(3) { truck.move() }
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
@@ -89,11 +86,9 @@ class TruckTest {
         tripPlanner.setTripDistance(Distance(2))
         val truck = Truck.parked(tripPlanner, truckListener)
         truck.load(Cargo(CargoId("1"), Location("B")))
-        truck.move()
-        truck.move()
+        repeat(2) { truck.move() }
         truck.unload()
-        truck.move()
-        truck.move()
+        repeat(2) { truck.move() }
         assertThat(
             truckListener.arrivals,
             equalTo(listOf(
