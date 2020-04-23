@@ -26,7 +26,7 @@ class TransportApp : TimeListener {
     private var numberOfTrucks = 0
     private var trucks = mutableListOf<Truck>()
 
-    fun setTrucks(number: Int) {
+    fun parkTrucksAtTheFactory(number: Int) {
         numberOfTrucks = number
         parkTrucksAtTheFactory()
     }

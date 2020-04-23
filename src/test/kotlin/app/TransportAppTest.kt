@@ -13,43 +13,43 @@ class TransportAppTest {
     private val app = TransportApp()
 
     @Test fun `ships cargo to a warehouse`() {
-        app.setTrucks(1)
+        app.parkTrucksAtTheFactory(1)
         app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B")), equalTo(5))
     }
 
     @Test fun `truck has to travel back to the factory to pick up the next cargo`() {
-        app.setTrucks(1)
+        app.parkTrucksAtTheFactory(1)
         app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(15))
     }
 
     @Test fun `two trucks deliver cargo in parallel`() {
-        app.setTrucks(2)
+        app.parkTrucksAtTheFactory(2)
         app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B")), equalTo(5))
     }
 
     @Test fun `one truck travels back and delivers the third cargo in 5 hours`() {
-        app.setTrucks(2)
+        app.parkTrucksAtTheFactory(2)
         app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("B", "B", "B")), equalTo(15))
     }
 
     @Test fun `after a short trip, a truck can pick up a cargo to a farther warehouse`() {
-        app.setTrucks(2)
+        app.parkTrucksAtTheFactory(2)
         app.addWarehouse(Location("A"), Distance(1))
         app.addWarehouse(Location("B"), Distance(5))
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf("A", "B", "B")), equalTo(7))
     }
 
     @Test fun `total delivery time is zero after shipping no cargo`() {
-        app.setTrucks(1)
+        app.parkTrucksAtTheFactory(1)
         assertThat(app.timeToDeliverCargoesToWarehouses(listOf()), equalTo(0))
     }
 
     @Test fun `can not ship without trucks`() {
-        app.setTrucks(0)
+        app.parkTrucksAtTheFactory(0)
         val exception = assertThrows<IllegalStateException> {
             app.timeToDeliverCargoesToWarehouses(listOf("B"))
         }
@@ -57,7 +57,7 @@ class TransportAppTest {
     }
 
     @Test fun `can not ship to unknown destinations`() {
-        app.setTrucks(1)
+        app.parkTrucksAtTheFactory(1)
         app.addWarehouse(Location("B"), Distance(5))
         val exception = assertThrows<IllegalArgumentException> {
             app.timeToDeliverCargoesToWarehouses(listOf("X"))
