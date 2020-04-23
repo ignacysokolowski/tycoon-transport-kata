@@ -57,8 +57,8 @@ class TransportApp : TimeListener {
         warehouseIds.map { Cargo(cargoIdGenerator.next(), Location(it)) }
 
     private fun ship(cargoes: List<Cargo>) {
-        factory.produce(cargoes)
         parkTrucksAtTheFactory()
+        factory.produce(cargoes)
         stopWatch.countUntil { deliveryTracker.allCargoesDelivered() }
     }
 
