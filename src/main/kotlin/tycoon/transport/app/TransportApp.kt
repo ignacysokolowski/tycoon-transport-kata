@@ -23,12 +23,10 @@ class TransportApp : TimeListener {
     private val truckTripPlanner = RoutingTripPlanner(factory.location, map)
     private val transportArrivalNotifier = TransportArrivalNotifier(map)
     private val stopWatch = StopWatch(this, timeLimit = 100)
-    private var numberOfTrucks = 0
     private var trucks = mutableListOf<Truck>()
 
     fun parkTrucksAtTheFactory(number: Int) {
-        numberOfTrucks = number
-        repeat(numberOfTrucks) { trucks.add(newTruck()) }
+        repeat(number) { trucks.add(newTruck()) }
     }
 
     private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
