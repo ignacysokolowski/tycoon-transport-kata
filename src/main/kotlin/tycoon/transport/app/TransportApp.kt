@@ -45,7 +45,7 @@ class TransportApp : TimeListener {
         if (warehouseIds.isEmpty()) {
             return 0
         }
-        if (numberOfTrucks == 0) {
+        if (trucks.size == 0) {
             throw IllegalStateException("No trucks at the factory")
         }
         try {
