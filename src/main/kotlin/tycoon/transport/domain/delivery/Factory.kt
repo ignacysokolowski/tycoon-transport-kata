@@ -10,9 +10,13 @@ class Factory(private val deliveryScheduler: DeliveryScheduler) : Station {
 
     fun produce(cargoes: List<Cargo>) {
         cargoes.forEach {
-            containerStack.put(it)
+            handleProduced(it)
             deliveryScheduler.scheduleDeliveryOf(it.id)
         }
+    }
+
+    private fun handleProduced(cargo: Cargo) {
+        containerStack.put(cargo)
     }
 
     override fun transportArrived(transport: Transport) {
