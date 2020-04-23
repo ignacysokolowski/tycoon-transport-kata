@@ -28,10 +28,8 @@ class TransportApp : TimeListener {
 
     fun parkTrucksAtTheFactory(number: Int) {
         numberOfTrucks = number
-        parkTrucksAtTheFactory()
+        repeat(numberOfTrucks) { trucks.add(newTruck()) }
     }
-
-    private fun parkTrucksAtTheFactory() = repeat(numberOfTrucks) { trucks.add(newTruck()) }
 
     private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
 
