@@ -28,6 +28,7 @@ class TransportApp : TimeListener {
 
     fun setTrucks(number: Int) {
         numberOfTrucks = number
+        parkTrucksAtTheFactory()
     }
 
     fun addWarehouse(location: Location, distance: Distance) {
@@ -57,7 +58,6 @@ class TransportApp : TimeListener {
         warehouseIds.map { Cargo(cargoIdGenerator.next(), Location(it)) }
 
     private fun ship(cargoes: List<Cargo>) {
-        parkTrucksAtTheFactory()
         factory.produce(cargoes)
         stopWatch.countUntil { deliveryTracker.allCargoesDelivered() }
     }
