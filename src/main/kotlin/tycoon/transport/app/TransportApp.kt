@@ -31,6 +31,10 @@ class TransportApp : TimeListener {
         parkTrucksAtTheFactory()
     }
 
+    private fun parkTrucksAtTheFactory() = repeat(numberOfTrucks) { trucks.add(newTruck()) }
+
+    private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
+
     fun addWarehouse(location: Location, distance: Distance) {
         map.addStationBehind(
             factory.location,
@@ -61,10 +65,6 @@ class TransportApp : TimeListener {
         factory.produce(cargoes)
         stopWatch.countUntil { deliveryTracker.allCargoesDelivered() }
     }
-
-    private fun parkTrucksAtTheFactory() = repeat(numberOfTrucks) { trucks.add(newTruck()) }
-
-    private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
 
     override fun tick() {
         trucks.forEach { it.move() }
