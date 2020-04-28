@@ -1,6 +1,8 @@
-package tycoon.transport.domain.carrier
+package tycoon.transport.domain.carrier.routing
 
 import tycoon.transport.domain.Location
+import tycoon.transport.domain.carrier.Trip
+import tycoon.transport.domain.carrier.TripPlanner
 
 class RoutingTripPlanner(
     private val origin: Location,

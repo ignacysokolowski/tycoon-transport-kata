@@ -1,4 +1,4 @@
-package tycoon.transport.domain.carrier
+package tycoon.transport.domain.carrier.routing
 
 import tycoon.transport.domain.Location
 

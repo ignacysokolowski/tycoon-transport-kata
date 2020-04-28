@@ -1,8 +1,8 @@
 package tycoon.transport.domain
 
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.Leg
-import tycoon.transport.domain.carrier.Router
+import tycoon.transport.domain.carrier.routing.Leg
+import tycoon.transport.domain.carrier.routing.Router
 import tycoon.transport.domain.delivery.Station
 
 class TransportMap(private val factory: Station) : StationMap, Router {

@@ -7,8 +7,8 @@ import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.cargo.Cargo
 import tycoon.transport.domain.cargo.CargoIdGenerator
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.RoutingTripPlanner
 import tycoon.transport.domain.carrier.Truck
+import tycoon.transport.domain.carrier.routing.RoutingTripPlanner
 import tycoon.transport.domain.delivery.DeliveryTracker
 import tycoon.transport.domain.delivery.Factory
 import tycoon.transport.domain.delivery.Warehouse

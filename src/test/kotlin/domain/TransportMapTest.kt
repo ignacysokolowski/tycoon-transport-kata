@@ -10,7 +10,7 @@ import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.Leg
+import tycoon.transport.domain.carrier.routing.Leg
 import tycoon.transport.domain.delivery.Station
 
 class StationStub(override val location: Location) : Station {

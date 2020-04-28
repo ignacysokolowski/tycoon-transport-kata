@@ -1,12 +1,12 @@
-package domain.carrier
+package domain.carrier.routing
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.carrier.Distance
-import tycoon.transport.domain.carrier.Leg
 import tycoon.transport.domain.carrier.Trip
+import tycoon.transport.domain.carrier.routing.Leg
 
 class LegTest {
 
