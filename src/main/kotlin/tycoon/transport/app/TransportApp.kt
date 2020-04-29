@@ -32,14 +32,10 @@ class TransportApp : TimeListener {
     private fun newTruck() = Truck.parked(truckTripPlanner, transportArrivalNotifier)
 
     fun addWarehouse(locationCode: String, distance: Int) {
-        addWarehouse(Location(locationCode), Distance(distance))
-    }
-
-    private fun addWarehouse(location: Location, distance: Distance) {
         map.addStationBehind(
             factory.location,
-            Warehouse(location, deliveryTracker),
-            distance
+            Warehouse(Location(locationCode), deliveryTracker),
+            Distance(distance)
         )
     }
 
