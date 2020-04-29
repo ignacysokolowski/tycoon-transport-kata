@@ -2,6 +2,7 @@ package tycoon.transport.domain
 
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.routing.Leg
+import tycoon.transport.domain.carrier.routing.LegNotFound
 import tycoon.transport.domain.carrier.routing.Router
 import tycoon.transport.domain.delivery.Station
 

@@ -4,13 +4,13 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import tycoon.transport.domain.LegNotFound
 import tycoon.transport.domain.Location
 import tycoon.transport.domain.LocationUnknown
 import tycoon.transport.domain.Transport
 import tycoon.transport.domain.TransportMap
 import tycoon.transport.domain.carrier.Distance
 import tycoon.transport.domain.carrier.routing.Leg
+import tycoon.transport.domain.carrier.routing.LegNotFound
 import tycoon.transport.domain.delivery.Station
 
 class StationStub(override val location: Location) : Station {
