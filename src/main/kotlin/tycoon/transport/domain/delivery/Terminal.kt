@@ -11,8 +11,8 @@ class Terminal {
     }
 
     fun nextTransport(): Transport {
-        try {
-            return queue.pop()
+        return try {
+            queue.pop()
         } catch (e: NoSuchElementException) {
             throw TerminalEmpty()
         }
