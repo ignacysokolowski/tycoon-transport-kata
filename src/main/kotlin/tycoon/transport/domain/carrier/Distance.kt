@@ -1,6 +1,6 @@
 package tycoon.transport.domain.carrier
 
-data class Distance(val hours: Int) {
+data class Distance(private val hours: Int) {
     init {
         if (hours < 0) {
             throw IllegalArgumentException("Distance can not be negative")
